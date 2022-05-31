@@ -1,0 +1,10 @@
+
+body {
+    font-size: 10vw;
+    color: #fcbe24;
+    background-color: #18222d;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
