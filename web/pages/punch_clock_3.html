@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HTML 5 Template">
+    <title>punch-clock</title>
+    <style>
+        * {
+            background-color: lightcyan;
+            color: black;
+        }
+
+        .btnCenter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="">
+            <Span>
+                <h1 id="txtMain">punch-clock</h1>
+            </Span>
+        </div>
+        <div class="">
+            <fieldset>
+                <legend>Time</legend>
+                <div class="btnCenter">
+                    <div><label for="closedTicket">start hour: </label></div>
+                    <div><input type="time" id="startTime" name="appt" min="06:00" max="21:00" onchange="pfh()"
+                            required></div>
+                </div>
+                <br />
+                <div class="btnCenter">
+                    <span><label for="closedTicket">&nbsp;end hour: </label></span>
+                    <span><input type="time" id="endTime" name="appt" min="06:00" max="21:00" onchange="tfh()"
+                            required></span>
+                </div>
+            </fieldset>
+        </div>
+        <br />
+        <div class="btnCenter">
+            <Span>
+                <div> <input id="sub" type="button" value="sub" onclick="sub()"> </div>
+            </Span>
+        </div>
+        <fieldset>
+            <legend>result</legend>
+            <div>
+                <div>
+                    <span class="titleLeft"> [from]: </span>
+                    <b><span id="fromTime" class="txtGreen"> </span></b>
+                </div>
+                <div>
+                    <span class="titleLeft"> [to]: </span>
+                    <b><span id="toTime" class="txtRed"> </span></b>
+                </div>
+                <div>
+                    <span class="titleLeft"> [total]: </span>
+                    <b><span id="total" class="txtRed"> </span> </b>
+                </div>
+            </div>
+        </fieldset>
+    </header>
+    <script>
+        /***
+* script.js
+*/
+
+        //// js() function, show if the 
+        function js() {
+            console.log(" 'script.js'  is loaded... ");
+        }
+
+        function pfh() {
+            var fh = document.getElementById("startTime").value;
+            document.getElementById("fromTime").innerHTML = fh;
+            return fh;
+        }
+
+        function tfh() {
+            var th = document.getElementById("endTime").value;
+            document.getElementById("toTime").innerHTML = th;
+            return th;
+        }
+
+        function diff(start, end) {
+            start = start.split(":");
+            end = end.split(":");
+            var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+            var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+            var diff = endDate.getTime() - startDate.getTime();
+            var hours = Math.floor(diff / 1000 / 60 / 60);
+            diff -= hours * 1000 * 60 * 60;
+            var minutes = Math.floor(diff / 1000 / 60);
+
+            // If using time pickers with 24 hours format, add the below line get exact hours
+            if (hours < 0)
+                hours = hours + 24;
+
+            return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
+        }
+
+
+        function sub() {
+            var ft = pfh();
+            var tt = tfh();
+            var result;
+
+            console.log("ft " + ft + " tt " + tt);
+            result = diff(ft, tt);
+            console.log(" result == " + result);
+
+            if ((result < 0) || (result === null) || (result === undefined) | (result === "NaN:NaN")) {
+                result = "please enter start/end hour";
+            }
+            document.getElementById("total").innerHTML = result
+        }
+    </script>
+</body>
+
+</html>
