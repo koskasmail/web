@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HTML 5 Template">
+    <style>
+        * {
+            /* background-color: #f7fd04; */
+        }
+
+
+        #txtMain {
+            /* text-transform: uppercase; */
+            text-transform: capitalize;
+            /* font-size: 1.8rem; */
+            /* margin: 0; */
+            margin-bottom: 1rem;
+            text-decoration-line: underline;
+            /* text-decoration-line: underline line-through overline ; */
+            /* text-decoration-style: dashed; // dashedwavy */
+            text-decoration-style: dashed;
+            text-decoration-color: gray;
+        }
+
+        #txtfh {
+            /* text-transform: uppercase; */
+            text-transform: lowercase;
+            /* font-size: 1.8rem; */
+            /* margin: 0; */
+            margin-bottom: 1rem;
+            text-decoration-line: underline;
+            /* text-decoration-style: dashed; // dashedwavy */
+            text-decoration-style: wavy;
+            text-decoration-color: red;
+        }
+
+        #txtth {
+            /* text-transform: uppercase; */
+            text-transform: lowercase;
+            /* font-size: 1.8rem; */
+            /* margin: 0; */
+            margin-bottom: 1rem;
+            text-decoration-line: underline;
+            /* text-decoration-style: dashed; // dashedwavy */
+            text-decoration-style: wavy;
+            text-decoration-color: #f9b208;
+        }
+
+        f9b208 .titleCenter {
+            text-align: center;
+        }
+
+        .timeBorder {
+            background-color: lightblue;
+            color: white;
+            border: 2px solid black;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .titleLeft {
+            border: 2px dash black;
+            padding-left: 20px;
+        }
+
+        .bkfh {
+            background-color: #f9b208;
+        }
+
+        .bkth {
+            background-color: red;
+        }
+
+        .bkResult {
+            background-color: red;
+        }
+
+        .btnCenter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .txtRed {
+            color: red;
+            font-weight: bold;
+        }
+
+        .txtRed {
+            color: red;
+            font-weight: bold;
+        }
+
+        .txtGreen {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+
+    <title>punch-clock</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="timeBorder titleCenter">
+            <Span>
+                <h1 id="txtMain">punch-clock</h1>
+            </Span>
+        </div>
+
+
+        <div class="timeBorder bkfh">
+            <span>
+                <span id="txtfh">from hour:</span>
+            </span>
+            <br />
+            <Span>
+                <span class="titleLeft">hour: </span>
+                <span> <input id="fhh" type="range" min="0" max="23" value="1" onclick="pfh()"> </span>
+            </Span>
+            <Span>
+                <span class="titleLeft">minute: </span>
+                <span> <input id="fmm" type="range" min="0" max="59" value="0" onclick="pfh()"> </span>
+            </Span>
+        </div>
+
+        <div class="timeBorder bkth">
+            <Span>
+                <span id="txtth">to hour:</span>
+            </Span>
+            <br />
+            <Span>
+                <span class="titleLeft">hour: </span>
+                <span> <input id="thh" type="range" min="0" max="23" value="1" onclick="tfh()"> </span>
+            </Span>
+            <Span>
+                <Span class="titleLeft">minute: </Span>
+                <Span> <input id="tmm" type="range" min="0" max="59" value="0" onclick="tfh()"> </Span>
+            </Span>
+        </div>
+
+
+        <div class="btnCenter">
+            <Span>
+                <div> <input id="sub" type="button" value="sub" onclick="sub()"> </div>
+            </Span>
+        </div>
+
+        <div class="timeBorder">
+            <span>
+                <span class="titleLeft"> from: </span>
+                <span id="fromTime" class="txtGreen"> </span>
+            </span>
+            <span>
+                <span class="titleLeft"> to: </span>
+                <span id="toTime" class="txtRed"> </span>
+            </span>
+            <span>
+                <span class="titleLeft"> total: </span>
+                <span id="total" class="txtRed"> </span>
+            </span>
+        </div>
+
+    </header>
+    <script>
+        /***
+        * script.js
+        */
+
+        //// js() function, show if the 
+        function js() {
+            console.log(" 'script.js'  is loaded... ");
+        }
+
+        function pfh() {
+            var fh = document.getElementById("fhh").value;
+            var fm = document.getElementById("fmm").value;
+            document.getElementById("fromTime").innerHTML = " " + fh + " : " + fm;
+            return fh + ":" + fm;
+        }
+
+        function tfh() {
+            var th = document.getElementById("thh").value;
+            var tm = document.getElementById("tmm").value;
+            document.getElementById("toTime").innerHTML = " " + th + " : " + tm;
+            return th + ":" + tm;
+        }
+
+        function diff(start, end) {
+            start = start.split(":");
+            end = end.split(":");
+            var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+            var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+            var diff = endDate.getTime() - startDate.getTime();
+            var hours = Math.floor(diff / 1000 / 60 / 60);
+            diff -= hours * 1000 * 60 * 60;
+            var minutes = Math.floor(diff / 1000 / 60);
+
+            // If using time pickers with 24 hours format, add the below line get exact hours
+            if (hours < 0)
+                hours = hours + 24;
+
+            return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
+        }
+
+        // TODO
+        // mol - more or less hours per day.
+        function mol(start, end) {
+            start = start.split(":");
+            end = end.split(":");
+            var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+            var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+            var diff = endDate.getTime() - startDate.getTime();
+            var hours = Math.floor(diff / 1000 / 60 / 60);
+            diff -= hours * 1000 * 60 * 60;
+            var minutes = Math.floor(diff / 1000 / 60);
+
+            // If using time pickers with 24 hours format, add the below line get exact hours
+            if (hours < 0)
+                hours = hours + 24;
+
+            return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
+        }
+
+        function sub() {
+
+            var ft = pfh();
+            var tt = tfh();
+            var result;
+
+            console.log("ft " + ft + " tt " + tt);
+
+            result = diff(ft, tt);
+            console.log(" result == " + result);
+            document.getElementById("total").innerHTML = result
+
+        }
+    </script>
+</body>
+
+</html>
