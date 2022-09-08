@@ -1,5 +1,9 @@
+/* ----[style.css]------------ */
+
+/* body tag */
 body {
     margin: 0;
+    font-family: sans-serif; 
 
     /* align horizontally to center */
     display: flex;
@@ -11,12 +15,60 @@ body {
     justify-content: center;
 
     /* page background image */
-    background: url("https://ofekbytes.github.io/assets/www/www_0001.jpg");
+    background: url("../wallpaper/1011.png");
+    background-size: cover; /* display background */
 }
 
-
+/* h2 tag */
 h2 {
     text-transform: uppercase; /* abc -to- ABC */
-    letter-spacing: 4px;
-    background-color: white;
+    letter-spacing: 6px;
+    font-size: 26px;
+    text-align: center;
+    color: black;
+}
+
+/* class */
+.clock   {
+    display:flex; /* Dispaly getting closer*/
+}
+
+/* div inside class */
+.clock div{
+    margin: 5px; /* speart the 'div' tags inside 'clock' class */
+    position: relative;  /* for am/pm button */
+}
+
+/* span inside class */
+.clock span {
+    width: 100px;
+    height: 80px;
+    background-color: slateblue;
+    opacity: .9; /* transparency (1=not transparent, 0.5 = 50% transparent)   color */
+    color:white; /* text color */
+    display:flex; /* change all the display */
+    justify-content: center; /* horizontal center */
+    align-items: center; /* vertical center */
+    
+    font-size: 50px;
+    text-shadow: 2px 2px, 4px rgb(0,0,0.3) ; /* horizontal, vertical, blur-radius, 0,0,0=black + 30 transparency */
+}
+
+.clock .text {
+    height: 30px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-color: darkblue;
+    opacity: 0.8;
+}
+
+.clock #ampm {
+    /*  buttom of screen */
+    bottom: 0;
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    font-size: 20px;
+    background: green;
 }
