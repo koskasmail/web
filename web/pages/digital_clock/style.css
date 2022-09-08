@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+
+    /* align horizontally to center */
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+
+    /* align vertically to center */
+    height: 100vh; /* vh of the view port */
+    justify-content: center;
+
+    /* page background image */
+    background: url("https://ofekbytes.github.io/assets/www/www_0001.jpg");
+}
+
+
+h2 {
+    text-transform: uppercase; /* abc -to- ABC */
+    letter-spacing: 4px;
+    background-color: white;
+}
