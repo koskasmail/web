@@ -15,7 +15,8 @@ body {
     justify-content: center;
 
     /* page background image */
-    background: url("../wallpaper/1011.png");
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==);
+    /* background: url(data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7); */
     background-size: cover; /* display background */
 }
 
@@ -23,7 +24,7 @@ body {
 h2 {
     text-transform: uppercase; /* abc -to- ABC */
     letter-spacing: 6px;
-    font-size: 26px;
+    font-size: 26px; /* 14px */
     text-align: center;
     color: black;
 }
@@ -61,14 +62,4 @@ h2 {
     letter-spacing: 2px;
     background-color: darkblue;
     opacity: 0.8;
-}
-
-.clock #ampm {
-    /*  buttom of screen */
-    bottom: 0;
-    position: absolute;
-    width: 60px;
-    height: 30px;
-    font-size: 20px;
-    background: green;
 }

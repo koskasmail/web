@@ -1,0 +1,59 @@
+body {
+    /* margin: 0px; */
+}
+
+.navbar {
+    display: flex; /* bring tag/element together - in same line */
+    position: fixed; /* .navbar get .top-container picture */
+
+    /* .navbar size, color */
+    background-color: white;
+    width: 100%;
+
+    /* .navbar right-to-left */
+    justify-content: space-between;
+
+    /* logo to center */
+    align-items: center;
+}
+
+.navbar ul {
+    display: flex; /* bring tag/element together - in same line */
+    list-style-type:none; /* delete ul symbols */
+}
+
+.navbar ul li a {
+    text-decoration: none; /* remove text decoration */
+    margin: 0 10px; /* space between ul+li+a tags --> space bettwen top+bot , left+right */
+    color: black;
+    font-family: cursive;
+}
+
+.navbar ul li a:hover {
+    color:red;
+
+}
+
+.top-container {
+    background-image: url("https://images.unsplash.com/photo-1547394765-185e1e68f34e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+    height: 100vh; /* 100% screen size */
+    background-size: cover; /*picture resize with screen size*/
+
+    /* h1 tag to center */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.top-container h1 {
+    color: white;
+    font-size: 50px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    letter-spacing: 2px;
+}
+
+.text {
+    margin: 50px, 5%;  /* top+bot, left+right */ 
+    font-family: sans-serif; 
+}

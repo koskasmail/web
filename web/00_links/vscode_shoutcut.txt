@@ -1,0 +1,30 @@
+
+
+/// ----[div with a class name]------------
+.class_name <enter>
+<div class="class_name"></div>
+
+
+/// ----[div with a id name]------------
+#id_name <enter>
+<div id="id_name"></div>
+
+
+/// ----[p tag with class name]------------
+p.class_name
+<p class="class_name"></p>
+
+
+/// ----[p tag with id name]------------
+p#id_name
+<p id="id_name"></p>
+
+
+///create lorem free text]------------
+p.text
+<p class="text"></p>
+
+// 100 words Lorem ipsum
+<p class="text">lorem100</p>
+<p class="text">Lorem ipsum, dolor sit amet consectetur ....</p>
+
