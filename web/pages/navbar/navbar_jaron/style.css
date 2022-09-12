@@ -42,6 +42,7 @@ body {
 
 .navbar .stime {
     /* background: gray; */
+    /* font: menu; */
 }
 
 .navbar .stime .text {
@@ -50,34 +51,31 @@ body {
 
 .navbar .stime span{
     margin: 1px;
-    color: white;
+    /* color: white; */
     width: 260px;
     height: 60px;
     border-width: 3px;
     font-size: 50px;
-    color: black;
     /* background: gray; */
 }
 
 .navbar .stime #hour  {
-    background-color: black;
-    color:white;
-    border: red;
+    background-color: whitesmoke;
+    color:yellowgreen;
+    border-width: 2px;
     text-shadow: 2px 2px, 4px rgb(0,0,0.3) ;
     /* margin: 3px, 10px; */
 }
 
 .navbar .stime #minutes  {
-   background-color: black;
-   color:white;
-   border: red;
+    background-color: whitesmoke;
+    color:yellowgreen;
    text-shadow: 2px 2px, 4px rgb(0,0,0.3) ;
 }
 
 .navbar .stime #seconds  {
-   background-color: black;
-   color:white;
-   border: red;
+    background-color: whitesmoke;
+    color:yellowgreen;
    text-shadow: 2px 2px, 4px rgb(0,0,0.3) ;
 }
 
