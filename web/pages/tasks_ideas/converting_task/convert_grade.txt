@@ -1,0 +1,18 @@
+* convert grade
+** convert grade from number to letter.
+** convert grade from letter to number.
+
+
+A+  97
+A   95
+A-  92
+B+  87
+B   85
+B-  82
+C+  77
+C   75
+C-  72
+D+  67
+D   65
+D-  62
+F   50
