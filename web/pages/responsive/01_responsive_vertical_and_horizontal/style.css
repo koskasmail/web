@@ -1,0 +1,15 @@
+@media ( orientation: portrait) {
+    body {
+        background-color:black;
+        color: white;
+        font-size:22px;
+    }
+}
+
+@media ( orientation: landscape) {
+    body {
+        background-color: gray;
+        color: black;
+        font-size: 24px;
+    }
+}
