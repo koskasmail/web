@@ -15,6 +15,12 @@ body {
 
     /* logo to center */
     align-items: center;
+
+    /* box shadow (x y blur-radius color (0,0,0=black + transparent=0.3)  */
+    box-shadow: 0 4px 8px rgb(0,0,0.3);
+
+    /* smooth background color change = 0.4 second (color change with a 0.4 second delay)  */
+    transition: background-color 0.4s;
 }
 
 .navbar ul {
@@ -32,6 +38,14 @@ body {
 .navbar ul li a:hover {
     color:red;
 
+}
+
+.navbar.active {
+    background-color: black;
+}
+
+.navbar.active ul li a {
+    color: white;
 }
 
 .top-container {
@@ -54,6 +68,6 @@ body {
 }
 
 .text {
-    margin: 50px, 5%;  /* top+bot, left+right */ 
+    margin: 50px 5%;  /* top+bot, left+right */ 
     font-family: sans-serif; 
 }
