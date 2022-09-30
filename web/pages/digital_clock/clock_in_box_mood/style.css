@@ -1,0 +1,39 @@
+.container {
+    /* margin: 0; */
+    font-family: sans-serif;
+    /* display: flex;           */
+    /* align-item: center; */
+    /* align-self: center; */
+    /* justify-content: center; */
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 5rem;
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    border: 1px solid rgba(59, 58, 58, 0.46);
+    border-radius: 20px;
+    box-shadow: -10px 5px 10px gray;
+    top: 0;
+    transition: top ease 0.5s;
+    /* background: linear-gradient(to top, lime, 20%, cyan); */
+    background: linear-gradient(to top, lime, cyan);
+    color: red;
+}
+
+/* .box:hover { */
+    /* top: -50px */
+/* } */
