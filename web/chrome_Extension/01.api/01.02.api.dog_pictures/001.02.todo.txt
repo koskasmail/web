@@ -1,0 +1,9 @@
+
+
+----[001.02.todo.txt]------------
+
+* call a service ....[ok]
+* print result to page ....[ok]
+* print result to console ....[ok]
+* change service url/api ....[]
+* create a serice url/api ....[]

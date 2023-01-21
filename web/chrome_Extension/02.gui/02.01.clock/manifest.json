@@ -1,0 +1,12 @@
+{
+    "name": "clock",
+    "version": "1.0.0",
+    "description": "description ",
+    "manifest_version": 3,
+    "author": "Yaron Kessler",
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "clock",
+        "default_icon": "star.jpg"
+    }
+}

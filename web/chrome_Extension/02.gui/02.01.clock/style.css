@@ -1,0 +1,36 @@
+* {
+    width: auto;
+    height: auto;
+}
+/* 
+.container {
+    font-family: sans-serif;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+} */
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 5rem;
+    position: relative;
+    width: 350px;
+    height: 150px;
+    background-color: white;
+    border: 1px solid rgba(59, 58, 58, 0.46);
+    border-radius: 20px;
+    box-shadow: -10px 5px 10px gray;
+    top: 0;
+    transition: top ease 0.5s;
+    /* background: linear-gradient(to top, lime, 20%, cyan); */
+    background: linear-gradient(to top, lime, cyan);
+    color: green;
+}
+
+/* .box:hover { */
+/* top: -50px */
+/* } */

@@ -1,0 +1,7 @@
+
+----[json.favourite.api]------------
+
+"API": "AdoptAPet",
+"API": "Cataas",
+"API": "Dog Facts",
+------------------------------------

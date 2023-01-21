@@ -1,0 +1,37 @@
+
+Public_APIs.json
+
+https://apipheny.io/free-api/
+
+
+
+
+
+----[https://apipheny.io/free-api/#apis-without-key]------------
+
+[*] catfact.json
+
+https://catfact.ninja/fact
+
+https://alexwohlbruck.github.io/cat-facts/
+
+https://cataas.com/cat?width=150
+
+https://cataas.com/cat?html=true
+
+
+[___] entries
+https://api.publicapis.org/entries
+
+
+[] currentprice.json
+https://api.coindesk.com/v1/bpi/currentprice.json
+
+
+[] activity
+https://www.boredapi.com/api/activity
+
+
+----------------------------------------------------------------
+
+

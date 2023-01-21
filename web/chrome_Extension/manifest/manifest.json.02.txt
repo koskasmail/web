@@ -1,0 +1,11 @@
+{
+    "name": "title",
+    "version": "1.0.0",
+    "description": "description ",
+    "manifest_version": 3,
+    "author": "jaron",
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "title"
+    }
+}
