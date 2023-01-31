@@ -10,3 +10,6 @@ https://developer.chrome.com/docs/webstore/publish/
 ///-----[chrome-extensions-samples]---------------///
 https://github.com/GoogleChrome/chrome-extensions-samples.git
 
+
+git config --global user.email "koskasmail@gmail.com"
+git config --global user.name "Jaron"
