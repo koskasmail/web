@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex_002 box</title>
+    <style>
+        .container {
+            /* margin: 0; */
+            font-family: sans-serif;
+            /* display: flex;           */
+            /* align-item: center; */
+            /* align-self: center; */
+            /* justify-content: center; */
+
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            /* bring your own prefixes */
+            transform: translate(-50%, -50%);
+
+        }
+
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 5rem;
+            position: relative;
+            width: 400px;
+            height: 400px;
+            background-color: white;
+            border: 1px solid rgba(59, 58, 58, 0.46);
+            border-radius: 20px;
+            box-shadow: -10px 5px 10px gray;
+            top: 0;
+            transition: top ease 0.5s;
+            /* background: linear-gradient(to top, lime, 20%, cyan); */
+            background: linear-gradient(to top, lime, cyan);
+            color: red;
+        }
+
+        /* .box:hover { */
+        /* top: -50px */
+        /* } */
+
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            40% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <span class="box">
+            <span id="hour">00</span>
+            <span class="colon blink">:</span>
+            <span id="minutes blink">00</span>
+            <span class="colon blink">:</span>
+            <span id="seconds">00</span>
+        </span>
+    </div>
+</body>
+
+<script>
+    const idHour = document.getElementById("hour");
+    const idMinutes = document.getElementById("minutes");
+    const idSeconds = document.getElementById("seconds");
+
+    function updateClock() {
+        let hh = new Date().getHours();
+        let mm = new Date().getMinutes();
+        let ss = new Date().getSeconds();
+
+        // if hh < 0 add 0 .
+        hh = hh < 10 ? "0" + hh : hh;
+        mm = mm < 10 ? "0" + mm : mm;
+        ss = ss < 10 ? "0" + ss : ss;
+
+        idHour.innerText = hh;
+        idMinutes.innerText = mm;
+        idSeconds.innerHTML = ss;
+
+        //excute again after 1 sec (1000-ms)
+        setTimeout(() => {
+            updateClock();
+        }, 1000);
+    }
+
+    updateClock();
+</script>
+
+</html>
