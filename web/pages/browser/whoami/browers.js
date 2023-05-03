@@ -13,7 +13,7 @@ if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) 
 } else if(navigator.userAgent.indexOf("Firefox") !== -1 ) {
     // The browser is Firefox
     console.log('This is Firefox');
-} else if((navigator.userAgent.indexOf("MSIE") !== -1 ) || (!!document.documentMode === true )) {
+} else if ((navigator.userAgent.indexOf("MSIE") !== -1) || (!!document.DOCUMENT_TYPE_NODE === true)) {
     // The browser is Internet Explorer
     console.log('This is Internet Explorer');
 } else {
