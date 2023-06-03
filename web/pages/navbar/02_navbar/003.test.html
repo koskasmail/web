@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Netscape-Style Navigation Bar</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      background-color: #333;
+      height: 40px;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    a {
+      display: block;
+      padding: 10px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      background-color: #666;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Back</a></li>
+      <li><a href="#">Forward</a></li>
+      <li><a href="#">Reload</a></li>
+      <li>
+        <form action="#">
+          <input type="text" placeholder="Search in Page" style="width: 200px; padding: 5px;">
+          <input type="submit" value="Search" style="padding: 5px;">
+        </form>
+      </li>
+    </ul>
+  </nav>
+</body>
+</html>
