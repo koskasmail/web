@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #search-container {
+      background-color: #f0f0f0;
+      padding: 10px;
+      text-align: center;
+    }
+
+    #search-input {
+      width: 300px;
+      padding: 5px;
+      font-size: 14px;
+    }
+
+    #search-button {
+      padding: 5px 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    #search-results {
+      margin-top: 20px;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="search-container">
+    <input type="text" id="search-input" placeholder="Enter search text">
+    <button id="search-button">Search</button>
+    <div id="search-results"></div>
+  </div>
+
+  <div>
+    <div>Welcome to</div>
+    <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus eveniet eius, reiciendis voluptate possimus
+      voluptatem velit accusamus debitis, error tenetur placeat sint culpa commodi repudiandae impedit ut quibusdam
+      mollitia assumenda! </div>
+  </div>
+
+  <script>
+    var searchInput = document.getElementById('search-input');
+    var searchButton = document.getElementById('search-button');
+    var searchResults = document.getElementById('search-results');
+
+    searchButton.addEventListener('click', function () {
+      var searchText = searchInput.value.trim();
+      if (searchText !== '') {
+        var bodyText = document.body.innerText;
+        var searchRegex = new RegExp(searchText, 'gi');
+        var matches = bodyText.match(searchRegex);
+        if (matches !== null) {
+          searchResults.innerText = 'Found ' + matches.length + ' matches.';
+        } else {
+          searchResults.innerText = 'No matches found.';
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
