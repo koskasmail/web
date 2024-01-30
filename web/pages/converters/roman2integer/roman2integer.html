@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roman to Integer Converter</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    #converter {
+        margin: 50px auto;
+        width: 300px;
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    #result {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+</style>
+</head>
+<body>
+    <div id="converter">
+        <h2>Roman to Integer Converter</h2>
+        <input type="text" id="romanInput" placeholder="Enter Roman numeral">
+        <button onclick="convert()">Convert</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function convert() {
+            const roman = document.getElementById('romanInput').value.toUpperCase();
+            const romanToIntMap = {
+                'I': 1,
+                'V': 5,
+                'X': 10,
+                'L': 50,
+                'C': 100,
+                'D': 500,
+                'M': 1000
+            };
+
+            let result = 0;
+            let prevValue = 0;
+
+            for (let i = roman.length - 1; i >= 0; i--) {
+                const currentValue = romanToIntMap[roman[i]];
+                if (currentValue >= prevValue) {
+                    result += currentValue;
+                } else {
+                    result -= currentValue;
+                }
+                prevValue = currentValue;
+            }
+
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+</body>
+</html>
