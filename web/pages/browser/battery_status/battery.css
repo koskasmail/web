@@ -1,0 +1,27 @@
+* {
+    font-size: 60px;
+  }
+  
+  div {
+    text-align: center;
+  }
+
+  #BatteryLevel {
+    color: red;
+  }
+  
+  #batteryCharging {
+    color: red;
+  }
+  
+  #ChargeInfo {
+    color: red;
+  }
+  
+  #DischargingInfo {
+    color: red;
+  }
+
+  .title {
+    color: purple;
+  }
