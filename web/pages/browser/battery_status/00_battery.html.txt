@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="battery.css">
+    <title></title>
+</head>
+<body>
+ 
+<div>
+    <span>🔋 = </span>
+    <span id="BatteryLevel"></h1></span>
+  </div>
+  
+  <div>
+    <span>🔌 =</span>
+    <span id="batteryCharging"></h1></span>
+  </div>
+  
+  <!-- Tip: use emoji -->
+  <!-- 🔋 🪫 🔌 ⌛️ ⏳  -->
+  <!-- https://getemoji.com/ -->
+  
+  <!-- <div> -->
+  <!--   <span>Charge-status: </span> -->
+  <!--   <span id="ChargeInfo"></h1></span> -->
+  <!-- </div> -->
+  <!-- <div> -->
+  <!--   <span>Charge-Info: </span> -->
+  <!--   <span id="DischargingInfo"></h1></span> -->
+  <!-- </div> -->
+  
+    <script src="battery.js"></script>
+</body>
+</html>
