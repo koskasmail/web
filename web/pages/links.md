@@ -5,6 +5,7 @@
 * [hhmmss_ampm](https://koskasmail.github.io/web/web/pages/digital_clock/hhmmss_ampm/)
 * [clockInBox](https://koskasmail.github.io/web/web/pages/digital_clock/clock_in_box/clockInBox.html)
 * [clock_neon](https://koskasmail.github.io/web/web/pages/digital_clock/clock_neon/)
+* [digital_neon_clock](https://koskasmail.github.io/web/web/pages/digital_clock/digital_neon_clock)
 
 # other
 * [base64_dot_star](https://koskasmail.github.io/web/web/pages/base64/base64_dot_star.html)
