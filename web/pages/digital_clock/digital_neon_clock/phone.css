@@ -4,7 +4,7 @@
 /*         direction: ltr; */
         /* direction: ltr;
         font-family: Orbitron;
-        background: blue;
+        background: green;
         color: yellow;
         font-size: 44px;
         font-family: Orbitron;
@@ -25,7 +25,7 @@
 /*         direction: ltr; */
         position: absolute;
         top: 50%;
-        left: 20%;
+        left: 40%;
         transform: translateX(-20%) translateY(-20%);
 
         /* color: #17D4FE; */
