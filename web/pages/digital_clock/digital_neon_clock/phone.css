@@ -6,8 +6,8 @@
     }
 
     .box {
-        /* position: absolute; */
-        /* top: 50%; */
+        position: absolute;
+        top: 50%;
         /* left: 40%; */
         /* transform: translateX(-20%) translateY(-20%); */
 
