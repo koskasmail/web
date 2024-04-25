@@ -1,7 +1,7 @@
 /* phone.css */
 @media screen and (max-width: 600px) {
     * {
-        direction: ltr;
+/*         direction: ltr; */
         /* direction: ltr;
         font-family: Orbitron;
         background: blue;
@@ -12,7 +12,7 @@
     }
 
     body {
-        direction: ltr;
+/*         direction: ltr; */
         font-family: Orbitron;
         background: blue;
         color: gray;
@@ -22,7 +22,7 @@
     }
 
     .box {
-        direction: ltr;
+/*         direction: ltr; */
         position: absolute;
         top: 50%;
         left: 20%;
