@@ -1,5 +1,4 @@
 /* desktop */
-
 @media screen and (min-width: 901px) {
 
     * {
@@ -17,7 +16,7 @@
         transform: translateX(-50%) translateY(-50%);
 
         color: #17D4FE;
-        font-size: 80px;
+        font-size: 120px;
         font-family: Orbitron;
         letter-spacing: 4px;
 
