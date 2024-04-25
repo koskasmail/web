@@ -3,19 +3,23 @@
     * {
         font-family: Orbitron;
         background: blue;
+        color: yellow;
+        font-size: 32px;
+        font-family: Orbitron;
+        letter-spacing: 4px;
     }
 
     .box {
         position: absolute;
         top: 50%;
-        left: 40%;
+        /* left: 40%; */
         /* transform: translateX(-20%) translateY(-20%); */
 
         /* color: #17D4FE; */
-        color: yellow;
-        font-size: 32px;
+        /* color: yellow;
+        font-size: 20px;
         font-family: Orbitron;
-        letter-spacing: 4px;
+        letter-spacing: 4px; */
 
         transition: 0.5s;
         text-shadow: 0 0 5px#2703f4,
