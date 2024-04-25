@@ -1,32 +1,19 @@
 /* phone.css */
 @media screen and (max-width: 600px) {
-    * {
-/*         direction: ltr; */
-        /* direction: ltr;
-        font-family: Orbitron;
-        background: green;
-        color: yellow;
-        font-size: 44px;
-        font-family: Orbitron;
-        letter-spacing: 4px; */
-    }
-
     body {
-/*         direction: ltr; */
         font-family: Orbitron;
         background: blue;
-        color: gray;
+        color: green;
         font-size: 44px;
         font-family: Orbitron;
         letter-spacing: 4px;
     }
 
     .box {
-/*         direction: ltr; */
         position: absolute;
         top: 50%;
-        left: 40%;
-        transform: translateX(-20%) translateY(-20%);
+        left: 10%;
+/*         transform: translateX(-20%) translateY(-20%); */
 
         /* color: #17D4FE; */
         /* color: yellow;
