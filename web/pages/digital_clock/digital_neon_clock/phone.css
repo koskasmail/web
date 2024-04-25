@@ -1,17 +1,23 @@
 /* phone.css */
 @media screen and (max-width: 600px) {
     * {
-        direction: ltr;
+        /* direction: ltr;
         font-family: Orbitron;
         background: blue;
         color: yellow;
         font-size: 44px;
         font-family: Orbitron;
-        letter-spacing: 4px;
+        letter-spacing: 4px; */
     }
 
     body {
         direction: ltr;
+        font-family: Orbitron;
+        background: blue;
+        color: gray;
+        font-size: 44px;
+        font-family: Orbitron;
+        letter-spacing: 4px;
     }
 
     .box {
