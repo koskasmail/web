@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>image2base64</title>
+</head>
+<body>
+        <div class="title">
+        <div>
+            <span class="titleFont">file_2_base64</span>
+        </div>
+    </div>
+    <div class="container">
+        <input type="file" id="img">
+        <br /><br />
+        <button onclick="convertToBase64()">Convert to Base64</button>
+        <br />
+    </div>
+    <div class="container">
+        <div id="base64-output"></div>
+        <textarea id="output"></textarea>
+        <br />
+        <br />
+        <span>
+            <button onclick="copyToClipboard()">Copy To Clipboard</button>
+        </span>
+        <span>
+            <button onclick="fnShow()">Display Base64 Output</button>
+        </span>
+    </div>
+    <div class="container">
+        <div id="status"> - - - - - </div>
+    </div>
+    <div class="container">
+        <span><img id="imgOutput" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAY1BMVEX///8AAADd3d1zc3Ph4eEqKipbW1vt7e2Xl5eQkJC6urry8vL4+Pj7+/ukpKRDQ0NJSUnCwsJ+fn4zMzMRERENDQ2hoaE6Ojpra2stLS0iIiLT09MdHR00NDRTU1Orq6t7e3v5DzFKAAACyklEQVR4nO3dC27iMBRGYRsogRAeoTwKbaH7X+W0QlOGmVQytsP9kzlnAeh+ok2k2DjOtVS9ft740DbP67qtQVqqPgTrfnfolHFyt++rifXY4U2jgN5PrQcPrYwEel9ajx7WPBro/dx6+KAWCcKF9fBBrRKEK+vhQyrCb4P/timsxw9olAD0fmQ9fkCDJOHAevyAECLUDyFC/RAi1A8hQv0QItQPIUL9ECLUDyFC/RAi1A8hQv36v35YbBOA2y6sAbtlgnBpPXxQcRuiLnVjW9QsQTizHj6sXTRwZz16aMNI4NB68PDiiB0COneOAJ6th76v2W5/F2+/68hF5qZiFFon7vNERERERERERERERET0kKrRICn1xaf65SliQfSm7XKqiyxSzsH4M9VtCq+ZfJ+9SJ7dkrZP72+itaahefJ/4E2Cf6gpO7ya0rvcZAbqnYVV5xbK7U1MORKqMbn9pevcQrk9wrFb9H5ObZ83QoQI7UOIEKF9CBEitA8hQoT2IUSI0L7cj7z1hDE/pOyWsOi9MOl0gW4IM66PigqzP9fXE7px74Xuo/dCV+e83EgKnRtM1uPvTn0U3pR2xlAXhP0/JwohQv0QItQPIUL9ECLUDyFC/RAi1A8hQv0QItQPIUL9ECLUDyFC/RAi1A8hQv0QItQPIUL9ECLUDyFC/RAi1A8hQv0QdlFYleP94em7JOH1Yw77cVlZ0y7l/1H+NYU3kVe5DrtubmX+NVb3vdj4/vbWxMw/dG5obAssWwd6X5oKjw8QHi2BWU9k/zHLe2T+s02asnyt/PQhQstjzPOfMdTUECFChAgRIkSIECFChAgRIkSIEOF/L+z/s7bs785rbGEozH6McGOvhkK3fQBwawl8yGN9y4f6n7W7AvzVyhboZm8tA99mxkJXvLcKfBd4MWmV/2Wk19bWq/iXivOpjbXg4+mc4wv8BVj7RMcuDWptAAAAAElFTkSuQmCC" alt="test"></span>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+</html>
+04
