@@ -9,6 +9,7 @@
 
 # converters
 * [Image_To_base64](https://koskasmail.github.io/web/web/pages/base64/ImageTobase64/)
+* [qr_code](https://koskasmail.github.io/web/web/pages/converters/qr_code/)
 
 # browser
 * [battery](https://koskasmail.github.io/web/web/pages/browser/battery_status/battery.html)
