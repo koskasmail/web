@@ -7,11 +7,17 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="text" id="url" placeholder="Enter URL">
-    <button onclick="generateQR()">Generate QR Code</button>
-    <button onclick="clearQR()">Clear QR</button>
-    <div id="output"></div>
-
+    <div class="box">
+        <div class="title">Qr-Code Generator</div>
+        <div>
+            <input type="text" id="url" size=80% placeholder="Enter URL" class="text">
+        </div>
+        <div>
+            <button onclick="generateQR()" class="generateQR">Generate QR Code</button>
+            <button onclick="clearQR()" class="clearQR"> Clear QR</button>
+            <div id="output"></div>
+        </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
     <script src="script.js"></script>
 </body>
