@@ -1,4 +1,3 @@
-// script
 function generateQR() {
     var myUrl = document.getElementById("url").value;
     if (myUrl) {
@@ -23,3 +22,16 @@ function clearQR() {
     // clear result
     document.getElementById('output').innerText = " ";
 }
+
+function first() {
+    document.getElementById('output').innerText = "";
+    var qrcode = new QRCode(document.getElementById("output"), {
+        text: "https://koskasmail.github.io/web/web/pages/converters/qr_code/",
+        width: 200,
+        height: 200,
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    first(); // Call your first function when the DOM content is fully loaded
+});
