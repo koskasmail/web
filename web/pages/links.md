@@ -1,24 +1,24 @@
 # links 
 
 # digital clock
-* [hhmmss](https://koskasmail.github.io/web/web/pages/digital_clock/hhmmss/)
-* [hhmmss_ampm](https://koskasmail.github.io/web/web/pages/digital_clock/hhmmss_ampm/)
-* [clockInBox](https://koskasmail.github.io/web/web/pages/digital_clock/clock_in_box/clockInBox.html)
-* [clock_neon](https://koskasmail.github.io/web/web/pages/digital_clock/clock_neon/)
-* [digital_neon_clock](https://koskasmail.github.io/web/web/pages/digital_clock/digital_neon_clock)
+* [Digital_clock_hhmmss](https://koskasmail.github.io/web/web/pages/digital_clock/hhmmss/)
+* [Digital_clock_hhmmss_ampm](https://koskasmail.github.io/web/web/pages/digital_clock/hhmmss_ampm/)
+* [ClockInBox](https://koskasmail.github.io/web/web/pages/digital_clock/clock_in_box/clockInBox.html)
+* [Clock_neon](https://koskasmail.github.io/web/web/pages/digital_clock/clock_neon/)
+* [Digital_neon_clock](https://koskasmail.github.io/web/web/pages/digital_clock/digital_neon_clock)
 
 # converters
 * [Image_To_base64](https://koskasmail.github.io/web/web/pages/base64/ImageTobase64/)
-* [qr_code](https://koskasmail.github.io/web/web/pages/converters/qr_code/)
+* [QR_Code](https://koskasmail.github.io/web/web/pages/converters/qr_code/)
 
 # browser
-* [battery](https://koskasmail.github.io/web/web/pages/browser/battery_status/battery.html)
+* [Battery](https://koskasmail.github.io/web/web/pages/browser/battery_status/battery.html)
 
 # animation
-* [wave](https://koskasmail.github.io/web/web/pages/animation/wave/)
+* [Wave](https://koskasmail.github.io/web/web/pages/animation/wave/)
 
 # other
-* [base64_dot_star](https://koskasmail.github.io/web/web/pages/base64/base64_samples/base64_dot_star.html)
+* [Base64_dot_star](https://koskasmail.github.io/web/web/pages/base64/base64_samples/base64_dot_star.html)
 
 # base
-* [base64_dot_star](https://koskasmail.github.io/web/web/pages/)
+* [Base64_dot_star](https://koskasmail.github.io/web/web/pages/)
