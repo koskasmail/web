@@ -1,8 +1,157 @@
-* {
-    background-color: white;
-    color:black;
+/* div {
+  margin-top: 20px;
+} */
+
+.box {
+  font-family: sans-serif;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  color: #222;
+  transition: 0.5s;
+  text-shadow: 0 0 5px#03e9f4,
+    0 0 25px #03e9f4,
+    0 0 50px #03e9f4,
+    0 0 100px #03e9f4
+    /* transparent: 0.5; */
 }
 
-div {
-    padding: 30px 30px;
+.title {
+  font-size: 20px;
+
+  backface-visibility: hidden;
+  position: relative;
+  cursor: pointer;
+  /* display: inline-block; */
+  background: linear-gradient(180deg, #b4d9e4 0%, #bcd2d8 30%, #bcc5c7 65%, #b8ccd1 100%);
+  border-radius: 8px;
+  border: 0px solid #379;
+  border-width: 10px 0px 10px 0px;
+  padding: 9px 15px 9px 15px;
+  margin-bottom: 50px;
+}
+
+hr {
+  width: 80%;
+}
+
+.text {
+  align-content: center;
+  align-items: center;
+  align-self: center;
+  backface-visibility: hidden;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+  background: linear-gradient(180deg, #b4d9e4 0%, #bcd2d8 30%, #bcc5c7 65%, #b8ccd1 100%);
+  border-radius: 8px;
+  border: 0px solid #379;
+  border-width: 0px 0px 5px 0px;
+  padding: 9px 15px 6px 15px;
+  box-shadow: inset 0px 1px 3px rgba(255, 255, 255, .4);
+  color: #fff;
+  font-size: initial;
+  font-family: Helvetica Neue;
+  font-weight: 900;
+  font-style: normal;
+  margin-bottom: 10px;
+}
+
+.generateQR {
+  backface-visibility: hidden;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+  background: linear-gradient(180deg, #44bbdd 0%, #40b5d6 30%, #30a5c6 65%, #129abc 100%);
+  border-radius: 8px;
+  border: 0px solid #379;
+  border-width: 0px 0px 5px 0px;
+  padding: 9px 15px 6px 15px;
+  box-shadow: inset 0px 1px 3px rgba(255, 255, 255, .4);
+  color: #fff;
+  font-size: initial;
+  font-family: Helvetica Neue;
+  font-weight: 900;
+  font-style: normal;
+  margin-right: 10px;
+  margin-bottom: 30px;
+}
+
+.generateQR>div {
+  color: #999;
+  font-size: 10px;
+  font-family: Helvetica Neue;
+  font-weight: initial;
+  font-style: normal;
+  text-align: center;
+  margin: 0px 0px 0px 0px;
+}
+
+.generateQR>i {
+  color: #fff;
+  font-size: 1em;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 100px;
+  border: 0px solid transparent;
+  border-width: 0px 0px 0px 0px;
+  padding: 5px 5px 5px 5px;
+  margin: 0px 0px 0px 10px;
+  position: static;
+  box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.4), inset 0px -1px 0px rgba(255, 255, 255, .5);
+}
+
+.generateQR>.ld {
+  font-size: initial;
+}
+
+/* clearQR */
+.clearQR {
+  backface-visibility: hidden;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+  background: #fd1a02;
+  border-radius: 8px;
+  border: 0px solid #cf1818;
+  border-width: 0px 0px 5px 0px;
+  padding: 9px 15px 6px 15px;
+  box-shadow: inset 0px 1px 3px rgba(255, 255, 255, .4);
+  color: #fff;
+  font-size: initial;
+  font-family: Helvetica Neue;
+  font-weight: 900;
+  font-style: normal;
+
+}
+
+.clearQR>div {
+  color: #999;
+  font-size: 10px;
+  font-family: Helvetica Neue;
+  font-weight: initial;
+  font-style: normal;
+  text-align: center;
+  margin: 0px 0px 0px 0px;
+}
+
+.clearQR>i {
+  color: #fff;
+  font-size: 1em;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 100px;
+  border: 0px solid transparent;
+  border-width: 0px 0px 0px 0px;
+  padding: 5px 5px 5px 5px;
+  margin: 0px 0px 0px 10px;
+  position: static;
+  box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.4), inset 0px -1px 0px rgba(255, 255, 255, .5);
+}
+
+.clearQR>.ld {
+  font-size: initial;
 }
