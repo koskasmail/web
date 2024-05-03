@@ -1,11 +1,10 @@
 body {
-    /* height: 100vh;
-    width: 100vh; */
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: black;
-    font-size: xx-large;
+    color: white;
+    font-size: 44px;
     position: relative;
 }
 
