@@ -1,0 +1,17 @@
+.  {
+    font-family: Arial, sans-serif;
+    font-size: 84px;
+    color: #d10808;
+    margin-top: 20px;
+    animation: blink-animation 1s infinite alternate;
+}
+
+@keyframes blink-animation {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
