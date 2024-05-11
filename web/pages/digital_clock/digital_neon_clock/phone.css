@@ -5,7 +5,7 @@
         background: black;
         color: #17D4FE;
         font-family: Orbitron;
-        letter-spacing: 4px;
+        letter-spacing: 2px;
     }
 
     .box {
@@ -13,9 +13,9 @@
         top: 30%;
         left: 20%;
         transform: translateX(-20%) translateY(-10%);
-        font-size: 38pt;
+        font-size: 42pt;
         font-family: Orbitron;
-        letter-spacing: 4px;
+        letter-spacing: 2px;
         */ transition: 0.5s;
         text-shadow: 0 0 5px#2703f4,
             0 0 25px #2703f4,
