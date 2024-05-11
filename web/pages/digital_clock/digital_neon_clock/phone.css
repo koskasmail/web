@@ -11,14 +11,13 @@
 
     .box {
         position: absolute;
-        top: 50%;
+        top: 30%;
         left: 20%;
-        transform: translateX(-20%) translateY(-10%); 
-        font-size: 40px;
+        transform: translateX(-20%) translateY(-10%);
+        font-size: 44pt;
         font-family: Orbitron;
-        letter-spacing: 4px; */
-
-        transition: 0.5s;
+        letter-spacing: 4px;
+        */ transition: 0.5s;
         text-shadow: 0 0 5px#2703f4,
             0 0 25px #2703f4,
             0 0 50px #2703f4,
