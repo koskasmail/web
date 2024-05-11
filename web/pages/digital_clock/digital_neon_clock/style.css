@@ -1,6 +1,5 @@
 /* desktop */
 @media screen and (min-width: 901px) {
-
     * {
         font-family: Orbitron;
     }
@@ -16,7 +15,7 @@
         transform: translateX(-50%) translateY(-50%);
 
         color: #17D4FE;
-        font-size: 110px;
+        font-size: 50pt;
         font-family: Orbitron;
         letter-spacing: 4px;
 
