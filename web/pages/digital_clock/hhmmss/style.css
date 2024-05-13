@@ -15,9 +15,10 @@ body {
     justify-content: center;
 
     /* page background image */
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==);
-    /* background: url(data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7); */
-    background-size: cover; /* display background */
+    /* background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==); */
+    background: linear-gradient(to top, rgb(51, 68, 129),white, rgb(33, 150, 168));
+
+    background-size:cover;  /* contain/cover display background */
 }
 
 /* h2 tag */
@@ -44,7 +45,7 @@ h2 {
 .clock span {
     width: 100px;
     height: 80px;
-    background-color: slateblue;
+    background-color: rgb(109, 130, 245);
     opacity: .9; /* transparency (1=not transparent, 0.5 = 50% transparent)   color */
     color:white; /* text color */
     display:flex; /* change all the display */
@@ -60,6 +61,6 @@ h2 {
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    background-color: darkblue;
+    background-color: rgb(61, 61, 146);
     opacity: 0.8;
 }
