@@ -14,6 +14,9 @@
 
 # browser
 * [Battery](https://koskasmail.github.io/web/web/pages/browser/battery_status/battery.html)
+* [window_size](https://koskasmail.github.io/web/web/pages/browser/window_size/window_size/)
+* [window_size_in_field](https://koskasmail.github.io/web/web/pages/browser/window_size/window_size_in_field/)
+* [window_size_in_text_table](https://koskasmail.github.io/web/web/pages/browser/window_size/window_size_in_text_table/)
 
 # animation
 * [Wave](https://koskasmail.github.io/web/web/pages/animation/wave/)
