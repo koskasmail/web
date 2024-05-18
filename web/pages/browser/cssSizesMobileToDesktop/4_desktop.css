@@ -1,0 +1,12 @@
+/* desktop */
+@media only screen and (min-width: 1200px) {
+    body {
+        background: black;
+        font-family: Orbitron;
+        color: green;
+        color: #17D4FE;
+        font-size: 30px;
+        font-family: Orbitron;
+        letter-spacing: 4px;
+    }    
+}
