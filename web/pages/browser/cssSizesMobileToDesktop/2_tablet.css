@@ -1,0 +1,11 @@
+/* tablet */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    body {
+        font-family: Orbitron;
+        background: black;
+        color: #17D4FE;
+        font-size: 30px;
+        font-family: Orbitron;
+        letter-spacing: 4px;
+    }    
+}
