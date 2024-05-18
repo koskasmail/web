@@ -1,4 +1,16 @@
+<a name="topage"></a>
+
 # links 
+
+## browser
+* [Battery Status](https://koskasmail.github.io/web/web/pages/browser/battery_status/battery.html)
+
+### browser - window size
+* [window_size](https://koskasmail.github.io/web/web/pages/browser/window_size/window_size/)
+* [window_size_in_field](https://koskasmail.github.io/web/web/pages/browser/window_size/window_size_in_field/)
+* [window_size_in_text_table](https://koskasmail.github.io/web/web/pages/browser/window_size/window_size_in_text_table/)
+
+-----
 
 # digital clock
 * [Digital_clock_hhmmss](https://koskasmail.github.io/web/web/pages/digital_clock/hhmmss/)
@@ -8,21 +20,30 @@
 * [Digital_neon_clock](https://koskasmail.github.io/web/web/pages/digital_clock/digital_neon_clock/)
 * [clock beat](https://koskasmail.github.io/web/web/pages/digital_clock/clock_beat/)
 
+-----
+
 # converters
 * [Image_To_base64](https://koskasmail.github.io/web/web/pages/base64/ImageTobase64/)
 * [QR_Code](https://koskasmail.github.io/web/web/pages/converters/qr_code/)
 
-# browser
-* [Battery](https://koskasmail.github.io/web/web/pages/browser/battery_status/battery.html)
-* [window_size](https://koskasmail.github.io/web/web/pages/browser/window_size/window_size/)
-* [window_size_in_field](https://koskasmail.github.io/web/web/pages/browser/window_size/window_size_in_field/)
-* [window_size_in_text_table](https://koskasmail.github.io/web/web/pages/browser/window_size/window_size_in_text_table/)
+-----
 
 # animation
 * [Wave](https://koskasmail.github.io/web/web/pages/animation/wave/)
 
+-----
+
 # other
 * [Base64_dot_star](https://koskasmail.github.io/web/web/pages/base64/base64_samples/base64_dot_star.html)
 
+-----
+
 # base
 * [Base64_dot_star](https://koskasmail.github.io/web/web/pages/)
+
+-----
+
+
+<p align="right">(<a href="#topage">back to top</a>)</p>
+<br/>
+<br/>
