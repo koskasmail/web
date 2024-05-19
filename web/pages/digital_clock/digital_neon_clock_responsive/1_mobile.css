@@ -1,0 +1,27 @@
+/* mobile.css */
+@media only screen and (max-width: 767px) {
+    body {
+        font-family: Orbitron;
+        background: black;
+        color: #17D4FE;
+        /* font-size: 44px; */
+        font-family: Orbitron;
+        letter-spacing: 4px;
+    }
+
+    .box {
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        transform: translateX(-20%) translateY(-10%); 
+        font-size: 40px;
+        font-family: Orbitron;
+        letter-spacing: 4px; */
+
+        transition: 0.5s;
+        text-shadow: 0 0 5px#2703f4,
+            0 0 25px #2703f4,
+            0 0 50px #2703f4,
+            0 0 100px #2703f4
+    }
+}
