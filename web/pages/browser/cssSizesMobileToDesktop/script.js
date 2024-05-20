@@ -12,9 +12,26 @@ function updateDimensions() {
     const widthInch = (widthPx * pxToInch).toFixed(2);
     const heightInch = (heightPx * pxToInch).toFixed(2);
 
+
+    let widthResult = "";
+    if (widthPx < 767) {
+        widthResult = "mobile";
+    } else if (widthPx >= 768 && widthPx <= 991) {
+        widthResult = "tablet";
+    } else if (widthPx >= 992 && widthPx <= 1199) {
+        widthResult = "laptop";
+    } else if (widthPx > 1200) {
+        widthResult = "desktop";
+    } else {
+        widthResult = "???";
+    }
+    // deviceName.innerHTML = "---[" + widthResult + "]---";
+
     currentWindowSize.innerHTML = `
+        <p>device: ${widthResult}</p>
         <p>Width: ${widthPx}px (${widthCm} cm, ${widthInch} inch)</p>
         <p>Height: ${heightPx}px (${heightCm} cm, ${heightInch} inch)</p>
+
     `;
 }
 
