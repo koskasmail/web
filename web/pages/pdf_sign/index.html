@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--<css>-->
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- <div class="container"> -->
+<!-- <p class="intro">Fill out this form to sign the example agreement. PactMaker automatically generates an example agreement <a href="/example.pdf" target="_blank">here</a>.</p> -->
+    
+    <div class="info">
+        <span><img id="logo" src="./assets/images/logo.png" width="120px" alt="picture not found">
+        </span>
+        <span>Please read document and sign it</span>
+    </div>
+
+    <!-- PDF file -->
+    <div id="pdfDoc">
+        <!-- <object data="./Lorem_Ipsum.pdf" type="application/pdf" width="100%" height="800">/object> -->
+        <object data="./assets/documents/Lorem_Ipsum.pdf" type="application/pdf" width="100%" height="600" view="fit">
+            <parm name="view" value="FitH" />
+        </object>
+    </div>
+
+    <!-- button -->
+    <!-- <div class="centerItem"> -->
+    <!-- <a href="#" class="btn1">* send document * </a> -->
+    <!-- </div> -->
+
+
+    <div class="container">
+        <!-- <p class="intro">Fill out this form to sign the example agreement. PactMaker automatically generates an example agreement <a href="/example.pdf" target="_blank">here</a>.</p> -->
+    
+        <!-- <form action="/sign" method="POST"> -->
+        <form action="http://localhost:8080/sign" method="POST">
+    
+
+    
+          <div class="form-row">
+            <div class="form-label">
+              <!-- <label>Sign your name</label> -->
+            </div>
+            <div class="form-field">
+              <button class="js-sig-reset sig-reset hidden"></button>
+              <!-- 444 / 125 -->
+              <canvas class="js-sig-canvas sig" width="600" height="125"></canvas> 
+              <input type="hidden" class="js-sig" name="signature">
+              <input type="text" name="txtFirstName" value="shalom">
+              <input type="text" name="txtLastName" value="akuo">
+
+            </div>
+          </div>
+    
+          <div class="form-submit">
+            <input class="c-submit js-submit" type="submit" value="Sign Agreement" disabled>
+          </div>
+        </form>
+    </div>
+    
+     <!--<script>-->
+        <script src="./assets/lib/signature-pad.js"></script>
+        <script src="./assets/lib/form.js"></script>
+        <!-- <link rel="stylesheet" href="./assets/lib"> -->
+        <!-- <script src="./javaScript.js" defer></script> -->
+</body>
+</html>
