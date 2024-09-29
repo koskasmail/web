@@ -4,8 +4,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    align: center;
+/*     alignment-adjust: center; */
     height: 100vh;
-    margin: 0;
+    width: 60%;
+    margin: 0% 20%;
+  
 }
 
 .container {
@@ -13,6 +17,7 @@ body {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 h2 {
