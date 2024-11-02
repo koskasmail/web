@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+#subjects-container {
+    max-width: 600px;
+    margin: auto;
+}
+
+.subject {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.links {
+    list-style-type: none;
+    padding: 0;
+}
+
+.links li {
+    margin: 5px 0;
+}
