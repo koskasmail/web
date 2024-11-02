@@ -13,6 +13,17 @@
           {"title": "w3schools", "url": "https://www.w3schools.com/js/"},
           {"title": "geeksforgeeks", "url": "https://www.geeksforgeeks.org/javascript/"}
         ]
+      },
+      {
+        "name": "Java",
+        "links": [
+          {"title": "w3schools", "url": "https://www.w3schools.com/java/"},
+          {"title": "sololearn", "url": "https://www.sololearn.com/en/learn/courses/le-java"},
+          {"title": "geeksforgeeks", "url": "https://www.geeksforgeeks.org/java/"},
+          {"title": "tutorialspoint", "url": "https://www.tutorialspoint.com/java/index.htm"},
+          {"title": "programiz", "url": "https://www.programiz.com/java-programming"},
+          {"title": "javatpoint", "url": "https://www.javatpoint.com/java-tutorial"}
+        ]
       }
     ]
   }
