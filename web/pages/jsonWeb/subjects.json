@@ -1,0 +1,19 @@
+{
+    "subjects": [
+      {
+        "name": "Html",
+        "links": [
+          {"title": "w3schools", "url": "https://www.w3schools.com/html/"},
+          {"title": "geeksforgeeks", "url": "https://www.geeksforgeeks.org/html-tutorial/"}
+        ]
+      },
+      {
+        "name": "JavaScript",
+        "links": [
+          {"title": "w3schools", "url": "https://www.w3schools.com/js/"},
+          {"title": "geeksforgeeks", "url": "https://www.geeksforgeeks.org/javascript/"}
+        ]
+      }
+    ]
+  }
+  
