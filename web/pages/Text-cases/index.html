@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Text-cases</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Text Converter</h2>
+        <textarea class="input-field" id="input-text" rows="5"></textarea>
+        <textarea class="output-field" id="output-text" rows="5" readonly></textarea>
+        <div class="buttons">
+            <button class="button" onclick="toUpper()">Upper</button>
+            <button class="button" onclick="toCamelCase()">Camel</button>
+            <button class="button" onclick="toKebabCase()">Kebab</button>
+            <button class="button" onclick="toSnakeCase()">Snake</button>
+            <button class="button" onclick="toSentenceCase()">Sentence</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
