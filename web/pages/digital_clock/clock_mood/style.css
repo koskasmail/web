@@ -71,6 +71,78 @@ body {
 
 
 
+.sun1 {
+    width: 100px;
+    height: 100px;
+    background-image: linear-gradient(to bottom, #ffe0b2, #ffcc80, #ff9800, #f44336); 
+    border-radius: 20px;
+    margin: 2px;
+/*     background-image: url(); */
+}
+
+.sun2 {
+    width: 100px;
+    height: 100px;
+/*     background-image: linear-gradient(to bottom, #e0f7fa, #b3e5fc, #81d4fa, #4fc3f7, #29b6f6);  */
+    background-image: linear-gradient(to bottom, #ffe0b2, #ffcc80, #ff9800, #f44336); 
+    border-radius: 20px;
+    margin: 2px;
+/*     background-image: url(); */
+}
+
+.sun3 {
+    width: 100px;
+    height: 100px;
+/*     background-color: #ff9800;  */
+    background-image: linear-gradient(to bottom, #ffe0b2, #ffcc80, #ff9800, #f44336); 
+    border-radius: 20px;
+    margin: 2px;
+/*     background-image: url(); */
+}
+
+.sun4 {
+    width: 100px;
+    height: 100px;
+/*     background-color: #87ceeb;  */
+    background-image: linear-gradient(to bottom, #ffe0b2, #ffcc80, #ff9800, #f44336); 
+    border-radius: 20px;
+    margin: 2px;
+/*     background-image: url(); */
+}
+
+.sun5 {
+    width: 100px;
+    height: 100px;
+/*     background-color: #ff6347;  */
+    background-image: linear-gradient(to bottom, #ffe0b2, #ffcc80, #ff9800, #f44336); 
+    border-radius: 20px;  
+    margin: 2px;
+/*     background-image: url(); */
+}
+
+.sun6 {
+    width: 100px;
+    height: 100px;
+/*     background-color: #ffa07a;  */
+    background-image: linear-gradient(to bottom, #ffe0b2, #ffcc80, #ff9800, #f44336); 
+    border-radius: 20px;  
+    margin: 2px;
+/*     background-image: url(); */
+}
+
+
+.sun7 {
+    width: 100px;
+    height: 100px;
+/*     background-color: blue;  */
+    background-image: linear-gradient(to bottom, #ffe0b2, #ffcc80, #ff9800, #f44336); 
+    border-radius: 20px;  
+    margin: 2px;
+/*     background-image: url(); */
+}
+
+
+
 /* .Template {
     width: 100px;
     height: 100px;
