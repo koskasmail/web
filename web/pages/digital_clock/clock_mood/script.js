@@ -26,13 +26,13 @@
                 moodIconsDiv.innerHTML = '<div class="sun4"></div>';
             } else if (hours >= 17 && hours < 19) {
                 backgroundClass = 'evening';
-                moodIconsDiv.innerHTML = '<div class="sun4"></div>';
+                moodIconsDiv.innerHTML = '<div class="sun5"></div>';
             } else if (hours >= 19 && hours < 21) {
                 backgroundClass = 'sunset';
-                moodIconsDiv.innerHTML = '<div class="sun4"></div>';
+                moodIconsDiv.innerHTML = '<div class="sun6"></div>';
             } else {
                 backgroundClass = 'night';
-                moodIconsDiv.innerHTML = '<div class="sun5"></div>';
+                moodIconsDiv.innerHTML = '<div class="sun7"></div>';
             }
 
             document.body.className = backgroundClass;
