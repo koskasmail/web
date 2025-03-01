@@ -25,6 +25,8 @@
 * [Digital_neon_clock](https://koskasmail.github.io/web/web/pages/digital_clock/digital_neon_clock/)
 * [clock beat](https://koskasmail.github.io/web/web/pages/digital_clock/clock_beat/)
 * [projector_clock](https://koskasmail.github.io/web/web/pages/digital_clock/projector_clock/)
+* [clock_mood](https://koskasmail.github.io/web/web/pages/digital_clock/clock_mood/)
+
 -----
 
 
