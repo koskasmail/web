@@ -71,6 +71,7 @@ body {
 
 
 
+
 .sun1 {
     width: 100px;
     height: 100px;
@@ -94,8 +95,8 @@ body {
     width: 100px;
     height: 100px;
 /*     background-color: #ff9800;  */
-    background-image: linear-gradient(to bottom, #ffe0b2, #ffcc80, #ff9800, #f44336); 
-    border-radius: 20px;
+/*     background-image: linear-gradient(to bottom, #ffe0b2, #ffcc80, #ff9800, #f44336);  */
+/*     border-radius: 20px; */
     margin: 2px;
 /*     background-image: url(); */
 }
