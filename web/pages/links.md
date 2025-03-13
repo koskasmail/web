@@ -26,6 +26,7 @@
 * [clock beat](https://koskasmail.github.io/web/web/pages/digital_clock/clock_beat/)
 * [projector_clock](https://koskasmail.github.io/web/web/pages/digital_clock/projector_clock/)
 * [clock_mood](https://koskasmail.github.io/web/web/pages/digital_clock/clock_mood/)
+* 
 
 -----
 
@@ -61,6 +62,8 @@
 # base
 * [Base64_dot_star](https://koskasmail.github.io/web/web/pages/)
 
+# navbar
+* [sticky_navbar](https://koskasmail.github.io/web/web/pages/navbar/sticky_navbar)
 -----
 
 
