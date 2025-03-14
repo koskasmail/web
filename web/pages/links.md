@@ -63,8 +63,13 @@
 * [Base64_dot_star](https://koskasmail.github.io/web/web/pages/)
 
 # navbar
+* [dynamic_Navbar_01](https://koskasmail.github.io/web/web/pages/dynamic_Navbar/01/)
 * [sticky_navbar](https://koskasmail.github.io/web/web/pages/navbar/sticky_navbar)
+* [navbar/01_navbar](https://koskasmail.github.io/web/web/pages/navbar/01_navbar)
+* [navbar/03.navbar](https://koskasmail.github.io/web/web/pages/navbar/03.navbar)
 
+# navbar - test
+* [navbar/02_navbar-001.test](https://koskasmail.github.io/web/web/pages/navbar/02_navbar/001.test.html)
 
 -----
 
