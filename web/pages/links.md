@@ -50,13 +50,13 @@
 # pdf - merge
 * [pdf_merge_01](https://koskasmail.github.io/web/web/pages/pdf/merge/01/)
 
-
 -----
 
 # other
 * [Base64_dot_star](https://koskasmail.github.io/web/web/pages/base64/base64_samples/base64_dot_star.html)
 * [jsonWeb](https://koskasmail.github.io/web/web/pages/jsonWeb/)
 * [cheatSheet](https://koskasmail.github.io/web/web/pages/cheatSheet/)
+
 -----
 
 # base
@@ -64,8 +64,9 @@
 
 # navbar
 * [sticky_navbar](https://koskasmail.github.io/web/web/pages/navbar/sticky_navbar)
------
 
+
+-----
 
 <p align="right">(<a href="#topage">back to top</a>)</p>
 <br/>
