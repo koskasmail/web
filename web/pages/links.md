@@ -44,6 +44,7 @@
 
 # animation
 * [Wave](https://koskasmail.github.io/web/web/pages/animation/wave/)
+* [balls](https://koskasmail.github.io/web/web/pages/animation/balls/)
 
 -----
 
