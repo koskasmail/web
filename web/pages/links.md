@@ -78,6 +78,8 @@
 
 # zzz_test
 * [navbar/001.html](https://koskasmail.github.io/web/web/pages/zzz_test/navbar/001.html)
+* [navbar/001.html](https://koskasmail.github.io/web/web/pages/zzz_test/word_test/001.html)
+
 
 
 -----
