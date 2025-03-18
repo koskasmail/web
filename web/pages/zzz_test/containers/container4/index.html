@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disk Status - Side by Side</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .disk-status {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #4e54c8, 0 0 20px #8f94fb;
+            width: 250px;
+            text-align: center;
+        }
+
+        .disk-status h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .disk-status div {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 2px solid #8f94fb;
+            border-radius: 8px;
+        }
+
+        .future-border {
+            animation: neon-glow 1.5s infinite alternate;
+        }
+
+        @keyframes neon-glow {
+            from {
+                box-shadow: 0 0 10px #8f94fb, 0 0 20px #8f94fb;
+            }
+            to {
+                box-shadow: 0 0 20px #4e54c8, 0 0 30px #4e54c8;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="disk-status future-border">
+            <h2>Disk 1</h2>
+            <div>Total Size: 500 GB</div>
+            <div>Used Size: 300 GB</div>
+            <div>Free Size: 200 GB</div>
+            <div>Free Percentage: 40%</div>
+        </div>
+        <div class="disk-status future-border">
+            <h2>Disk 2</h2>
+            <div>Total Size: 1 TB</div>
+            <div>Used Size: 600 GB</div>
+            <div>Free Size: 400 GB</div>
+            <div>Free Percentage: 40%</div>
+        </div>
+        <div class="disk-status future-border">
+            <h2>Disk 3</h2>
+            <div>Total Size: 750 GB</div>
+            <div>Used Size: 550 GB</div>
+            <div>Free Size: 200 GB</div>
+            <div>Free Percentage: 26.7%</div>
+        </div>
+        <div class="disk-status future-border">
+            <h2>Disk 4</h2>
+            <div>Total Size: 2 TB</div>
+            <div>Used Size: 1.2 TB</div>
+            <div>Free Size: 800 GB</div>
+            <div>Free Percentage: 40%</div>
+        </div>
+    </div
