@@ -69,18 +69,7 @@
 * [navbar/01_navbar](https://koskasmail.github.io/web/web/pages/navbar/01_navbar)
 * [navbar/03.navbar](https://koskasmail.github.io/web/web/pages/navbar/03.navbar)
 
-# navbar - test
-* [navbar/02_navbar-001.test](https://koskasmail.github.io/web/web/pages/navbar/02_navbar/001.test.html)
-* [navbar/02_navbar-002.test](https://koskasmail.github.io/web/web/pages/navbar/02_navbar/002.test.html)
-* [navbar/02_navbar-003.test](https://koskasmail.github.io/web/web/pages/navbar/02_navbar/003.test.html)
-* [navbar/02_navbar-004.test](https://koskasmail.github.io/web/web/pages/navbar/02_navbar/004.test.html)
 
-
-# zzz_test
-* [navbar/001.html](https://koskasmail.github.io/web/web/pages/zzz_test/navbar/001.html)
-* [word_test/001.html](https://koskasmail.github.io/web/web/pages/zzz_test/word_test/001.html)
-* [container1](https://koskasmail.github.io/web/web/pages/zzz_test/containers/container1/)
-* [container4](https://koskasmail.github.io/web/web/pages/zzz_test/containers/container4/)
 
 -----
 
