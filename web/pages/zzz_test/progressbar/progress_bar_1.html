@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disk Usage Progress Bar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .progress-container {
+            width: 80%;
+            max-width: 600px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            height: 30px;
+            background: linear-gradient(90deg, #0078d4, #64cdfa);
+            width: 60%; /* Adjust dynamically */
+            border-radius: 10px 0 0 10px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .details span {
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+            <div class="progress-text">60%</div> <!-- Disk Used Text -->
+        </div>
+        <div class="details">
+            <span>Used: 60%</span>
+            <span>Free: 40%</span>
+        </div>
+    </div>
+
+    <script>
+        // Set disk usage values dynamically
+        const usedPercent = 60; // Disk percent used
+        const freePercent = 100 - usedPercent; // Disk percent free
+
+        // Update progress bar width
+        document.querySelector(".progress-bar").style.width = usedPercent + "%";
+        
+        // Update text values
+        document.querySelector(".progress-text").textContent = usedPercent + "%";
+        document.querySelector(".details span:nth-child(1)").textContent = `Used: ${usedPercent}%`;
+        document.querySelector(".details span:nth-child(2)").textContent = `Free: ${freePercent}%`;
+    </script>
+</body>
+</html>
