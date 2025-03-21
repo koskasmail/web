@@ -1,0 +1,146 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #2b1055;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    opacity: 0.8;
+    border-radius: 50%;
+    animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+.floating-hearts {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    z-index: 1;
+}
+
+.heart {
+    width: 20px;
+    height: 20px;
+    background-color: pink;
+    position: relative;
+    animation: float 4s infinite ease-in-out;
+    border-radius: 50%;
+}
+
+.heart:before,
+.heart:after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: pink;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.heart:before {
+    top: -10px;
+    left: 0;
+}
+
+.heart:after {
+    top: 0;
+    left: -10px;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-200px);
+        opacity: 0;
+    }
+}
+
+#clock-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+    transform-origin: 150px 150px;
+}
+
+#digital-clock {
+    font-family: monospace;
+    font-size: 3em;
+    color: white;
+    margin-top: 20px;
+    display: flex;
+    /* Use flexbox for dot-like digits */
+}
+
+.digit {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5px;
+}
+
+.row {
+    display: flex;
+}
+
+.square-dot {
+    width: 10px;
+    height: 10px;
+    background-color: darkorange;
+    margin: 2px;
+}
