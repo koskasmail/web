@@ -9,6 +9,8 @@
 * [navbar/02_navbar-003.test](https://koskasmail.github.io/web/web/pages/navbar/02_navbar/003.test.html)
 * [navbar/02_navbar-004.test](https://koskasmail.github.io/web/web/pages/navbar/02_navbar/004.test.html)
 
+# progress_bar
+* [progress_bar_1](https://koskasmail.github.io/web/web/pages/zzz_test/progressbar/progress_bar_1.html)
 
 # zzz_test
 * [navbar/001.html](https://koskasmail.github.io/web/web/pages/zzz_test/navbar/001.html)
