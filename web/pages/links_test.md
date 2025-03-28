@@ -11,6 +11,8 @@
 
 ### progress_bar
 * [progress_bar_1](https://koskasmail.github.io/web/web/pages/zzz_test/progressbar/progress_bar_1.html)
+* [progress_bar_2](https://koskasmail.github.io/web/web/pages/zzz_test/progressbar/progress_bar_2.html)
+* [progress_bar_3](https://koskasmail.github.io/web/web/pages/zzz_test/progressbar/progress_bar_3.html)
 
 ### progress_bar_steps  
 * [progress_bar_steps_01](https://koskasmail.github.io/web/web/pages/zzz_test/progress_bar_steps/progress_bar_steps_01.html)
