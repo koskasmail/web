@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wikipedia Style SPA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f6f6f6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    header {
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      position: fixed;
+      top: 0;
+      z-index: 10;
+    }
+    header nav a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 10px;
+    }
+    header nav a:hover {
+      text-decoration: underline;
+    }
+    aside {
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      position: fixed;
+      top: 50px;
+      height: calc(100% - 60px);
+    }
+    aside a {
+      text-decoration: none;
+      color: #fff;
+      display: block;
+      margin-bottom: 10px;
+    }
+    aside a:hover {
+      color: #f0f0f0;
+    }
+    main {
+      margin-left: 270px;
+      margin-top: 80px;
+      padding: 20px;
+    }
+    main h2 {
+      color: #0066cc;
+    }
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <!-- <a href="#" onclick="loadPage('home')">Home</a>
+      <a href="#" onclick="loadPage('about')">About</a>
+      <a href="#" onclick="loadPage('contact')">Contact</a> -->
+      <a href="02.02.html" onclick="loadPage('home')">Home</a>
+      <a href="02.01.html" onclick="loadPage('about')">About</a>
+      <a href="02.04.html" onclick="loadPage('contact')">Contact</a>
+    </nav>
+  </header>
+  <aside>
+    <h2>Menu</h2>
+    <a href="#" onclick="loadPage('home')">Home</a>
+    <a href="#" onclick="loadPage('about')">About</a>
+    <a href="#" onclick="loadPage('contact')">Contact</a>
+  </aside>
+  <main id="content">
+    <h2>Welcome</h2>
+    <p>This is the home page. Use the menu to navigate.</p>
+  </main>
+  <!-- <footer> -->
+    <!-- <p>&copy; 2025 Wikipedia Style SPA Example</p> -->
+  <!-- </footer> -->
+
+  <script>
+    const pages = {
+      home: `
+        <h2>Home Page</h2>
+        <p>Welcome to the home page! Feel free to explore the other sections.</p>
+      `,
+      about: `
+        <h2>About Page</h2>
+        <p>This page contains information about our website and purpose.</p>
+      `,
+      contact: `
+        <h2>Contact Page</h2>
+        <p>Need help? Feel free to reach out through this page!</p>
+      `
+    };
+
+    function loadPage(page) {
+      const content = document.getElementById('content');
+      content.innerHTML = pages[page];
+    }
+  </script>
+</body>
+</html>
