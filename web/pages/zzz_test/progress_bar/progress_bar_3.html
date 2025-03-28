@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disk Usage Progress Bar</title>
+    <style>
+                body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .progress-container {
+            width: 80%;
+            max-width: 600px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            height: 30px;
+            background: linear-gradient(90deg, #0078d4, #64cdfa);
+            width: 60%; /* Adjust dynamically */
+            border-radius: 10px 0 0 10px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .details span {
+            font-size: 14px;
+            color: #333;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: black;
+        }
+
+        .progress-container {
+            width: 80%;
+            max-width: 600px;
+            height: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .details span {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="progress-container" id="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="details">
+            <span id="used-text">Used: 0 MB</span>
+            <span id="free-text">Free: 0 MB</span>
+        </div>
+    </div>
+
+    <script>
+        // Disk data
+        const totalSpace = 500; // Total disk space in MB
+        const usedSpace = 450; // Disk space used in MB
+        const freeSpace = totalSpace - usedSpace; // Calculate free space
+
+        // Calculate percentage used
+        const usedPercent = (usedSpace / totalSpace) * 100;
+
+        // Elements
+        const progressBar = document.getElementById("progress-bar");
+        const progressContainer = document.getElementById("progress-container");
+        const usedText = document.getElementById("used-text");
+        const freeText = document.getElementById("free-text");
+
+        // Set styles and text dynamically
+        progressBar.style.width = usedPercent + "%";
+        usedText.textContent = `Used: ${usedSpace} MB`;
+        freeText.textContent = `Free: ${freeSpace} MB`;
+
+        // Change colors based on usage
+        if (usedPercent < 80) {
+            progressBar.style.color = "black";
+            progressBar.style.backgroundColor = "green";
+            progressContainer.style.backgroundColor = "lightgreen";
+        } else {
+            progressBar.style.backgroundColor = "red";
+            progressContainer.style.backgroundColor = "lightcoral"; // Light red
+        }
+    </script>
+</body>
+</html>
