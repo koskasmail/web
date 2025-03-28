@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress Bar Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .progress-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 20px 0;
+    }
+    .progress-bar {
+      flex-grow: 1;
+      height: 5px;
+      background: #e0e0e0;
+      margin: 0 10px;
+      position: relative;
+    }
+    .progress-bar::before {
+      content: '';
+      width: 25%;
+      height: 5px;
+      background: #007bff;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: width 0.5s;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 12px;
+      color: #333;
+    }
+    .step.completed {
+      color: #007bff;
+    }
+    .step-circle {
+      width: 20px;
+      height: 20px;
+      background: #e0e0e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    .step.completed .step-circle {
+      background: #007bff;
+      color: #fff;
+    }
+    .content-container {
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin-top: 20px;
+      display: none;
+    }
+    .content-container.active {
+      display: block;
+    }
+    .btn-container {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Progress Bar Example</h1>
+  <div class="progress-container">
+    <div class="step completed">
+      <div class="step-circle">1</div>
+      <span>Personal Information</span>
+    </div>
+    <div class="progress-bar"></div>
+    <div class="step">
+      <div class="step-circle">2</div>
+      <span>Communication</span>
+    </div>
+    <div class="progress-bar"></div>
+    <div class="step">
+      <div class="step-circle">3</div>
+      <span>Create Card Payment</span>
+    </div>
+    <div class="progress-bar"></div>
+    <div class="step">
+      <div class="step-circle">4</div>
+      <span>Summary</span>
+    </div>
+  </div>
+  
+  <div id="personal-info" class="content-container active">
+    <h2>Personal Information</h2>
+    <p>Enter your personal details here.</p>
+  </div>
+  <div id="communication" class="content-container">
+    <h2>Communication</h2>
+    <p>Provide your communication preferences.</p>
+  </div>
+  <div id="payment" class="content-container">
+    <h2>Create Card Payment</h2>
+    <p>Fill in your payment details.</p>
+  </div>
+  <div id="summary" class="content-container">
+    <h2>Summary</h2>
+    <p>Review and confirm your information.</p>
+  </div>
+  
+  <div class="btn-container">
+    <button onclick="moveToStep(1)">Step 1</button>
+    <button onclick="moveToStep(2)">Step 2</button>
+    <button onclick="moveToStep(3)">Step 3</button>
+    <button onclick="moveToStep(4)">Step 4</button>
+  </div>
+
+  <script>
+    function moveToStep(step) {
+      const steps = document.querySelectorAll('.step');
+      const contents = document.querySelectorAll('.content-container');
+      const progressBars = document.querySelectorAll('.progress-bar::before');
+      
+      steps.forEach((stepElem, index) => {
+        if (index < step) {
+          stepElem.classList.add('completed');
+        } else {
+          stepElem.classList.remove('completed');
+        }
+      });
+
+      contents.forEach((contentElem, index) => {
+        if (index + 1 === step) {
+          contentElem.classList.add('active');
+        } else {
+          contentElem.classList.remove('active');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
