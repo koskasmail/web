@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            width: 25%;
+        }
+
+        .step {
+            width: 40px;
+            height: 40px;
+            background-color: #ccc;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .step.active {
+            background-color: #4caf50;
+        }
+
+        .progress {
+            width: 70%;
+            height: 4px;
+            background-color: #ccc;
+            position: absolute;
+            top: 20px;
+            left: 100%;
+            transform: translateX(-50%);
+        }
+
+        .progress.active {
+            background-color: #4caf50;
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button.prev-btn {
+            background-color: #f44336;
+        }
+
+        button.prev-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Registration Process</h2>
+
+        <div class="progress-bar">
+            <div class="step-container">
+                <div class="step" id="step1">1</div>
+                <div class="progress"></div>
+            </div>
+            <div class="step-container">
+                <div class="step" id="step2">2</div>
+                <div class="progress"></div>
+            </div>
+            <div class="step-container">
+                <div class="step" id="step3">3</div>
+                <div class="progress"></div>
+            </div>
+            <div class="step-container">
+                <div class="step" id="step4">4</div>
+            </div>
+        </div>
+
+        <form id="progressForm">
+            <div id="step1-content" class="step-content">
+                <h3>Step 1: Personal Information</h3>
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" required>
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" required>
+                <button type="button" class="next-btn" onclick="nextStep(1)">Next</button>
+            </div>
+
+            <div id="step2-content" class="step-content">
+                <h3>Step 2: Communication</h3>
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" required>
+                <button type="button" class="next-btn" onclick="nextStep(2)">Next</button>
+                <button type="button" class="prev-btn" onclick="prevStep(2)">Previous</button>
+            </div>
+
+            <div id="step3-content" class="step-content">
+                <h3>Step 3: Address</h3>
+                <label for="street">Street:</label>
+                <input type="text" id="street" required>
+                <label for="city">City:</label>
+                <input type="text" id="city" required>
+                <label for="country">Country:</label>
+                <input type="text" id="country" required>
+                <label for="zip">ZIP Code:</label>
+                <input type="text" id="zip" required>
+                <button type="button" class="next-btn" onclick="nextStep(3)">Next</button>
+                <button type="button" class="prev-btn" onclick="prevStep(3)">Previous</button>
+            </div>
+
+            <div id="step4-content" class="step-content">
+                <h3>Step 4: Summary</h3>
+                <p id="summary"></p>
+                <button type="button" class="prev-btn" onclick="prevStep(4)">Previous</button>
+                <button type="submit">Submit</button>
+            </div>
+
+            <div id="step5-content" class="step-content">
+                <h3>Summary</h3>
+                <p>
+                <ul>
+                    <li>Thank you for filling out the form.</li>
+                    <li></li>
+                    <li></li>
+                </ul>
+
+                </p>
+
+                <!-- <button type="button" class="prev-btn" onclick="prevStep(4)">Previous</button> -->
+                <!-- <button type="submit">Submit</button> -->
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let currentStep = 1;
+
+        function nextStep(step) {
+            const formSteps = document.querySelectorAll('.step-content');
+            const progressSteps = document.querySelectorAll('.step');
+            const progressBars = document.querySelectorAll('.progress');
+
+            if (step === 1) {
+                if (document.getElementById('firstName').value === "" || document.getElementById('lastName').value === "") {
+                    alert("Please fill in all fields.");
+                    return;
+                }
+            }
+            if (step === 2) {
+                if (document.getElementById('phone').value === "") {
+                    alert("Please fill in all fields.");
+                    return;
+                }
+            }
+            if (step === 3) {
+                if (document.getElementById('street').value === "" || document.getElementById('city').value === "" || document.getElementById('country').value === "" || document.getElementById('zip').value === "") {
+                    alert("Please fill in all fields.");
+                    return;
+                }
+            }
+
+            formSteps[step - 1].classList.remove('active');
+            progressSteps[step - 1].classList.add('active');
+            if (step < formSteps.length) {
+                formSteps[step].classList.add('active');
+                progressBars[step - 1].classList.add('active');
+            }
+        }
+
+        function prevStep(step) {
+            const formSteps = document.querySelectorAll('.step-content');
+            const progressSteps = document.querySelectorAll('.step');
+            const progressBars = document.querySelectorAll('.progress');
+
+            formSteps[step - 1].classList.remove('active');
+            progressSteps[step - 1].classList.remove('active');
+            if (step - 2 >= 0) {
+                formSteps[step - 2].classList.add('active');
+                progressSteps[step - 2].classList.add('active');
+                if (step - 2 > 0) {
+                    progressBars[step - 2].classList.add('active');
+                }
+            }
+        }
+
+        document.getElementById("progressForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const summary = `
+    <strong>Personal Information:</strong> ${document.getElementById('firstName').value} ${document.getElementById('lastName').value}<br>
+    <strong>Phone:</strong> ${document.getElementById('phone').value}<br>
+    <strong>Address:</strong> ${document.getElementById('street').value}, ${document.getElementById('city').value}, ${document.getElementById('country').value}, ${document.getElementById('zip').value}
+  `;
+
+            document.getElementById('summary').innerHTML = summary;
+            nextStep(4);
+        });
+
+        window.onload = function () {
+            document.getElementById('step1-content').classList.add('active');
+            document.getElementById('step1').classList.add('active');
+        };
+
+    </script>
+</body>
+
+</html>
