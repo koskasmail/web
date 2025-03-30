@@ -1,0 +1,16 @@
+{
+    "cities": [
+      "New York",
+      "Los Angeles",
+      "Chicago",
+      "San Francisco",
+      "Austin"
+    ],
+    "addresses": [
+      "123 Main Street",
+      "456 Oak Avenue",
+      "789 Pine Road",
+      "101 Maple Drive"
+    ]
+  }
+  
