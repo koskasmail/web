@@ -1,0 +1,95 @@
+/* styles.css */
+
+/* Navbar Styles */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar .title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .navbar .menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .navbar .menu li {
+    margin-left: 20px;
+  }
+  
+  .navbar .menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+  }
+  
+  .navbar .menu a:hover {
+    text-decoration: underline;
+  }
+  
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 50px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar li {
+    text-align: center;
+    margin: 5px 0;
+    cursor: pointer;
+  }
+  
+  /* Highlight selected letter */
+.sidebar li.selected {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+  }
+  
+
+  .phonebook {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+  }
+  
+  .phonebook ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .phonebook li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
