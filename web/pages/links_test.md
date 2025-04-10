@@ -28,7 +28,9 @@
 * [container1](https://koskasmail.github.io/web/web/pages/zzz_test/containers/container1/)
 * [container4](https://koskasmail.github.io/web/web/pages/zzz_test/containers/container4/)
 * [book1](https://koskasmail.github.io/web/web/pages/zzz_test/books/)
-* [businessCard](https://koskasmail.github.io/web/web/pages/zzz_test/businessCard)
+* [businessCard](https://koskasmail.github.io/web/web/pages/zzz_test/businessCard/)
+* [phone_book](https://koskasmail.github.io/web/web/pages/zzz_test/phone_book/)
+
 
 ### Test
 * [glassBusinessCard](https://koskasmail.github.io/web/web/pages/zzz_test/test/glassBusinessCard.html)
