@@ -1,0 +1,6 @@
+[
+    { "firstName": "John", "lastName": "Doe", "phone": "123-456-7890", "city": "New York", "state": "NY" },
+    { "firstName": "Jane", "lastName": "Smith", "phone": "987-654-3210", "city": "Los Angeles", "state": "CA" },
+    { "firstName": "Alice", "lastName": "Brown", "phone": "456-123-7890", "city": "Chicago", "state": "IL" }
+  ]
+  
