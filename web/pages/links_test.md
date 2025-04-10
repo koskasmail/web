@@ -29,7 +29,7 @@
 * [container4](https://koskasmail.github.io/web/web/pages/zzz_test/containers/container4/)
 * [book1](https://koskasmail.github.io/web/web/pages/zzz_test/books/)
 * [businessCard](https://koskasmail.github.io/web/web/pages/zzz_test/businessCard/)
-* [phone_book](https://koskasmail.github.io/web/web/pages/zzz_test/phone_book/)
+* [phone_book](https://koskasmail.github.io/web/web/pages/phone_book/)
 
 
 ### Test
