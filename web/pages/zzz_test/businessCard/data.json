@@ -1,0 +1,20 @@
+[
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "phone": "+1 (123) 456-7890",
+      "department": "Marketing"
+    },
+    {
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "phone": "+1 (987) 654-3210",
+      "department": "Engineering"
+    },
+    {
+      "firstName": "Carlos",
+      "lastName": "Rivera",
+      "phone": "+44 20 7946 0958",
+      "department": "Sales"
+    }
+  ]
