@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch JSON from URL</title>
+</head>
+<body>
+
+    <button onclick="fetchJSON()">Fetch Data</button>
+    <pre id="output"></pre>
+
+    <script>
+        function fetchJSON() {
+            const url = 'https://github.com/koskas/data/blob/main/json/code/1001.json';
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+                })
+                .catch(error => console.error('Error fetching JSON:', error));
+        }
+    </script>
+
+</body>
+</html>
