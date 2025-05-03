@@ -1,20 +1,30 @@
 fetch('data.json')
     .then(response => response.json())
-    .then(users => {
-        const container = document.getElementById("user-container");
+    .then(data => {
+        fetch('template.json')
+            .then(response => response.json())
+            .then(template => {
+                const container = document.getElementById("user-container");
 
-        users.forEach(user => {
-            const userDiv = document.createElement("div");
-            userDiv.className = `user-card ${user.size}`;
-            userDiv.id = user.id;
+                function createElement(node) {
+                    const element = document.createElement(node.tag);
+                    if (node.id) element.id = node.id;
+                    if (node.class) element.className = node.class;
+                    if (node.content) element.textContent = node.content;
+                    if (node.id && data[node.id]) element.textContent = data[node.id];
 
-            userDiv.innerHTML = `
-                <h2>${user.name}</h2>
-                <p><strong>Phone:</strong> ${user.phone}</p>
-                <p><strong>Address:</strong> ${user.address}</p>
-            `;
+                    if (node.children) {
+                        node.children.forEach(child => {
+                            element.appendChild(createElement(child));
+                        });
+                    }
 
-            container.appendChild(userDiv);
-        });
+                    return element;
+                }
+
+                template.tree.forEach(node => {
+                    container.appendChild(createElement(node));
+                });
+            });
     })
     .catch(error => console.error("Error loading JSON:", error));
