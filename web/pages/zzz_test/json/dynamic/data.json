@@ -1,0 +1,18 @@
+[
+    {
+        "name": "John Doe",
+        "phone": "123-456-7890",
+        "address": "123 Main Street",
+        "size": "large",
+        "id": "user1",
+        "class": "user-card"
+    },
+    {
+        "name": "Jane Smith",
+        "phone": "987-654-3210",
+        "address": "456 Elm Street",
+        "size": "small",
+        "id": "user2",
+        "class": "user-card"
+    }
+]
