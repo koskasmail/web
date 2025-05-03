@@ -1,0 +1,61 @@
+{
+    "title": "User Information",
+    "tree": [
+        {
+            "tag": "div",
+            "id": "container",
+            "children": [
+                {
+                    "tag": "h1",
+                    "content": "User Details"
+                },
+                {
+                    "tag": "div",
+                    "class": "user-info",
+                    "children": [
+                        {
+                            "tag": "label",
+                            "content": "First Name"
+                        },
+                        {
+                            "tag": "span",
+                            "id": "firstName"
+                        },
+                        {
+                            "tag": "label",
+                            "content": "Last Name"
+                        },
+                        {
+                            "tag": "span",
+                            "id": "lastName"
+                        },
+                        {
+                            "tag": "label",
+                            "content": "Phone"
+                        },
+                        {
+                            "tag": "span",
+                            "id": "phone"
+                        },
+                        {
+                            "tag": "label",
+                            "content": "Address"
+                        },
+                        {
+                            "tag": "span",
+                            "id": "address"
+                        },
+                        {
+                            "tag": "label",
+                            "content": "City"
+                        },
+                        {
+                            "tag": "span",
+                            "id": "city"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
