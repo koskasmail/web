@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock with Alarms</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .clock { font-size: 48px; margin: 20px; }
+        .alarms { margin-top: 20px; }
+        input, button { margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Digital Clock with Alarms</h1>
+    <div class="clock" id="clock"></div>
+    <input type="time" id="alarmTime">
+    <button onclick="setAlarm()">Set Alarm</button>
+    <ul id="alarmList"></ul>
+    <audio id="alarmSound" src="alarm.mp3"></audio>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+            document.getElementById("clock").innerText = timeString;
+            checkAlarms(timeString);
+        }
+
+        let alarmTimes = [];
+
+        function setAlarm() {
+            const alarmInput = document.getElementById("alarmTime").value;
+            if (alarmInput) {
+                alarmTimes.push(alarmInput + ":00");
+                const alarmList = document.getElementById("alarmList");
+                const listItem = document.createElement("li");
+                listItem.innerText = alarmInput;
+                alarmList.appendChild(listItem);
+            }
+        }
+
+        function checkAlarms(currentTime) {
+            if (alarmTimes.includes(currentTime)) {
+                document.getElementById("alarmSound").play();
+                alert("Alarm ringing!");
+            }
+        }
+
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
