@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock with Alarms</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .clock { font-size: 48px; margin: 20px; }
+        .alarms { margin-top: 20px; }
+        input, button { margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Digital Clock with Alarms</h1>
+    <div class="clock" id="clock"></div>
+    <input type="time" id="alarmTime">
+    <button onclick="setAlarm()">Set Alarm</button>
+    <button onclick="clearAlarms()">Clear All</button>
+    <ul id="alarmList"></ul>
+    <h3>Select Alarm Sound:</h3>
+    <input type="file" accept="audio/*" id="soundSelector">
+    <audio id="alarmSound"></audio>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+            document.getElementById("clock").innerText = timeString;
+            checkAlarms(timeString);
+        }
+
+        let alarmTimes = [];
+
+        function setAlarm() {
+            const alarmInput = document.getElementById("alarmTime").value;
+            if (alarmInput) {
+                alarmTimes.push(alarmInput + ":00");
+                updateAlarmList();
+            }
+        }
+
+        function updateAlarmList() {
+            const alarmList = document.getElementById("alarmList");
+            alarmList.innerHTML = ""; // Clear existing list
+            alarmTimes.forEach((time, index) => {
+                const listItem = document.createElement("li");
+                listItem.innerText = time;
+                const deleteButton = document.createElement("button");
+                deleteButton.innerText = "❌";
+                deleteButton.onclick = () => removeAlarm(index);
+                listItem.appendChild(deleteButton);
+                alarmList.appendChild(listItem);
+            });
+        }
+
+        function removeAlarm(index) {
+            alarmTimes.splice(index, 1);
+            updateAlarmList();
+        }
+
+        function clearAlarms() {
+            alarmTimes = [];
+            updateAlarmList();
+        }
+
+        function checkAlarms(currentTime) {
+            if (alarmTimes.includes(currentTime)) {
+                const selectedSound = document.getElementById("soundSelector").files[0];
+                if (selectedSound) {
+                    const soundURL = URL.createObjectURL(selectedSound);
+                    document.getElementById("alarmSound").src = soundURL;
+                    document.getElementById("alarmSound").play();
+                }
+                alert("Alarm ringing!");
+            }
+        }
+
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
