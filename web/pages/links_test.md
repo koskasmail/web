@@ -34,7 +34,11 @@
 
 ### Test
 * [glassBusinessCard](https://koskasmail.github.io/web/web/pages/zzz_test/test/glassBusinessCard.html)
-  
+
+
+### blue print
+* [calendar](https://github.com/koskasmail/web/blob/main/web/pages/zzz_test/calendar/01_calendar.md)
+
 -----
 
 <p align="right">(<a href="#topage">back to top</a>)</p>
