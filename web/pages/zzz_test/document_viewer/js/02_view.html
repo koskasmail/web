@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOCX Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    .navbar {
+      display: flex;
+      background-color: #333;
+      padding: 10px;
+      color: white;
+    }
+
+    .navbar button {
+      background-color: #444;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .navbar button:hover {
+      background-color: #555;
+    }
+
+    #output {
+      padding: 20px;
+    }
+
+    #upload {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <button onclick="document.getElementById('upload').click()">Load File</button>
+    <button onclick="displayFile()">Display File</button>
+    <input type="file" id="upload" accept=".docx">
+  </div>
+
+  <div id="output">
+    <h2>Converted HTML Output:</h2>
+    <div id="doc-content"></div>
+  </div>
+
+  <script src="./mammoth.browser.min.js"></script>
+  <!-- <script src="https://unpkg.com/mammoth/mammoth.browser.min.js"></script> -->
+  <!-- https://github.com/mwilliamson/mammoth.js.git
+    -->
+  <script>
+    let uploadedFile = null;
+
+    document.getElementById('upload').addEventListener('change', function(event) {
+      uploadedFile = event.target.files[0];
+      console.log("File uploaded:", uploadedFile.name);
+    });
+
+    function displayFile() {
+      if (!uploadedFile) {
+        alert("Please upload a .docx file first.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const arrayBuffer = event.target.result;
+
+        mammoth.convertToHtml({ arrayBuffer: arrayBuffer })
+          .then(function(result) {
+            document.getElementById("doc-content").innerHTML = result.value;
+          })
+          .catch(function(err) {
+            console.error("Error converting file:", err);
+          });
+      };
+
+      reader.readAsArrayBuffer(uploadedFile);
+    }
+  </script>
+
+</body>
+</html>
