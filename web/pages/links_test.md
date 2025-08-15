@@ -39,6 +39,9 @@
 ### blue print
 * [calendar](https://github.com/koskasmail/web/blob/main/web/pages/zzz_test/calendar/01_calendar.md)
 
+### document viewer
+* https://github.com/koskasmail/web/blob/main/web/pages/zzz_test/document_viewer/js/02_view.html
+  
 -----
 
 <p align="right">(<a href="#topage">back to top</a>)</p>
