@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #009688;
+            color: #fefefe;
+            font-family: Helvetica;
+            padding: 2em;
+        }
+
+        body .wrapper {
+            text-align: center;
+        }
+
+        body .btn {
+            background: #fefefe;
+            border: 0.625em;
+            color: #009688;
+            padding: 0.5em 1em;
+        }
+
+        body .iframe {
+            width: 100%;
+            height: 600px;
+            display: none;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h2>Testing Google Docs / Office Apps View Integration</h2>
+        <button class="google-viewer btn">Google Docs Viewer</button>
+        <button class="office-viewer btn">Office Apps Viewer</button>
+
+
+        <iframe class="google-docs iframe"
+            src="https://docs.google.com/viewer?url=https://gate.ac.uk/sale/talks/text-mining-course-sslst2011/slides/module1-intro.pdf&embedded=true"
+            frameborder="0" scrolling="no" marginheight="0" marginwidth="0" role="document" aria-label="PDF document"
+            title="PDF document">Click to view the document</iframe>
+
+        <iframe class="office iframe"
+            src="https://view.officeapps.live.com/op/embed.aspx?src=http%3A%2F%2Fstatsclass.org%2Fworkshops%2FDataScience%2FHandout8%2FHandout8.docx"
+            frameborder="0" scrolling="no" marginheight="0" marginwidth="0" role="document" aria-label="Doc document"
+            title="Doc document">
+        </iframe>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('.google-viewer').on('click', function () {
+                if ($('.office').css('display') !== 'none')
+                    $('.office').slideToggle();
+                $('.google-docs').slideToggle();
+            });
+
+            $('.office-viewer').on('click', function () {
+                if ($('.google-docs').css('display') !== 'none')
+                    $('.google-docs').slideToggle();
+                $('.office').slideToggle();
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+</body>
+
+</html>
+</body>
+
+</html>
