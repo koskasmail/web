@@ -45,10 +45,15 @@
 * [calendar](https://github.com/koskasmail/web/blob/main/web/pages/zzz_test/calendar/01_calendar.md)
 
 ### document viewer
-* https://github.com/koskasmail/web/blob/main/web/pages/zzz_test/document_viewer/js/02_view.html
-  
+* [document_viewer](https://koskasmail.github.io/web/web/pages/zzz_test/document_viewer/js/02_view.html)
+* [document_viewer_code](https://github.com/koskasmail/web/blob/main/web/pages/zzz_test/document_viewer/js/02_view.html)
+
+### check list
+* [check_list](https://koskasmail.github.io/web/web/pages/zzz_test/check_list/house/)
+
 -----
 
 <p align="right">(<a href="#topage">back to top</a>)</p>
 <br/>
 <br/>
+
