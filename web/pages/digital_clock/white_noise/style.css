@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background: black;
+  font-family: monospace;
+}
+
+#noiseCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+#clock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 8em;
+  z-index: 1;
+  text-shadow: 0 0 10px white;
+}
