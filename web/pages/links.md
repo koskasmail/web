@@ -28,7 +28,7 @@
 * [clock_mood](https://koskasmail.github.io/web/web/pages/digital_clock/clock_mood/)
 * [night_Clock](https://koskasmail.github.io/web/web/pages/digital_clock/night_Clock/)
 * [clock_matrix](https://koskasmail.github.io/web/web/pages/digital_clock/clock_matrix/)
-
+* [clock_white_noise](https://koskasmail.github.io/web/web/pages/digital_clock/white_noise/)
 -----
 
 
