@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Tic Tac Toe</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root { --bg:#111; --fg:#fff; --acc:#00c2ff; --grid:#2a2a2a; --win:#32d36f; }
+    body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--fg); font-family:system-ui, sans-serif; }
+    .wrap { width:min(420px, 92vw); }
+    h1 { margin:.2rem 0 1rem; font-size:1.25rem; letter-spacing:.5px; color:#ddd; }
+    .status { min-height:1.8rem; margin:.5rem 0 1rem; font-size:1rem; color:#ccc; }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.6rem; }
+    .cell {
+      aspect-ratio:1/1; display:grid; place-items:center; font-size:3rem; font-weight:700;
+      background:#181818; border:2px solid var(--grid); border-radius:.6rem; cursor:pointer; user-select:none;
+      transition:transform .08s ease, background .2s ease;
+    }
+    .cell:hover { transform:scale(1.02); }
+    .cell:disabled { cursor:not-allowed; opacity:.75; }
+    .cell.win { background:rgba(50,211,111,.15); border-color:var(--win); }
+    .panel { display:flex; gap:.6rem; margin-top:1rem; }
+    button {
+      padding:.6rem .9rem; border-radius:.5rem; border:1px solid #333; background:#1c1c1c; color:#ddd;
+      cursor:pointer; transition:background .2s ease, border-color .2s ease;
+    }
+    button:hover { background:#232323; border-color:#444; }
+    .turn { color:var(--acc); font-weight:600; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Tic Tac Toe</h1>
+    <div class="status">Turn: <span class="turn">X</span></div>
+    <div class="grid" id="grid"></div>
+    <div class="panel">
+      <button id="reset">Reset</button>
+      <button id="ai">Play vs Computer (O)</button>
+    </div>
+  </main>
+
+  <script>
+    const gridEl = document.getElementById('grid');
+    const statusEl = document.querySelector('.status');
+    const turnEl = document.querySelector('.turn');
+    const resetBtn = document.getElementById('reset');
+    const aiBtn = document.getElementById('ai');
+
+    const WIN_LINES = [
+      [0,1,2],[3,4,5],[6,7,8], // rows
+      [0,3,6],[1,4,7],[2,5,8], // cols
+      [0,4,8],[2,4,6]          // diagonals
+    ];
+
+    let board, xTurn, gameOver, vsAI;
+
+    function init() {
+      board = Array(9).fill('');
+      xTurn = true;
+      gameOver = false;
+      vsAI = false;
+      gridEl.innerHTML = '';
+      for (let i = 0; i < 9; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'cell';
+        btn.addEventListener('click', () => handleMove(i));
+        gridEl.appendChild(btn);
+      }
+      updateStatus();
+    }
+
+    function handleMove(i) {
+      if (gameOver || board[i]) return;
+      board[i] = xTurn ? 'X' : 'O';
+      render();
+      const result = checkResult();
+      if (result) return endGame(result);
+
+      xTurn = !xTurn;
+      updateStatus();
+
+      if (vsAI && !xTurn && !gameOver) {
+        setTimeout(aiMove, 180);
+      }
+    }
+
+    function aiMove() {
+      const move = bestMove('O'); // simple AI: win > block > center > corner > random
+      if (move !== null) handleMove(move);
+    }
+
+    function bestMove(player) {
+      const opponent = player === 'O' ? 'X' : 'O';
+      // 1) Win if possible
+      for (const idx of emptyIndices()) {
+        board[idx] = player;
+        if (checkWin(player)) { board[idx] = ''; return idx; }
+        board[idx] = '';
+      }
+      // 2) Block opponent's win
+      for (const idx of emptyIndices()) {
+        board[idx] = opponent;
+        if (checkWin(opponent)) { board[idx] = ''; return idx; }
+        board[idx] = '';
+      }
+      // 3) Center
+      if (!board[4]) return 4;
+      // 4) Corner preference
+      for (const c of [0,2,6,8]) if (!board[c]) return c;
+      // 5) Any
+      const empties = emptyIndices();
+      return empties.length ? empties[Math.random() * empties.length | 0] : null;
+    }
+
+    function emptyIndices() {
+      const arr = [];
+      for (let i = 0; i < 9; i++) if (!board[i]) arr.push(i);
+      return arr;
+    }
+
+    function checkWin(player) {
+      return WIN_LINES.some(line => line.every(i => board[i] === player));
+    }
+
+    function checkResult() {
+      if (checkWin('X')) return { winner: 'X', line: WIN_LINES.find(l => l.every(i => board[i] === 'X')) };
+      if (checkWin('O')) return { winner: 'O', line: WIN_LINES.find(l => l.every(i => board[i] === 'O')) };
+      if (board.every(Boolean)) return { draw: true };
+      return null;
+    }
+
+    function endGame(result) {
+      gameOver = true;
+      if (result.draw) {
+        statusEl.textContent = 'Draw!';
+      } else {
+        statusEl.textContent = `Winner: ${result.winner}`;
+        highlightWin(result.line);
+      }
+      disableAll(true);
+    }
+
+    function highlightWin(line) {
+      line.forEach(i => gridEl.children[i].classList.add('win'));
+    }
+
+    function disableAll(disabled) {
+      for (const cell of gridEl.children) cell.disabled = disabled;
+    }
+
+    function render() {
+      board.forEach((v, i) => gridEl.children[i].textContent = v);
+    }
+
+    function updateStatus() {
+      turnEl.textContent = xTurn ? 'X' : 'O';
+      statusEl.innerHTML = `Turn: <span class="turn">${xTurn ? 'X' : 'O'}</span>`;
+    }
+
+    resetBtn.addEventListener('click', () => {
+      init();
+    });
+
+    aiBtn.addEventListener('click', () => {
+      vsAI = !vsAI;
+      aiBtn.textContent = vsAI ? 'Playing vs Computer (O)' : 'Play vs Computer (O)';
+      // if it's AI's turn immediately (O starts only after X), do nothing
+      if (!xTurn && vsAI && !gameOver) setTimeout(aiMove, 200);
+    });
+
+    init();
+  </script>
+</body>
+</html>
