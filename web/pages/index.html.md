@@ -1,0 +1,131 @@
+
+# Index.html.md
+
+
+#### unsorted #2
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web | Pages</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    /* Navigation bar */
+    .navbar {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .navbar button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #0078d7;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .navbar button:hover {
+      background-color: #005a9e;
+    }
+
+    /* Link lists */
+    .link-list {
+      display: none;
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .link-list li {
+      margin: 8px 0;
+    }
+
+    .link-list a {
+      text-decoration: none;
+      color: #0078d7;
+    }
+
+    .link-list a:hover {
+      text-decoration: underline;
+    }
+
+    /* Active list */
+    .active {
+      display: block;
+    }
+
+     /* New */
+    .navtop {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+    }
+
+
+    .navUnder {
+        position: relative;
+        top: 30px;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- <div class="navbar">[ Web | Pages ]</div> -->
+  
+  <div class="navbar navtop">
+    <button onclick="showList('prod')">Prod</button>
+    <button onclick="showList('test')">Test</button>
+    <button onclick="showList('dev')">Dev</button>
+  </div>
+
+  <!-- Prod links -->
+  <ul id="prod" class="link-list navUnder">
+    <li><a href="#">Prod Link 1</a></li>
+    <li><a href="#">Prod Link 2</a></li>
+    <li><a href="#">Prod Link 3</a></li>
+  </ul>
+
+  <!-- Test links -->
+  <ul id="test" class="link-list navUnder">
+    <li><a href="#">Test Link A</a></li>
+    <li><a href="#">Test Link B</a></li>
+    <li><a href="#">Test Link C</a></li>
+  </ul>
+
+  <!-- Dev links -->
+  <ul id="dev" class="link-list navUnder">
+    <li><a href="#">Dev Link X</a></li>
+    <li><a href="#">Dev Link Y</a></li>
+    <li><a href="#">Dev Link Z</a></li>
+  </ul>
+
+<!-- <div>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta officia nobis quas saepe error voluptas corrupti dolore recusandae ipsum, consequuntur dolorem beatae id nesciunt eius eos expedita atque soluta illum.</div> -->
+
+
+  <script>
+    function showList(listId) {
+      // Hide all lists
+      document.querySelectorAll('.link-list').forEach(list => {
+        list.classList.remove('active');
+      });
+      // Show selected list
+      document.getElementById(listId).classList.add('active');
+    }
+
+    // Show "prod" list by default on page load
+    window.onload = function() {
+      showList('prod');
+    };
+  </script>
+</body>
+</html>
+```
+
