@@ -53,7 +53,9 @@
 
 ### contact list
 * [contact_list](https://koskasmail.github.io/web/web/pages/zzz_test/CacheStorage/contact)
-      
+
+### CacheStorage
+* [CacheStorage | test1](https://koskasmail.github.io/web/web/pages/zzz_test/CacheStorage/test1/)
 
 ### games
 * [tic_tac_toe](https://koskasmail.github.io/web/web/pages/zzz_test//tic_tac_toe/)
