@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="script.js" defer></script>
+    <title>Cardboard</title>
+</head>
+
+<body>
+    <header>
+        <div class="brand">Cardboard Kit</div>
+        <nav aria-label="Main">
+            <a href="#home" class="tab">Home</a>
+            <a href="#about" class="tab">About</a>
+            <a href="#quiz" class="tab">Quiz</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="home" class="panel" aria-labelledby="home-title">
+            <h2 id="home-title">Welcome</h2>
+            <div class="divider"></div>
+            <p><strong>Note:</strong> This whole interface is styled to feel like it’s sketched on cardboard—rough
+                fibers, penciled lines, and taped tags. Imperfections are deliberate.</p>
+            <p><strong>Tip:</strong> Try the navigation above; each tab feels like a taped label. Hover to see subtle
+                tilt changes.</p>
+            <button class="btn primary" onclick="scrollToId('quiz')">Jump to quiz</button>
+        </section>
+
+        <section id="about" class="panel" aria-labelledby="about-title">
+            <h2 id="about-title">About this look</h2>
+            <div class="divider"></div>
+            <ul>
+                <li><strong>Texture:</strong> Layered gradients mimic cardboard fibers and scuffs.</li>
+                <li><strong>Edges:</strong> Inset shadows give a sheet-of-cardboard feel.</li>
+                <li><strong>Tape tabs:</strong> Nav items look like masking tape labels with a “pushpin” dot.</li>
+                <li><strong>Ink lines:</strong> Dashed borders + slight rotations emulate hand-drawn edges.</li>
+            </ul>
+        </section>
+
+        <section id="quiz" class="panel" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quick cardboard quiz</h2>
+            <div class="divider"></div>
+
+            <form id="quiz-form">
+                <div class="quiz-item">
+                    <label for="q1"><strong>Q1:</strong> Corrugated cardboard typically has a fluted inner layer between
+                        flat liners. What’s the benefit?</label>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q1" value="A" /> Better cushioning and rigidity
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="B" /> Makes it waterproof by default
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="C" /> Enhances color printing
+                        </label>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <label for="q2"><strong>Q2:</strong> Which finish best matches a “cardboard” aesthetic for
+                        UI?</label>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q2" value="A" /> High-gloss glassmorphism
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="B" /> Matte, fibrous textures with dashed lines
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="C" /> Neon gradients with blur
+                        </label>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <label for="q3"><strong>Q3:</strong> What small detail helps sell the “handmade” feel?</label>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q3" value="A" /> Perfectly straight edges
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="B" /> Slight rotations and dashed borders
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="C" /> Monospaced fonts everywhere
+                        </label>
+                    </div>
+                </div>
+
+                <div style="margin-top: 10px;">
+                    <button type="button" class="btn" onclick="submitQuiz()">Check answers</button>
+                    <button type="reset" class="btn" style="margin-left:8px;" onclick="resetResult()">Reset</button>
+                </div>
+            </form>
+
+            <div id="result" class="result" role="status" aria-live="polite"></div>
+        </section>
+
+        <footer>
+            <p><strong>Reminder:</strong> Imperfections make it feel real—embrace the tilt, the texture, the sketched
+                lines.</p>
+        </footer>
+    </main>
+</body>
+
+</html>
