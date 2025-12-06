@@ -8,6 +8,9 @@ Here’s a **1960s magazine‑style layout** in HTML/CSS/JS, with distinct secti
 #### code
 
 ```html
+Here’s a **1960s magazine‑style layout** in HTML/CSS/JS, with distinct sections for Sports, Movies, Music, and Politics. The design uses psychedelic colors, bold fonts, and groovy dividers to emulate the look and feel of a retro magazine spread:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
