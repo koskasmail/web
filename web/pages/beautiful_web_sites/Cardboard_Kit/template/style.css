@@ -1,0 +1,246 @@
+    /* ========= Base: cardboard vibe ========= */
+    :root {
+      --cardboard: #c7a979;
+      --cardboard-dark: #a58557;
+      --ink: #2b251b;
+      --marker: #1f1a13;
+      --tape: #d9d2c5;
+      --accent: #6f4f28;
+      --red: #b34b3c;
+      --green: #4b7d3c;
+      --blue: #3c5b8f;
+    }
+
+    /* Handwritten-ish font fallback */
+    body {
+      font-family: "Patrick Hand", "Comic Sans MS", "Segoe Print", "Bradley Hand", cursive;
+      margin: 0;
+      color: var(--ink);
+      /* Layered gradients to fake cardboard fibers + uneven tone */
+      background:
+        radial-gradient(1200px 800px at 10% 20%, rgba(255,255,255,0.08), transparent 70%),
+        radial-gradient(800px 600px at 90% 80%, rgba(0,0,0,0.08), transparent 65%),
+        repeating-linear-gradient(5deg, rgba(0,0,0,0.03) 0 6px, transparent 6px 12px),
+        linear-gradient(180deg, #d2b587, #c7a979 50%, #b89360);
+      min-height: 100vh;
+      /* Inset shadows for “sheet” feel */
+      box-shadow: inset 0 0 80px rgba(0,0,0,0.18);
+    }
+
+    /* Subtle texture noise using shadow speckles */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 30% 40%, rgba(0,0,0,0.04) 0 1px, transparent 1px),
+        radial-gradient(circle at 70% 60%, rgba(0,0,0,0.035) 0 1px, transparent 1px);
+      background-size: 120px 120px, 180px 180px;
+      mix-blend-mode: multiply;
+      opacity: 0.6;
+    }
+
+    /* ========= Header “label” strip ========= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      padding: 18px 20px;
+      background:
+        repeating-linear-gradient(180deg, var(--tape) 0 18px, #cdc6b9 18px 36px);
+      border-bottom: 2px dashed rgba(0,0,0,0.2);
+      box-shadow:
+        0 6px 0 rgba(0,0,0,0.08),
+        inset 0 -10px 30px rgba(0,0,0,0.12);
+      transform: rotate(-0.2deg);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: 0.5px;
+      font-size: 1.4rem;
+      color: var(--marker);
+    }
+
+    .brand::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #6b6b6b 0 4px, #2c2c2c 4px 9px, #0000 9px);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.4);
+      transform: rotate(3deg);
+    }
+
+    /* ========= Nav tabs like taped tags ========= */
+    nav {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      position: relative;
+      background: #e2d9cc;
+      color: var(--marker);
+      padding: 10px 14px;
+      border-radius: 4px;
+      border: 1px dashed rgba(0,0,0,0.35);
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+      text-decoration: none;
+      transform: rotate(-0.8deg);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .tab:hover {
+      transform: rotate(-0.2deg) translateY(-1px);
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.26);
+    }
+
+    .tab::after {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: 10px;
+      width: 28px;
+      height: 12px;
+      background: linear-gradient(180deg, #f3f1ec, #d9d2c5);
+      border: 1px solid rgba(0,0,0,0.15);
+      transform: rotate(6deg);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+    }
+
+    /* ========= Main cardboard panels ========= */
+    .container {
+      max-width: 980px;
+      margin: 26px auto 40px;
+      padding: 0 16px;
+    }
+
+    .panel {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.06)),
+        linear-gradient(180deg, #caa977, #c29b68);
+      border: 2px solid rgba(0,0,0,0.15);
+      border-radius: 6px;
+      box-shadow:
+        4px 4px 0 rgba(0,0,0,0.22),
+        inset 0 0 45px rgba(0,0,0,0.14);
+      padding: 18px;
+      margin-bottom: 18px;
+      transform: rotate(0.4deg);
+    }
+
+    .panel h2 {
+      margin: 0 0 8px;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
+
+    /* Divider drawn like pencil line */
+    .divider {
+      height: 1px;
+      background: repeating-linear-gradient(90deg, rgba(0,0,0,0.25) 0 8px, transparent 8px 14px);
+      margin: 10px 0 16px;
+      transform: rotate(-0.3deg);
+    }
+
+    /* ========= Buttons: duct tape/marker ========= */
+    .btn {
+      display: inline-block;
+      background: linear-gradient(180deg, #f0eee9, #dcd7cb);
+      color: var(--marker);
+      padding: 10px 14px;
+      border: 1px solid rgba(0,0,0,0.2);
+      border-radius: 6px;
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.22);
+      text-decoration: none;
+      cursor: pointer;
+      transform: rotate(-0.6deg);
+      transition: transform 140ms ease, box-shadow 140ms ease;
+    }
+    .btn:hover {
+      transform: rotate(0deg) translateY(-1px);
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.28);
+    }
+    .btn.primary {
+      background: linear-gradient(180deg, #e9e5d9, #cfc7b6);
+      border-style: dashed;
+    }
+
+    /* ========= Quiz sheet ========= */
+    .quiz-item {
+      padding: 10px 12px;
+      margin: 8px 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.05)),
+        linear-gradient(180deg, #d1b387, #c7a979);
+      border: 1px dashed rgba(0,0,0,0.25);
+      border-radius: 5px;
+      transform: rotate(0.3deg);
+    }
+
+    .quiz-item label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .options {
+      display: grid;
+      gap: 6px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 4px;
+      transition: background 120ms ease;
+    }
+    .option:hover {
+      background: rgba(0,0,0,0.06);
+    }
+
+    input[type="radio"] {
+      accent-color: #7c5a33;
+      transform: rotate(-1deg);
+    }
+
+    /* ========= Result sticky note ========= */
+    .result {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 14px;
+      max-width: 420px;
+      background:
+        repeating-linear-gradient(180deg, #ffe9a8 0 22px, #ffd97a 22px 44px);
+      border: 1px solid rgba(0,0,0,0.25);
+      border-radius: 6px;
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.22);
+      transform: rotate(-0.8deg);
+    }
+    .result.good { outline: 3px solid rgba(75,125,60,0.35); }
+    .result.ok   { outline: 3px solid rgba(60,91,143,0.35); }
+    .result.bad  { outline: 3px solid rgba(179,75,60,0.35); }
+
+    /* ========= Footer kraft tape ========= */
+    footer {
+      margin-top: 24px;
+      padding: 14px 18px;
+      background:
+        linear-gradient(180deg, #e5dfd3, #cbc4b6);
+      border-top: 2px dashed rgba(0,0,0,0.2);
+      box-shadow: inset 0 10px 25px rgba(0,0,0,0.12);
+      transform: rotate(0.2deg);
+    }
+
+    /* Small screen tweaks */
+    @media (max-width: 600px) {
+      .brand { font-size: 1.2rem; }
+      .container { padding: 0 12px; }
+    }
