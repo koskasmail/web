@@ -1,4 +1,4 @@
-# 1980s magazine
+# 1960s magazine
 
 
 ### idea
