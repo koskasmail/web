@@ -323,3 +323,6 @@ with navbars and a quiz, styled like a 70s magazine spread:
             resultEl.textContent = "";
         }
     </script>
+</body>
+
+</html>
