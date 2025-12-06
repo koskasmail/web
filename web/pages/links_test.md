@@ -62,6 +62,12 @@
 
 -----
 
+### beautiful_web_sites
+[1960s_magazine_style](https://koskasmail.github.io/web/web/pages/beautiful_web_sites/1960s_magazine_style/1960s_magazine_style.html)
+
+-----
+
+
 <p align="right">(<a href="#topage">back to top</a>)</p>
 <br/>
 <br/>
