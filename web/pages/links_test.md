@@ -63,8 +63,10 @@
 -----
 
 ### beautiful_web_sites
-[1960s_magazine_style](https://koskasmail.github.io/web/web/pages/beautiful_web_sites/1960s_magazine_style/1960s_magazine_style.html)
-
+* [cardboard_magazine](https://koskasmail.github.io/web/web/pages/beautiful_web_sites/Cardboard_Kit/cardboard_magazine.html)
+* [1960s_magazine_style](https://koskasmail.github.io/web/web/pages/beautiful_web_sites/1960s_magazine_style/1960s_magazine_style.html)
+* [1960s magazine](https://koskasmail.github.io/web/web/pages/beautiful_web_sites/1960s_magazine/1960s_magazine.html)
+  
 -----
 
 
