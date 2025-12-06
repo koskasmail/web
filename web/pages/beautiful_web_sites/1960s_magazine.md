@@ -258,5 +258,9 @@ Here’s a full HTML/CSS/JS page restyled with a **1960s magazine aesthetic** �
     </section>
   </main>
 
-  <footer
+  <footer>
+    Peace • Love • Freedom — Stay Groovy
+  </footer>
+</body>
+</html>
 ```
