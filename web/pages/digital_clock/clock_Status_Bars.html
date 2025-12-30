@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Time Status Bars</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #111827;
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #1f2937;
+      padding: 20px 24px;
+      border-radius: 12px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+      width: 420px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 8px;
+      text-align: center;
+      color: #f9fafb;
+    }
+
+    .time-string {
+      text-align: center;
+      font-size: 16px;
+      margin-bottom: 16px;
+      color: #9ca3af;
+    }
+
+    .row {
+      margin-bottom: 18px;
+    }
+
+    .label-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .label-line span:first-child {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .label-line span:last-child {
+      color: #9ca3af;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .bar {
+      position: relative;
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #374151;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      transition: width 0.3s ease-out;
+    }
+
+    .fill.hours {
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+    }
+
+    .fill.minutes {
+      background: linear-gradient(90deg, #3b82f6, #2563eb);
+    }
+
+    .fill.seconds {
+      background: linear-gradient(90deg, #f97316, #ea580c);
+    }
+
+    .footer {
+      margin-top: 8px;
+      font-size: 11px;
+      text-align: center;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Time Status</h1>
+    <div class="time-string" id="timeString">--</div>
+
+    <div class="row">
+      <div class="label-line">
+        <span>Hours</span>
+        <span id="hoursInfo"></span>
+      </div>
+      <div class="bar">
+        <div class="fill hours" id="hoursBar"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="label-line">
+        <span>Minutes</span>
+        <span id="minutesInfo"></span>
+      </div>
+      <div class="bar">
+        <div class="fill minutes" id="minutesBar"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="label-line">
+        <span>Seconds</span>
+        <span id="secondsInfo"></span>
+      </div>
+      <div class="bar">
+        <div class="fill seconds" id="secondsBar"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Updates every second
+    </div>
+  </div>
+
+  <script>
+    function pad2(n) {
+      return n.toString().padStart(2, "0");
+    }
+
+    function updateTime() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = pad2(now.getMonth() + 1);
+      const day = pad2(now.getDate());
+      const hour = now.getHours();
+      const minute = now.getMinutes();
+      const second = now.getSeconds();
+
+      const timeString = `${year}-${month}-${day} ${pad2(hour)}:${pad2(minute)}:${pad2(second)}`;
+      document.getElementById("timeString").textContent = timeString;
+
+      const hourPct = (hour / 23) * 100;
+      const minPct = (minute / 59) * 100;
+      const secPct = (second / 59) * 100;
+
+      document.getElementById("hoursInfo").textContent =
+        `(${pad2(hour)}/23) ${hourPct.toFixed(2)}%`;
+      document.getElementById("minutesInfo").textContent =
+        `(${pad2(minute)}/59) ${minPct.toFixed(2)}%`;
+      document.getElementById("secondsInfo").textContent =
+        `(${pad2(second)}/59) ${secPct.toFixed(2)}%`;
+
+      document.getElementById("hoursBar").style.width = `${hourPct}%`;
+      document.getElementById("minutesBar").style.width = `${minPct}%`;
+      document.getElementById("secondsBar").style.width = `${secPct}%`;
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
+</body>
+</html>
