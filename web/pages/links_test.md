@@ -69,8 +69,13 @@
 * [1970s_magazine](https://koskasmail.github.io/web/web/pages/beautiful_web_sites/1970s_magazine/1970s_magazine.html)
 * [1980s_magazine](https://koskasmail.github.io/web/web/pages/beautiful_web_sites/1980s_magazine/1980s_magazine.html) 
 * [cartboard_magazine_2](https://koskasmail.github.io/web/web/pages/beautiful_web_sites/Cardboard_Kit/cartboard_magazine_2.html)
+
 -----
 
+### css
+* [pilots | pic_circle](https://koskasmail.github.io/web/web/pages/zzz_test/pilots/pic_circle/)
+
+-----
 
 <p align="right">(<a href="#topage">back to top</a>)</p>
 <br/>
