@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Markdown Viewer - Fixed</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css" />
+  <style>
+    :root {
+      --bg-gray: #e9ecef;
+      --nav-bg: #24292f;
+      --border-color: #d0d7de;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg-gray);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      background-color: var(--nav-bg); color: white; 
+      padding: 0 20px;
+      display: flex; align-items: center; z-index: 1000;
+      height: 50px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .navbar input[type="file"] { display: none; }
+    
+    .navbar label {
+      background-color: #2da44e; color: white; padding: 6px 16px;
+      cursor: pointer; border-radius: 6px; margin-right: 15px;
+      font-weight: 600; font-size: 14px;
+    }
+
+    .filename-box {
+      background-color: rgba(255,255,255,0.1); color: #adbac7;
+      padding: 4px 12px; border-radius: 6px; font-size: 13px;
+      border: 1px solid #444c56;
+    }
+
+    #content-wrapper {
+      margin-top: 65px;
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+      background: white; 
+      border: 1px solid var(--border-color);
+      border-radius: 6px; 
+      padding: 40px;
+      min-height: calc(100vh - 85px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-sizing: border-box;
+    }
+
+    /* Style for the code copy buttons */
+    .code-container { position: relative; }
+    .copy-btn {
+      position: absolute; top: 10px; right: 10px;
+      padding: 5px 10px; font-size: 12px; color: #24292f;
+      background-color: #f6f8fa; border: 1px solid var(--border-color);
+      border-radius: 6px; cursor: pointer; opacity: 0;
+      transition: opacity 0.2s; z-index: 10;
+    }
+    .code-container:hover .copy-btn { opacity: 1; }
+    .copy-btn.success { color: #1a7f37; border-color: #1a7f37; }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <label for="fileInput">Load File</label>
+    <input type="file" id="fileInput" accept=".md" />
+    <div class="filename-box" id="filenameBox">No file selected</div>
+  </div>
+
+  <div id="content-wrapper">
+    <div id="content" class="markdown-body">
+      Select a .md file to begin...
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const filenameBox = document.getElementById('filenameBox');
+    const contentDiv = document.getElementById('content');
+
+    fileInput.addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      
+      if (file) {
+        filenameBox.textContent = file.name;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const rawMarkdown = e.target.result;
+          
+          // Fixed the parsing call to be more robust
+          try {
+            const html = marked.parse(rawMarkdown);
+            contentDiv.innerHTML = html;
+            addCopyButtons();
+          } catch (err) {
+            console.error("Parsing error:", err);
+            contentDiv.innerHTML = "<p style='color:red'>Error parsing Markdown.</p>";
+          }
+        };
+        
+        reader.onerror = function() {
+          contentDiv.innerHTML = "<p style='color:red'>Error reading file.</p>";
+        };
+        
+        reader.readAsText(file);
+      }
+      
+      // The crucial fix so you can reload the same file
+      event.target.value = ''; 
+    });
+
+    function addCopyButtons() {
+      // Find all pre elements (which contain code blocks)
+      const codeBlocks = contentDiv.querySelectorAll('pre');
+      
+      codeBlocks.forEach((pre) => {
+        // Only add button if it doesn't have one already
+        if (pre.parentElement.className === 'code-container') return;
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'code-container';
+        pre.parentNode.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+
+        const button = document.createElement('button');
+        button.className = 'copy-btn';
+        button.innerText = 'Copy';
+
+        button.onclick = () => {
+          // Get the text from the code block
+          const text = pre.innerText;
+          navigator.clipboard.writeText(text).then(() => {
+            button.innerText = 'Copied!';
+            button.classList.add('success');
+            setTimeout(() => {
+              button.innerText = 'Copy';
+              button.classList.remove('success');
+            }, 2000);
+          });
+        };
+        wrapper.appendChild(button);
+      });
+    }
+  </script>
+
+</body>
+</html>
