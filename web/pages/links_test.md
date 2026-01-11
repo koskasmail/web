@@ -60,7 +60,7 @@
 * [CacheStorage | test1](https://koskasmail.github.io/web/web/pages/zzz_test/CacheStorage/test1/)
 
 ### games
-* [tic_tac_toe](https://koskasmail.github.io/web/web/pages/zzz_test//tic_tac_toe/)
+* [tic_tac_toe](https://koskasmail.github.io/web/web/pages/zzz_test/tic_tac_toe/)
 
 -----
 
@@ -76,7 +76,7 @@
 
 ### css
 * [pilots | pic_circle](https://koskasmail.github.io/web/web/pages/zzz_test/pilots/pic_circle/)
-
+* [clock_statusbar](https://koskasmail.github.io/web/web/pages/zzz_test/clock_statusbar/)
 -----
 
 <p align="right">(<a href="#topage">back to top</a>)</p>
