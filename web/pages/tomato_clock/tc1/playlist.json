@@ -1,0 +1,17 @@
+const audioList = [
+    {
+        name: "Beep Sound",
+        type: "wav",
+        path: "sound/beep.wav"   
+    },
+    {
+        name: "Alert Sound",
+        type: "mp3",
+        path: "sound/alert.mp3"
+    },
+    {
+        name: "Rest Sound",
+        type: "wav",
+        path: "sound/rest.wav"
+    }
+];
