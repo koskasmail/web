@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Phone Directory</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    📱 Phone Directory System
+</div>
+
+<div class="container">
+
+    <div class="sidebar">
+        <button onclick="showView()">View Phones</button>
+        <button onclick="showAdd()">Add New Phone</button>
+        <button onclick="exportJSON()">Export JSON</button>
+    </div>
+
+    <div class="content">
+
+        <div id="viewSection">
+            <h2>Contact List</h2>
+            <div id="phoneList"></div>
+        </div>
+
+        <div id="addSection" style="display:none;">
+            <h2 id="formTitle">Add Contact</h2>
+            <form id="addForm">
+                <input type="text" id="firstName" placeholder="First Name" required>
+                <input type="text" id="lastName" placeholder="Last Name" required>
+                <input type="text" id="phone" placeholder="Phone" required>
+                <input type="text" id="cell" placeholder="Cell" required>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
