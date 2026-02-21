@@ -1,0 +1,32 @@
+[
+  {
+    "first-name": "Alice",
+    "last-name": "Johnson",
+    "phone": "+1 202-555-0101",
+    "cell": "+1 202-555-1101"
+  },
+  {
+    "first-name": "Benjamin",
+    "last-name": "Smith",
+    "phone": "+1 202-555-0102",
+    "cell": "+1 202-555-1102"
+  },
+  {
+    "first-name": "Charlotte",
+    "last-name": "Brown",
+    "phone": "+1 202-555-0103",
+    "cell": "+1 202-555-1103"
+  },
+  {
+    "first-name": "Daniel",
+    "last-name": "Wilson",
+    "phone": "+1 202-555-0104",
+    "cell": "+1 202-555-1104"
+  },
+  {
+    "first-name": "Emma",
+    "last-name": "Taylor",
+    "phone": "+1 202-555-0105",
+    "cell": "+1 202-555-1105"
+  }
+]
