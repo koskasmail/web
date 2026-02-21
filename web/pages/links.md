@@ -76,6 +76,12 @@
 * [navbar/03.navbar](https://koskasmail.github.io/web/web/pages/navbar/03.navbar)
 
 -----
+
+# other
+* [tableOfElements](https://koskasmail.github.io/web/web/pages/tableOfElements/)
+
+-----
+
 # Under_Construction
 
 * [Under_Construction_01/](https://koskasmail.github.io/web/web/pages/Under_Construction/01/)
