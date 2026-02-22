@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bookmark Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    🔖 Bookmark Manager
+</div>
+
+<div class="container">
+
+    <!-- LEFT SIDE (Folders) -->
+    <div class="sidebar">
+        <h3>Folders</h3>
+        <div id="folderList"></div>
+
+        <button onclick="addFolder()">+ Add Folder</button>
+        <button onclick="deleteFolder()">🗑 Delete Folder</button>
+        <input type="file" id="loadJSON" accept=".json" onchange="loadJSON(event)">
+        <button onclick="exportData()">⬇ Export JSON</button>
+    </div>
+
+    <!-- RIGHT SIDE (Links) -->
+    <div class="content">
+        <h3 id="currentFolderTitle">Select a folder</h3>
+
+        <div id="linkList"></div>
+
+        <div class="form-section">
+            <input type="text" id="linkName" placeholder="Link Name">
+            <input type="text" id="linkURL" placeholder="https://example.com">
+            <button onclick="addLink()">Add Link</button>
+        </div>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
