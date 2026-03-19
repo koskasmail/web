@@ -103,8 +103,10 @@
 * [bookmakrs-05 | localStorage](https://koskasmail.github.io/web/web/pages/bookmakrs/05/bookmark_localStorage.html)
 * [bookmakrs-05 | sessionStorage](https://koskasmail.github.io/web/web/pages/bookmakrs/05/bookmark_sessionStorage.html)
 * [bookmakrs-05 | IndexedDB](https://koskasmail.github.io/web/web/pages/bookmakrs/05/IndexedDB.html)
+* [bookmakrs-06 | IndexedDB](https://koskasmail.github.io/web/web/pages/bookmakrs/06/indexedDB.html)
+* [bookmakrs-07 | IndexedDB](https://koskasmail.github.io/web/web/pages/bookmakrs/07/indexedDB.html)
+* [bookmakrs-08 | IndexedDB](https://koskasmail.github.io/web/web/pages/bookmakrs/08/indexedDB.html)
 
-  
 -----
 
 <p align="right">(<a href="#topage">back to top</a>)</p>
