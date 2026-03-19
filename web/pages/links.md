@@ -81,12 +81,6 @@
 * [phone_01](https://koskasmail.github.io/web/web/pages/phones/phone_01/)
 * [phone_02](https://koskasmail.github.io/web/web/pages/phones/phone_02/)
 
------
-
-# bookmakrs
-* [bookmakrs-01](https://koskasmail.github.io/web/web/pages/bookmakrs/01/)
-* [bookmakrs-02](https://koskasmail.github.io/web/web/pages/bookmakrs/02/)
-* [bookmakrs-03](https://koskasmail.github.io/web/web/pages/bookmakrs/03/)
 
 -----
 
@@ -99,6 +93,16 @@
 
 * [Under_Construction_01/](https://koskasmail.github.io/web/web/pages/Under_Construction/01/)
 
+-----
+
+# bookmakrs
+* [bookmakrs-01](https://koskasmail.github.io/web/web/pages/bookmakrs/01/)
+* [bookmakrs-02](https://koskasmail.github.io/web/web/pages/bookmakrs/02/)
+* [bookmakrs-03](https://koskasmail.github.io/web/web/pages/bookmakrs/03/)
+* [bookmakrs-04](https://koskasmail.github.io/web/web/pages/bookmakrs/04/)
+* [bookmakrs-05 | localStorage](https://koskasmail.github.io/web/web/pages/bookmakrs/05/bookmark_localStorage.html)
+* [bookmakrs-05 | sessionStorage](https://koskasmail.github.io/web/web/pages/bookmakrs/05/bookmark_sessionStorage.html)
+* [bookmakrs-06 | sessionStorage](https://koskasmail.github.io/web/web/pages/bookmakrs/06/bookmark_sessionStorage.html)
 
   
 -----
