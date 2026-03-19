@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Shining Stars Banner</title>
+<style>
+  body {
+    margin: 0;
+    background: #000;
+    font-family: system-ui, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .banner {
+    position: relative;
+    padding: 40px 80px;
+    border: 2px solid #555;
+    border-radius: 12px;
+    overflow: hidden;
+    background: radial-gradient(circle at top, #222 0, #000 60%);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+  }
+
+  .banner-text {
+    position: relative;
+    font-size: 64px;
+    letter-spacing: 0.25em;
+    color: #f5f5f5;
+    text-transform: uppercase;
+    text-align: center;
+    z-index: 1;
+  }
+
+  /* Container for stars */
+  .stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+    animation: twinkle 2s infinite ease-in-out;
+  }
+
+  /* Make stars visible only where text is, using mix-blend-mode */
+  .stars {
+    mix-blend-mode: screen;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.3); }
+    40%      { opacity: 1; transform: scale(1.2); }
+    60%      { opacity: 0.4; transform: scale(0.8); }
+  }
+</style>
+</head>
+<body>
+  <div class="banner">
+    <div class="banner-text">STAR LOGO</div>
+    <div class="stars" id="stars"></div>
+  </div>
+
+<script>
+  const starsContainer = document.getElementById('stars');
+  const STAR_COUNT = 80;
+
+  function random(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  for (let i = 0; i < STAR_COUNT; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+
+    // Random position inside banner
+    star.style.left = random(0, 100) + '%';
+    star.style.top = random(0, 100) + '%';
+
+    // Random size and animation timing
+    const size = random(2, 4);
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.animationDuration = random(1.5, 3.5) + 's';
+    star.style.animationDelay = random(-3, 0) + 's';
+
+    starsContainer.appendChild(star);
+  }
+</script>
+</body>
+</html>
