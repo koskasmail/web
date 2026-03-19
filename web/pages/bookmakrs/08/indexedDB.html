@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bookmark Manager</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+}
+
+/* SIDEBAR */
+#sidebar {
+    width: 320px;
+    background: #2c3e50;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebarHeader {
+    background: #1a252f;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 2px solid #34495e;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 6px;
+    margin: 6px 0;
+    border-radius: 3px;
+    border: none;
+    font-size: 13px;
+}
+
+#folderList {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 0;
+}
+
+/* Folder rows */
+.folder-row {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px;
+    border-bottom: 1px solid #34495e;
+    user-select: none;
+}
+
+.folder-row.drag-over {
+    border: 1px dashed #1abc9c;
+}
+
+.folder-toggle {
+    width: 16px;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 4px;
+    font-size: 12px;
+}
+
+.folder-name {
+    flex: 1;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Buttons */
+button {
+    cursor: pointer;
+    border: none;
+    padding: 2px 6px;
+    font-size: 12px;
+    background: #1abc9c;
+    color: white;
+    border-radius: 3px;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #159a80;
+}
+
+.folder-buttons button {
+    margin-left: 3px;
+}
+
+#addFolderBtn {
+    padding: 10px;
+    background: #1abc9c;
+    font-size: 14px;
+}
+
+/* MAIN */
+#main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#mainHeader {
+    background: #dfe6e9;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 2px solid #b2bec3;
+}
+
+#toolbar {
+    padding: 8px;
+    background: #ecf0f1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#bookmarkList {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.bookmark {
+    border: 1px solid #ccc;
+    padding: 6px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bookmark-info {
+    flex: 1;
+    font-size: 13px;
+}
+
+.bookmark button {
+    margin-left: 3px;
+}
+</style>
+</head>
+<body>
+
+<div id="sidebar">
+    <div id="sidebarHeader">Folders</div>
+    <input id="searchInput" type="text" placeholder="Search folders & bookmarks...">
+    <div id="folderList"></div>
+    <button id="addFolderBtn">+ Add Folder</button>
+</div>
+
+<div id="main">
+    <div id="mainHeader">Bookmarks</div>
+    <div id="toolbar">
+        <button onclick="addBookmark()">Add Bookmark</button>
+        <button onclick="exportData()">Export JSON</button>
+        <input type="file" id="importFile" onchange="importData(event)">
+    </div>
+    <div id="bookmarkList"></div>
+</div>
+
+<script>
+/* =========================
+   IndexedDB wrapper
+========================= */
+let db;
+const DB_NAME = "BookmarkDB";
+const STORE_NAME = "bookmarkStore";
+
+function openDB() {
+    return new Promise((resolve, reject) => {
+        const req = indexedDB.open(DB_NAME, 1);
+        req.onupgradeneeded = e => {
+            db = e.target.result;
+            db.createObjectStore(STORE_NAME);
+        };
+        req.onsuccess = e => {
+            db = e.target.result;
+            resolve(db);
+        };
+        req.onerror = () => reject("DB error");
+    });
+}
+
+function saveData() {
+    return new Promise(resolve => {
+        const tx = db.transaction(STORE_NAME, "readwrite");
+        tx.objectStore(STORE_NAME).put(data, "bookmarkData");
+        tx.oncomplete = resolve;
+    });
+}
+
+function loadData() {
+    return new Promise(resolve => {
+        const tx = db.transaction(STORE_NAME, "readonly");
+        const req = tx.objectStore(STORE_NAME).get("bookmarkData");
+        req.onsuccess = () => resolve(req.result || { folders: [] });
+        req.onerror = () => resolve({ folders: [] });
+    });
+}
+
+/* =========================
+   Data & state
+========================= */
+let data = { folders: [] };
+let selectedFolderPath = null;
+let searchTerm = "";
+
+/* COLLAPSED BY DEFAULT */
+let collapsedSet = new Set();
+
+let dragSourcePath = null;
+
+/* =========================
+   Helpers
+========================= */
+function pathToKey(path) {
+    return path.join("/");
+}
+
+function getFolderByPath(path) {
+    let arr = data.folders;
+    let folder = null;
+    for (let i = 0; i < path.length; i++) {
+        folder = arr[path[i]];
+        arr = folder.subfolders;
+    }
+    return folder;
+}
+
+function ensureFolderShape(folder) {
+    if (!folder.bookmarks) folder.bookmarks = [];
+    if (!folder.subfolders) folder.subfolders = [];
+}
+
+/* =========================
+   Rendering folders
+========================= */
+function renderFolders() {
+    const list = document.getElementById("folderList");
+    list.innerHTML = "";
+
+    function matchesSearch(folder) {
+        if (!searchTerm) return true;
+        const t = searchTerm.toLowerCase();
+        if (folder.name.toLowerCase().includes(t)) return true;
+        if (folder.bookmarks.some(b =>
+            b.name.toLowerCase().includes(t) ||
+            b.url.toLowerCase().includes(t) ||
+            (b.comment || "").toLowerCase().includes(t)
+        )) return true;
+        return folder.subfolders.some(matchesSearch);
+    }
+
+    function renderLevel(folders, path = [], indent = 0) {
+        folders.forEach((folder, index) => {
+            ensureFolderShape(folder);
+            const currentPath = [...path, index];
+            const key = pathToKey(currentPath);
+
+            if (!matchesSearch(folder)) return;
+
+            const row = document.createElement("div");
+            row.className = "folder-row";
+            row.style.paddingLeft = (indent * 18 + 6) + "px";
+            row.draggable = true;
+
+            const isCollapsed = collapsedSet.has(key);
+
+            const toggle = document.createElement("div");
+            toggle.className = "folder-toggle";
+            toggle.textContent = folder.subfolders.length ? (isCollapsed ? "+" : "−") : "";
+            toggle.onclick = e => {
+                e.stopPropagation();
+                if (isCollapsed) collapsedSet.delete(key);
+                else collapsedSet.add(key);
+                renderFolders();
+            };
+
+            const nameSpan = document.createElement("div");
+            nameSpan.className = "folder-name";
+            nameSpan.textContent = folder.name;
+            nameSpan.onclick = () => {
+                selectedFolderPath = currentPath;
+                renderBookmarks();
+            };
+
+            const btns = document.createElement("div");
+            btns.className = "folder-buttons";
+
+            const renameBtn = createBtn("R", () => {
+                const newName = prompt("Rename folder:", folder.name);
+                if (newName) {
+                    folder.name = newName;
+                    saveData().then(renderFolders);
+                }
+            });
+
+            const subBtn = createBtn("+", () => {
+                const name = prompt("Subfolder name:");
+                if (!name) return;
+                folder.subfolders.push({
+                    name,
+                    bookmarks: [],
+                    subfolders: []
+                });
+                collapsedSet.add(key);
+                saveData().then(renderFolders);
+            });
+
+            const delBtn = createBtn("X", () => {
+                if (!confirm("Delete folder?")) return;
+                folders.splice(index, 1);
+                saveData().then(() => {
+                    selectedFolderPath = null;
+                    renderFolders();
+                    renderBookmarks();
+                });
+            });
+
+            btns.append(renameBtn, subBtn, delBtn);
+
+            /* Drag events */
+            row.addEventListener("dragstart", e => {
+                dragSourcePath = currentPath;
+                e.dataTransfer.effectAllowed = "move";
+            });
+            row.addEventListener("dragover", e => {
+                e.preventDefault();
+                row.classList.add("drag-over");
+            });
+            row.addEventListener("dragleave", () => row.classList.remove("drag-over"));
+            row.addEventListener("drop", e => {
+                e.preventDefault();
+                row.classList.remove("drag-over");
+                moveFolderByPath(dragSourcePath, currentPath);
+                dragSourcePath = null;
+            });
+
+            row.append(toggle, nameSpan, btns);
+            list.appendChild(row);
+
+            if (!isCollapsed && folder.subfolders.length) {
+                renderLevel(folder.subfolders, currentPath, indent + 1);
+            }
+        });
+    }
+
+    renderLevel(data.folders);
+}
+
+/* =========================
+   Move folder (DnD)
+========================= */
+function moveFolderByPath(sourcePath, targetPath) {
+    if (pathToKey(sourcePath) === pathToKey(targetPath)) return;
+
+    function removeAt(path) {
+        let arr = data.folders;
+        for (let i = 0; i < path.length - 1; i++) arr = arr[path[i]].subfolders;
+        return arr.splice(path[path.length - 1], 1)[0];
+    }
+
+    function insertAt(path, folder) {
+        let arr = data.folders;
+        for (let i = 0; i < path.length - 1; i++) arr = arr[path[i]].subfolders;
+        arr.splice(path[path.length - 1], 0, folder);
+    }
+
+    const folder = removeAt(sourcePath);
+
+    if (sourcePath.length === targetPath.length) {
+        let sameParent = true;
+        for (let i = 0; i < sourcePath.length - 1; i++) {
+            if (sourcePath[i] !== targetPath[i]) sameParent = false;
+        }
+        if (sameParent && sourcePath[sourcePath.length - 1] < targetPath[targetPath.length - 1]) {
+            targetPath = [...targetPath];
+            targetPath[targetPath.length - 1]--;
+        }
+    }
+
+    insertAt(targetPath, folder);
+    saveData().then(renderFolders);
+}
+
+/* =========================
+   Bookmarks
+========================= */
+function renderBookmarks() {
+    const list = document.getElementById("bookmarkList");
+    list.innerHTML = "";
+
+    if (!selectedFolderPath) return;
+
+    const folder = getFolderByPath(selectedFolderPath);
+    ensureFolderShape(folder);
+
+    folder.bookmarks.forEach((bm, index) => {
+        const div = document.createElement("div");
+        div.className = "bookmark";
+
+        const info = document.createElement("div");
+        info.className = "bookmark-info";
+
+        const linkText = bm.url.length > 30 ? bm.name : bm.url;
+
+        info.innerHTML = `<b>${bm.name}</b><br>
+                          <a href="${bm.url}" target="_blank">${linkText}</a><br>
+                          <small>${bm.comment || ""}</small>`;
+
+        const editBtn = createBtn("Edit", () => {
+            const name = prompt("Name:", bm.name);
+            const url = prompt("URL:", bm.url);
+            const comment = prompt("Comment:", bm.comment || "");
+            if (name && url) {
+                bm.name = name;
+                bm.url = url;
+                bm.comment = comment;
+                saveData().then(renderBookmarks);
+            }
+        });
+
+        const delBtn = createBtn("X", () => {
+            if (!confirm("Delete bookmark?")) return;
+            folder.bookmarks.splice(index, 1);
+            saveData().then(renderBookmarks);
+        });
+
+        div.append(info, editBtn, delBtn);
+        list.appendChild(div);
+    });
+}
+
+function addBookmark() {
+    if (!selectedFolderPath) {
+        alert("Select a folder first.");
+        return;
+    }
+    const folder = getFolderByPath(selectedFolderPath);
+    ensureFolderShape(folder);
+
+    const name = prompt("Bookmark name:");
+    const url = prompt("URL:");
+    const comment = prompt("Comment:");
+    if (!name || !url) return;
+
+    folder.bookmarks.push({ name, url, comment });
+    saveData().then(renderBookmarks);
+}
+
+/* =========================
+   Buttons
+========================= */
+function createBtn(text, action) {
+    const btn = document.createElement("button");
+    btn.textContent = text;
+    btn.onclick = e => {
+        e.stopPropagation();
+        action();
+    };
+    return btn;
+}
+
+/* =========================
+   Export / Import
+========================= */
+function exportData() {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "bookmarks.json";
+    a.click();
+}
+
+function importData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        try {
+            const obj = JSON.parse(e.target.result);
+            data = obj;
+            collapsedSet.clear();
+            selectedFolderPath = null;
+            saveData().then(() => {
+                renderFolders();
+                renderBookmarks();
+            });
+        } catch {
+            alert("Invalid JSON file.");
+        }
+    };
+    reader.readAsText(file);
+}
+
+/* =========================
+   Search
+========================= */
+document.getElementById("searchInput").addEventListener("input", e => {
+    searchTerm = e.target.value.trim();
+    renderFolders();
+});
+
+/* =========================
+   Init
+========================= */
+document.getElementById("addFolderBtn").onclick = () => {
+    const name = prompt("Folder name:");
+    if (!name) return;
+    data.folders.push({
+        name,
+        bookmarks: [],
+        subfolders: []
+    });
+    saveData().then(renderFolders);
+};
+
+openDB()
+    .then(loadData)
+    .then(d => {
+        data = d;
+
+        // Ensure all folders start collapsed
+        function collapseAll(folders, path = []) {
+            folders.forEach((f, i) => {
+                ensureFolderShape(f);
+                const p = [...path, i];
+                collapsedSet.add(pathToKey(p));
+                collapseAll(f.subfolders, p);
+            });
+        }
+        collapseAll(data.folders);
+
+        renderFolders();
+        renderBookmarks();
+    });
+</script>
+
+</body>
+</html>
