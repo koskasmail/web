@@ -76,15 +76,14 @@
 
 ### css
 * [tooltiop | 01](https://koskasmail.github.io/web/web/pages/zzz_test/tooltip/01.html)
-
-web/pages/zzz_test/tooltip/01.html
-
------
-
-### css
 * [pilots | pic_circle](https://koskasmail.github.io/web/web/pages/zzz_test/pilots/pic_circle/)
 * [clock_statusbar](https://koskasmail.github.io/web/web/pages/zzz_test/clock_statusbar/)
+
 -----
+
+### playground
+* [staricon](https://koskasmail.github.io/web/web/pages/zzz_test/playground/staricon.html)
+
 
 <p align="right">(<a href="#topage">back to top</a>)</p>
 <br/>
