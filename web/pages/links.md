@@ -102,7 +102,7 @@
 * [bookmakrs-04](https://koskasmail.github.io/web/web/pages/bookmakrs/04/)
 * [bookmakrs-05 | localStorage](https://koskasmail.github.io/web/web/pages/bookmakrs/05/bookmark_localStorage.html)
 * [bookmakrs-05 | sessionStorage](https://koskasmail.github.io/web/web/pages/bookmakrs/05/bookmark_sessionStorage.html)
-* [bookmakrs-06 | sessionStorage](https://koskasmail.github.io/web/web/pages/bookmakrs/06/bookmark_sessionStorage.html)
+* [bookmakrs-05 | IndexedDB](https://koskasmail.github.io/web/web/pages/bookmakrs/05/IndexedDB.html)
 
   
 -----
