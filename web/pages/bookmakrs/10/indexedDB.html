@@ -102,11 +102,6 @@ button[data-tip]:hover::after {
     font-size: 12px;
     opacity: 1;
     pointer-events: none;
-    transition: opacity 0.2s;
-}
-
-button[data-tip]::after {
-    opacity: 0;
 }
 
 button[data-tip]:hover::before {
@@ -118,10 +113,6 @@ button[data-tip]:hover::before {
     border: 6px solid transparent;
     border-top-color: #000000cc;
     opacity: 1;
-}
-
-button[data-tip]::before {
-    opacity: 0;
 }
 
 /* Tooltip BELOW (first row only) */
@@ -149,11 +140,6 @@ button[data-tip-below]:hover::before {
     border: 6px solid transparent;
     border-bottom-color: #000000cc;
     opacity: 1;
-}
-
-button[data-tip-below]::after,
-button[data-tip-below]::before {
-    opacity: 0;
 }
 
 .folder-buttons button {
@@ -190,9 +176,9 @@ button[data-tip-below]::before {
 }
 
 #bookmarkSearch {
-    width: 200px;
     padding: 4px;
     font-size: 13px;
+    width: 200px;
 }
 
 #bookmarkList {
@@ -224,7 +210,7 @@ button[data-tip-below]::before {
 
 <div id="sidebar">
     <div id="sidebarHeader">Folders</div>
-    <input id="searchInput" type="text" placeholder="Search folders & bookmarks...">
+    <input id="searchInput" type="text" placeholder="Search folders...">
     <div id="folderList"></div>
     <button id="addFolderBtn" data-tip="Create a new folder">+ Add Folder</button>
 </div>
@@ -325,13 +311,15 @@ function renderFolders() {
     function matchesSearch(folder) {
         if (!searchTerm) return true;
         const t = searchTerm.toLowerCase();
-        if (folder.name.toLowerCase().includes(t)) return true;
-        if (folder.bookmarks.some(b =>
-            b.name.toLowerCase().includes(t) ||
-            b.url.toLowerCase().includes(t) ||
-            (b.comment || "").toLowerCase().includes(t)
-        )) return true;
-        return folder.subfolders.some(matchesSearch);
+        return (
+            folder.name.toLowerCase().includes(t) ||
+            folder.bookmarks.some(b =>
+                b.name.toLowerCase().includes(t) ||
+                b.url.toLowerCase().includes(t) ||
+                (b.comment || "").toLowerCase().includes(t)
+            ) ||
+            folder.subfolders.some(matchesSearch)
+        );
     }
 
     function renderLevel(folders, path = [], indent = 0, isFirstRow = false) {
@@ -370,7 +358,7 @@ function renderFolders() {
             const btns = document.createElement("div");
             btns.className = "folder-buttons";
 
-            const renameBtn = createBtn("R", "Rename this folder", isFirstRow, () => {
+            const renameBtn = createBtn("R", "Rename folder", isFirstRow, () => {
                 const newName = prompt("Rename folder:", folder.name);
                 if (newName) {
                     folder.name = newName;
@@ -378,7 +366,7 @@ function renderFolders() {
                 }
             });
 
-            const subBtn = createBtn("+", "Create a subfolder", isFirstRow, () => {
+            const subBtn = createBtn("+", "Create subfolder", isFirstRow, () => {
                 const name = prompt("Subfolder name:");
                 if (!name) return;
                 folder.subfolders.push({
@@ -390,7 +378,7 @@ function renderFolders() {
                 saveData().then(renderFolders);
             });
 
-            const delBtn = createBtn("X", "Delete this folder", isFirstRow, () => {
+            const delBtn = createBtn("X", "Delete folder", isFirstRow, () => {
                 if (!confirm("Delete folder?")) return;
                 folders.splice(index, 1);
                 saveData().then(() => {
@@ -503,7 +491,7 @@ function renderBookmarks() {
                           <a href="${bm.url}" target="_blank">${linkText}</a><br>
                           <small>${bm.comment || ""}</small>`;
 
-        const editBtn = createBtn("Edit", "Edit this bookmark", false, () => {
+        const editBtn = createBtn("Edit", "Edit bookmark", false, () => {
             const name = prompt("Name:", bm.name);
             const url = prompt("URL:", bm.url);
             const comment = prompt("Comment:", bm.comment || "");
@@ -515,7 +503,7 @@ function renderBookmarks() {
             }
         });
 
-        const delBtn = createBtn("X", "Delete this bookmark", false, () => {
+        const delBtn = createBtn("X", "Delete bookmark", false, () => {
             if (!confirm("Delete bookmark?")) return;
             folder.bookmarks.splice(index, 1);
             saveData().then(renderBookmarks);
@@ -625,4 +613,23 @@ document.getElementById("addFolderBtn").onclick = () => {
 openDB()
     .then(loadData)
     .then(d => {
-        data =
+        data = d;
+
+        // Collapse all folders on load
+        function collapseAll(folders, path = []) {
+            folders.forEach((f, i) => {
+                ensureFolderShape(f);
+                const p = [...path, i];
+                collapsedSet.add(pathToKey(p));
+                collapseAll(f.subfolders, p);
+            });
+        }
+        collapseAll(data.folders);
+
+        renderFolders();
+        renderBookmarks();
+    });
+</script>
+
+</body>
+</html>
