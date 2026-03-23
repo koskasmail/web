@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Retro Car Radio - Automatic</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #444 0, #111 60%);
+      font-family: "Courier New", monospace;
+      color: #eee;
+    }
+
+    .radio {
+      width: 800px;
+      height: 380px;
+      background: #3b2b22;
+      border-radius: 30px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+      border: 6px solid #1b120e;
+      position: relative;
+      padding: 20px 30px;
+      box-sizing: border-box;
+      display: grid;
+      grid-template-columns: 2fr 1.2fr;
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas:
+        "dial controls"
+        "screen buttons"
+        "footer buttons";
+      gap: 15px;
+    }
+
+    .dial {
+      grid-area: dial;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #f5e2b8;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .dial-scale {
+      flex: 1;
+      height: 26px;
+      border-radius: 16px;
+      background: linear-gradient(90deg, #1b1b1b, #333);
+      border: 2px solid #000;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dial-scale::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      background: repeating-linear-gradient(to right, #f5e2b8 0, #f5e2b8 1px, transparent 1px, transparent 10px);
+      opacity: 0.7;
+    }
+
+    .dial-indicator {
+      position: absolute;
+      top: 2px;
+      width: 4px;
+      bottom: 2px;
+      left: 0%;
+      background: #ff4b4b;
+      box-shadow: 0 0 6px #ff4b4b;
+      transition: left 0.3s ease;
+    }
+
+    .controls {
+      grid-area: controls;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .knob-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #f5e2b8;
+    }
+
+    .volume-slider {
+      -webkit-appearance: none;
+      width: 150px;
+      height: 6px;
+      border-radius: 3px;
+      background: #111;
+      outline: none;
+      border: 1px solid #555;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f5e2b8;
+      border: 2px solid #000;
+      cursor: pointer;
+    }
+
+    .screen {
+      grid-area: screen;
+      background: #111;
+      border-radius: 12px;
+      border: 4px solid #000;
+      box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .screen-header {
+      position: absolute;
+      top: 4px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 11px;
+      color: #8fffa8;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .screen iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #050505;
+    }
+
+    .buttons {
+      grid-area: buttons;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .btn-label {
+      font-size: 9px;
+      text-align: center;
+      text-transform: uppercase;
+      color: #f5e2b8;
+      margin-bottom: 2px;
+    }
+
+    .station-btn {
+      width: 100%;
+      height: 35px;
+      border-radius: 4px;
+      border: 2px solid #000;
+      background: linear-gradient(to bottom, #d9d0c0, #a89b86);
+      cursor: pointer;
+      font-size: 10px;
+      color: #222;
+      transition: all 0.1s;
+    }
+
+    .station-btn.active {
+      background: linear-gradient(to bottom, #ffe9a6, #d1b76b);
+      transform: translateY(2px);
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .footer {
+      grid-area: footer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #c9b89a;
+    }
+
+    .led {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #300;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .led.on {
+      background: #3f0;
+      box-shadow: 0 0 8px #7f0;
+    }
+  </style>
+</head>
+<body>
+  <div class="radio">
+    <div class="dial">
+      <span>FM</span>
+      <div class="dial-scale">
+        <div class="dial-indicator" id="dialIndicator"></div>
+      </div>
+      <span>AM</span>
+    </div>
+
+    <div class="controls">
+      <div class="knob-group">
+        <span>Master Volume</span>
+        <input id="volume" class="volume-slider" type="range" min="0" max="100" value="60" />
+      </div>
+    </div>
+
+    <div class="screen">
+      <div class="screen-header" id="screenHeader">SYSTEM READY - SELECT CH</div>
+      <iframe id="apiFrame" title="API Viewer"></iframe>
+    </div>
+
+    <div class="buttons" id="buttonsContainer"></div>
+
+    <div class="footer">
+      <div class="led" id="powerLed"></div>
+      <span id="statusText">POWER OFF</span>
+    </div>
+  </div>
+
+  <audio id="radioAudio" loop>
+    <!-- <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" /> -->
+  </audio>
+
+  <script>
+    // Note: Some URLs may not display in iframe due to "X-Frame-Options: DENY" headers on the source site.
+    const apiStations = [
+      "https://wg.cdn.tibus.net/Q10280s",
+      "https://jsonplaceholder.typicode.com/posts/1",
+      "https://jsonplaceholder.typicode.com/users/1",
+      "https://jsonplaceholder.typicode.com/todos/1",
+      "https://jsonplaceholder.typicode.com/comments/1",
+      "https://www.wikipedia.org", 
+      "https://jsonplaceholder.typicode.com/albums/1",
+      "https://jsonplaceholder.typicode.com/photos/1",
+      "https://jsonplaceholder.typicode.com/posts/2",
+      "https://jsonplaceholder.typicode.com/users/2",
+      "https://jsonplaceholder.typicode.com/todos/2",
+      "https://jsonplaceholder.typicode.com/comments/2",
+      "https://jsonplaceholder.typicode.com/albums/2",
+      "https://jsonplaceholder.typicode.com/photos/2",
+      "https://jsonplaceholder.typicode.com/posts/3",
+      "https://jsonplaceholder.typicode.com/users/3",
+      "https://jsonplaceholder.typicode.com/todos/3",
+      "https://jsonplaceholder.typicode.com/comments/3",
+      "https://jsonplaceholder.typicode.com/albums/3",
+      "https://jsonplaceholder.typicode.com/posts/4",
+      "https://jsonplaceholder.typicode.com/users/4"
+    ];
+
+    const buttonsContainer = document.getElementById("buttonsContainer");
+    const apiFrame = document.getElementById("apiFrame");
+    const powerLed = document.getElementById("powerLed");
+    const statusText = document.getElementById("statusText");
+    const volumeSlider = document.getElementById("volume");
+    const radioAudio = document.getElementById("radioAudio");
+    const screenHeader = document.getElementById("screenHeader");
+    const dialIndicator = document.getElementById("dialIndicator");
+
+    let isPlaying = false;
+
+    // Create 20 buttons
+    apiStations.forEach((url, index) => {
+      const wrapper = document.createElement("div");
+      const label = document.createElement("div");
+      label.className = "btn-label";
+      label.textContent = "CH " + (index + 1);
+
+      const btn = document.createElement("button");
+      btn.className = "station-btn";
+      btn.textContent = "PSET " + (index + 1);
+      btn.dataset.index = index;
+
+      btn.addEventListener("click", () => {
+        handleStationClick(index);
+      });
+
+      wrapper.appendChild(label);
+      wrapper.appendChild(btn);
+      buttonsContainer.appendChild(wrapper);
+    });
+
+    async function handleStationClick(index) {
+      // 1. Update UI Selection
+      document.querySelectorAll(".station-btn").forEach((b) => b.classList.remove("active"));
+      const activeBtn = document.querySelector(`.station-btn[data-index="${index}"]`);
+      if (activeBtn) activeBtn.classList.add("active");
+
+      // 2. Move dial
+      const percent = (index / (apiStations.length - 1)) * 100;
+      dialIndicator.style.left = percent + "%";
+
+      // 3. Load Content
+      apiFrame.src = apiStations[index];
+      screenHeader.textContent = "TUNING CH " + (index + 1) + "...";
+
+      // 4. Automatic Power/Audio Logic
+      radioAudio.volume = volumeSlider.value / 100;
+      
+      try {
+        await radioAudio.play();
+        isPlaying = true;
+        powerLed.classList.add("on");
+        statusText.textContent = "RECEIVING SIGNAL";
+      } catch (err) {
+        console.warn("Audio blocked. Ensure you click a button to start.", err);
+        statusText.textContent = "SIGNAL BLOCKED";
+      }
+    }
+
+    // Volume Slider Control
+    volumeSlider.addEventListener("input", () => {
+      const vol = volumeSlider.value / 100;
+      radioAudio.volume = vol;
+      
+      if (isPlaying) {
+        statusText.textContent = "VOL: " + volumeSlider.value + "%";
+        // Reset text after 1 second
+        clearTimeout(window.volTimeout);
+        window.volTimeout = setTimeout(() => {
+          statusText.textContent = "RECEIVING SIGNAL";
+        }, 1000);
+      }
+    });
+  </script>
+</body>
+</html>
