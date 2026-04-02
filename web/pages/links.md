@@ -112,7 +112,8 @@
 -----
 
 # Radio
-* [radio](https://koskasmail.github.io/web/web/pages/music/radio.html)
+* [radio_1](https://koskasmail.github.io/web/web/pages/music/radio.html)
+* [radio_2](https://koskasmail.github.io/web/web/pages/music/mr2.html)
 
 <p align="right">(<a href="#topage">back to top</a>)</p>
 <br/>
