@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mobileRadio</title>
+    <style>
+        body {
+            background: #111;
+            color: #eee;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #radioContainer {
+            width: 100%;
+            max-width: 420px;
+            margin: auto;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        #screenHeader {
+            text-align: center;
+            font-size: 1.4rem;
+            padding: 12px;
+            background: #222;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        #dialContainer {
+            position: relative;
+            height: 40px;
+            background: #333;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        #dialIndicator {
+            position: absolute;
+            top: 0;
+            width: 6px;
+            height: 40px;
+            background: red;
+            transition: left 0.3s ease;
+        }
+
+        #apiFrame {
+            width: 100%;
+            height: 120px;
+            border: none;
+            background: #000;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        #radioAudio {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        #statusRow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        #powerLed {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #400;
+        }
+
+
+        @keyframes softBlink {
+            0% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.4;
+            }
+        }
+
+        #powerLed.on {
+            background: #0f0;
+            animation: softBlink 1.5s ease-in-out infinite;
+        }
+
+        #buttonsContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            gap: 10px;
+        }
+
+        .station-btn {
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 8px;
+            background: #444;
+            color: #fff;
+            border: none;
+        }
+
+        .station-btn.active {
+            background: #ff4444;
+        }
+
+        /* Mobile tweaks */
+        @media (max-width: 480px) {
+            #screenHeader {
+                font-size: 1.1rem;
+            }
+
+            .station-btn {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="radioContainer">
+        <div id="screenHeader">📻 Jaron Radio 📻</div>
+        <div id="dialContainer">
+            <div id="dialIndicator"></div>
+        </div>
+
+        <iframe id="apiFrame"></iframe>
+
+        <audio id="radioAudio"></audio>
+
+        <div id="statusRow">
+            <span id="statusText">Press Chxx and play button</span>
+            <div id="powerLed"></div>
+        </div>
+
+        <div id="buttonsContainer"></div>
+
+    </div>
+
+    <script>
+        let apiStations = [];
+        let isPowerOn = false;
+
+        // DOM references
+        let radioAudio, powerLed, statusText, screenHeader, dialIndicator, apiFrame;
+
+        // fetch("apiStationList.json")
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         apiStations = data.stations;
+        //         initDom();
+        //         buildButtons();
+        //     });
+
+
+        fetch("apiStationList.json")
+            .then(response => response.json())
+            .then(data => {
+                apiStations = data.stations;
+                apiStyles = data.style;   // <-- NEW
+                initDom();
+                buildButtons();
+            });
+
+        function initDom() {
+            apiFrame = document.getElementById("apiFrame");
+            powerLed = document.getElementById("powerLed");
+            statusText = document.getElementById("statusText");
+            radioAudio = document.getElementById("radioAudio");
+            screenHeader = document.getElementById("screenHeader");
+            dialIndicator = document.getElementById("dialIndicator");
+        }
+
+        // function buildButtons() {
+        //     const container = document.getElementById("buttonsContainer");
+
+        //     apiStations.forEach((url, index) => {
+        //         const btn = document.createElement("button");
+        //         btn.className = "station-btn";
+        //         btn.textContent = "CH " + (index + 1);
+        //         btn.onclick = () => tuneToStation(index);
+        //         container.appendChild(btn);
+        //     });
+        // }
+
+
+        function buildButtons() {
+            const buttonsContainer = document.getElementById("buttonsContainer");
+
+            apiStations.forEach((url, index) => {
+                const btn = document.createElement("button");
+                btn.className = "station-btn";
+
+                // Use style text instead of CH #
+                btn.textContent = apiStyles[index];
+
+                btn.onclick = () => tuneToStation(index);
+
+                buttonsContainer.appendChild(btn);
+            });
+        }
+
+
+        async function tuneToStation(index) {
+            document.querySelectorAll(".station-btn").forEach((b, i) => {
+                b.classList.toggle("active", i === index);
+            });
+
+            const percent = (index / (apiStations.length - 1)) * 100;
+            dialIndicator.style.left = percent + "%";
+
+            apiFrame.src = apiStations[index];
+
+            powerLed.classList.add("on");
+
+            if (!isPowerOn) {
+                try {
+                    await radioAudio.play();
+                    isPowerOn = true;
+                    powerLed.classList.add("on");
+                } catch {
+                    statusText.textContent = "Tap again to enable audio";
+                }
+            }
+
+            statusText.textContent = "Signal Received";
+        }
+    </script>
+</body>
+
+</html>
