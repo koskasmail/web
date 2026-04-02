@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jaron Radio Mobile</title>
+
+<style>
+body {
+    margin: 0;
+    background: radial-gradient(circle at top, #444 0, #111 60%);
+    font-family: "Courier New", monospace;
+    color: #eee;
+}
+
+/* MAIN RADIO */
+.radio {
+    width: 100%;
+    max-width: 420px;
+    margin: auto;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+/* DIAL */
+.dial {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #f5e2b8;
+    font-size: 12px;
+}
+
+.dial-scale {
+    height: 20px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #1b1b1b, #333);
+    border: 2px solid #000;
+    position: relative;
+    margin: 5px 0;
+}
+
+.dial-indicator {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    width: 3px;
+    left: 0%;
+    background: #ff4b4b;
+}
+
+/* SCREEN */
+.screen {
+    height: 180px;
+    background: #000;
+    border-radius: 10px;
+    border: 3px solid #000;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.screen-header {
+    position: absolute;
+    top: 5px;
+    width: 100%;
+    text-align: center;
+    font-size: 11px;
+    color: #8fffa8;
+    text-shadow: 0 0 5px #0f0;
+    z-index: 2;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* BUTTONS */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.station-btn {
+    height: 60px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 2px solid #000;
+    background: linear-gradient(to bottom, #d9d0c0, #a89b86);
+    cursor: pointer;
+}
+
+.station-btn.active {
+    background: #ffe9a6;
+    transform: scale(0.95);
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+}
+
+.led {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #300;
+}
+
+.led.on {
+    background: #3f0;
+    box-shadow: 0 0 8px #7f0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="radio">
+
+    <div class="dial">
+        FM 📻 Jaron Radio
+        <div class="dial-scale">
+            <div class="dial-indicator" id="dialIndicator"></div>
+        </div>
+    </div>
+
+    <div class="screen">
+        <div class="screen-header" id="screenHeader">Standby...</div>
+        <iframe id="apiFrame"></iframe>
+    </div>
+
+    <div class="buttons" id="buttonsContainer"></div>
+
+    <div class="footer">
+        <div class="led" id="powerLed"></div>
+        <span id="statusText">Tap a channel</span>
+    </div>
+
+</div>
+
+<audio id="radioAudio" loop></audio>
+
+<script>
+let apiStations = [];
+let isPowerOn = false;
+
+let radioAudio, powerLed, statusText, screenHeader, dialIndicator, apiFrame;
+
+fetch("apiStationList.json")
+.then(r => r.json())
+.then(data => {
+    apiStations = data.stations;
+    initDom();
+    buildButtons();
+});
+
+function initDom() {
+    apiFrame = document.getElementById("apiFrame");
+    powerLed = document.getElementById("powerLed");
+    statusText = document.getElementById("statusText");
+    radioAudio = document.getElementById("radioAudio");
+    screenHeader = document.getElementById("screenHeader");
+    dialIndicator = document.getElementById("dialIndicator");
+}
+
+function buildButtons() {
+    const container = document.getElementById("buttonsContainer");
+
+    apiStations.forEach((url, index) => {
+        const btn = document.createElement("button");
+        btn.className = "station-btn";
+        btn.textContent = "CH " + (index + 1);
+
+        btn.onclick = () => tuneToStation(index);
+
+        container.appendChild(btn);
+    });
+}
+
+async function tuneToStation(index) {
+
+    document.querySelectorAll('.station-btn').forEach((b, i) => {
+        b.classList.toggle('active', i === index);
+    });
+
+    const percent = (index / (apiStations.length - 1)) * 100;
+    dialIndicator.style.left = percent + "%";
+
+    screenHeader.textContent = "CH " + (index + 1);
+    apiFrame.src = apiStations[index];
+
+    if (!isPowerOn) {
+        try {
+            await radioAudio.play();
+            isPowerOn = true;
+            powerLed.classList.add("on");
+        } catch {
+            statusText.textContent = "Tap again to enable audio";
+        }
+    }
+
+    statusText.textContent = "Playing...";
+}
+</script>
+
+</body>
+</html>
