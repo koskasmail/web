@@ -1,0 +1,117 @@
+body {
+    background: #111;
+    color: #eee;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#radioContainer {
+    width: 100%;
+    max-width: 420px;
+    margin: auto;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+#screenHeader {
+    text-align: center;
+    font-size: 1.4rem;
+    padding: 12px;
+    background: #222;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+#dialContainer {
+    position: relative;
+    height: 40px;
+    background: #333;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+#dialIndicator {
+    position: absolute;
+    top: 0;
+    width: 6px;
+    height: 40px;
+    background: red;
+    transition: left 0.3s ease;
+}
+
+#apiFrame {
+    width: 100%;
+    height: 120px;
+    border: none;
+    background: #000;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+#radioAudio {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#statusRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+#powerLed {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #400;
+}
+
+/* 
+#powerLed.on {
+    background: #0f0;
+} */
+
+
+@keyframes softBlink {
+  0%   { opacity: 0.4; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+#powerLed.on {
+  background: #0f0;
+  animation: softBlink 1.5s ease-in-out infinite;
+}
+
+#buttonsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 10px;
+}
+
+.station-btn {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    background: #444;
+    color: #fff;
+    border: none;
+}
+
+.station-btn.active {
+    background: #ff4444;
+}
+
+/* Mobile tweaks */
+@media (max-width: 480px) {
+    #screenHeader {
+        font-size: 1.1rem;
+    }
+
+    .station-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
