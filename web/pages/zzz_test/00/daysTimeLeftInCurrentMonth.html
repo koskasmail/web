@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Today & Month Countdown</title>
 
     <style>
@@ -178,6 +179,7 @@
 </head>
 
 <body>
+
     <main class="card">
 
         <!-- Today's date -->
@@ -188,6 +190,7 @@
         <div class="date" id="today">
             --/--/----
         </div>
+
 
         <!-- Countdown -->
         <div class="label">
@@ -206,6 +209,7 @@
                 </span>
             </div>
 
+
             <div class="time-box">
                 <span class="time-value" id="hours">
                     00
@@ -215,6 +219,7 @@
                     Hours
                 </span>
             </div>
+
 
             <div class="time-box">
                 <span class="time-value" id="minutes">
@@ -226,6 +231,7 @@
                 </span>
             </div>
 
+
             <div class="time-box">
                 <span class="time-value" id="seconds">
                     00
@@ -235,13 +241,18 @@
                     Seconds
                 </span>
             </div>
+
         </div>
+
     </main>
+
 
     <script>
 
         function updateCountdown() {
+
             const now = new Date();
+
 
             /*
              * TODAY
@@ -260,8 +271,10 @@
 
             const year = now.getFullYear();
 
+
             document.getElementById("today").textContent =
                 `${day}/${month}/${year}`;
+
 
             /*
              * END OF CURRENT MONTH
@@ -272,17 +285,21 @@
              * Therefore, the countdown ends
              * exactly when the current month ends.
              */
+
             const endOfMonth = new Date(
                 now.getFullYear(),
                 now.getMonth() + 1,
                 1
             );
 
+
             /*
              * Difference in milliseconds
              */
+
             const difference =
                 endOfMonth.getTime() - now.getTime();
+
 
             /*
              * Convert milliseconds
@@ -308,9 +325,11 @@
                 (difference / 1000) % 60
             );
 
+
             /*
              * Display values
              */
+
             document.getElementById("days")
                 .textContent = String(days).padStart(2, "0");
 
@@ -328,12 +347,14 @@
         /*
          * Run immediately
          */
+
         updateCountdown();
 
 
         /*
          * Update every second
          */
+
         setInterval(
             updateCountdown,
             1000
@@ -344,152 +365,3 @@
 </body>
 
 </html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Today & Month Countdown</title>
-
-  <style>
-.countdown {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin-top: 10px;
-}
-
-.countdown > div {
-  min-width: 80px;
-  padding: 15px 10px;
-
-  background: #f4f4ff;
-  border-radius: 14px;
-}
-
-.countdown span {
-  display: block;
-
-  color: #764ba2;
-  font-size: 2rem;
-  font-weight: 800;
-}
-
-.countdown small {
-  display: block;
-  margin-top: 4px;
-
-  color: #777;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-@media (max-width: 480px) {
-  .countdown {
-    gap: 6px;
-  }
-
-  .countdown > div {
-    min-width: 65px;
-    padding: 12px 6px;
-  }
-
-  .countdown span {
-    font-size: 1.5rem;
-  }
-
-  .countdown small {
-    font-size: 0.6rem;
-  }
-}
-  </style>
-</head>
-
-<body>
-
-  <div class="card">
-    <div class="label">Today:</div>
-    <div class="date" id="today">--/--/----</div>
-
-    <div class="label">End of month</div>
-    <div class="month-end">
-      <span class="days" id="daysLeft">--</span> days
-    </div>
-  </div>
-
-  <div class="label">End of month</div>
-
-<div class="countdown">
-  <div>
-    <span id="daysLeft">00</span>
-    <small>Days</small>
-  </div>
-
-  <div>
-    <span id="hoursLeft">00</span>
-    <small>Hours</small>
-  </div>
-
-  <div>
-    <span id="minutesLeft">00</span>
-    <small>Minutes</small>
-  </div>
-
-  <div>
-    <span id="secondsLeft">00</span>
-    <small>Seconds</small>
-  </div>
-</div>
-<script>
-  function updateDate() {
-    const now = new Date();
-
-    // Format today's date: dd/mm/yyyy
-    const day = String(now.getDate()).padStart(2, "0");
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const year = now.getFullYear();
-
-    document.getElementById("today").textContent =
-      `${day}/${month}/${year}`;
-
-    // End of the current month
-    const endOfMonth = new Date(
-      now.getFullYear(),
-      now.getMonth() + 1,
-      1
-    );
-
-    // Time remaining
-    const difference = endOfMonth - now;
-
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (difference / (1000 * 60 * 60)) % 24
-    );
-    const minutes = Math.floor(
-      (difference / (1000 * 60)) % 60
-    );
-    const seconds = Math.floor(
-      (difference / 1000) % 60
-    );
-
-    document.getElementById("daysLeft").textContent = days;
-    document.getElementById("hoursLeft").textContent =
-      String(hours).padStart(2, "0");
-    document.getElementById("minutesLeft").textContent =
-      String(minutes).padStart(2, "0");
-    document.getElementById("secondsLeft").textContent =
-      String(seconds).padStart(2, "0");
-  }
-
-  // Update every second
-  updateDate();
-  setInterval(updateDate, 1000);
-</script>
-  
-</body>
-</html>
-
