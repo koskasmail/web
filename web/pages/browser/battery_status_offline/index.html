@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="battery.css">
+    <title>battery_status</title>
+</head>
+<body>
+    <div class="title">battery status</div>
+    <hr>
+    <div>
+        <span>🔋 = </span>
+        <span id="BatteryLevel">--%</span>
+    </div>
+    <div>
+        <span>🔌 = </span>
+        <span id="batteryCharging">--</span>
+    </div>
+    <div>
+        <span>⏳ Charge Time = </span>
+        <span id="ChargeInfo">--</span>
+    </div>
+    <div>
+        <span>⏳ Discharging Time = </span>
+        <span id="DischargingInfo">--</span>
+    </div>
+    <div style="margin-top: 20px;">
+        <button id="updateBtn">Update App from Internet</button>
+    </div>
+
+    <script src="battery.js"></script>
+</body>
+</html>
