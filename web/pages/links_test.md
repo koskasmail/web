@@ -2,6 +2,7 @@
 
 # links_test 
 
+* [bst2](https://koskasmail.github.io/web/web/pages/browser/bst/bs2.html)
 
 ### navbar
 * [navbar/02_navbar-001.test](https://koskasmail.github.io/web/web/pages/navbar/02_navbar/001.test.html)
