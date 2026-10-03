@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            font-size: 60px;
+        }
+
+        div {
+            text-align: center;
+        }
+
+        #BatteryLevel {
+            color: red;
+        }
+
+        #batteryCharging {
+            color: red;
+        }
+
+        #ChargeInfo {
+            color: red;
+        }
+
+        #DischargingInfo {
+            color: red;
+        }
+
+        .title {
+            color: purple;
+        }
+    </style>
+    <title>battery_status</title>
+</head>
+
+<body>
+    <div class="title">battery status</div>
+    <hr>
+    <div>
+        <span>🔋 = </span>
+        <span id="BatteryLevel"></h1></span>
+    </div>
+    <div>
+        <span>🔌 =</span>
+        <span id="batteryCharging"></h1></span>
+    </div>
+
+    <div>
+        <span>🟢 Start Time = </span>
+        <span id="StartTime"></span>
+    </div>
+
+    <div>
+        <span>🔴 End Time = </span>
+        <span id="EndTime"></span>
+    </div>
+
+    <script>
+        navigator.getBattery().then((battery) => {
+
+
+            function updateAllBatteryInfo() {
+                updateChargeInfo();
+                updateLevelInfo();
+                updateChargingInfo();
+                updateDischargingInfo();
+            }
+
+            battery.addEventListener("chargingchange", () => {
+                updateChargeInfo();
+
+                if (battery.charging) {
+                    document.getElementById("StartTime").innerHTML =
+                        new Date().toLocaleTimeString();
+
+                    document.getElementById("EndTime").innerHTML = "";
+                }
+            });
+
+            function updateChargeInfo() {
+                var status = `${battery.charging ? "Yes" : "No"}`;
+                document.getElementById("batteryCharging").innerHTML = status;
+                // console.log(`Battery charging? ${battery.charging ? "Yes" : "No"}`);
+            }
+
+            battery.addEventListener("levelchange", () => {
+                updateLevelInfo();
+
+                if (battery.level === 1) {
+                    document.getElementById("EndTime").innerHTML =
+                        new Date().toLocaleTimeString();
+                }
+            });
+
+            function updateLevelInfo() {
+                var status = `${battery.level * 100}%`;
+                document.getElementById("BatteryLevel").innerHTML = status;
+                // console.log(`Battery level: ${levelInfo}...`);
+            }
+
+            battery.addEventListener("chargingtimechange", () => {
+                updateChargingInfo();
+            });
+
+            function updateChargingInfo() {
+                var status = `${battery.chargingTime} seconds`;
+                document.getElementById("ChargeInfo").innerHTML = status;
+                // console.log(`Battery charging time: ${battery.chargingTime} seconds`);
+            }
+
+            battery.addEventListener("dischargingtimechange", () => {
+                updateDischargingInfo();
+            });
+
+            function updateDischargingInfo() {
+                var status = `${battery.dischargingTime} seconds`;
+                document.getElementById("DischargingInfo").innerHTML = status;
+                // console.log(`Battery discharging time: ${battery.dischargingTime} seconds`);
+            }
+
+            updateAllBatteryInfo();
+
+        });
+
+    </script>
+</body>
+
+</html>
