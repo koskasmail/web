@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Battery Status</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #222;
+        }
+
+        .container {
+            width: min(100%, 600px);
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .title {
+            text-align: center;
+            color: purple;
+            font-size: clamp(28px, 8vw, 50px);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+            padding: 15px 10px;
+
+            font-size: clamp(20px, 5vw, 32px);
+            border-bottom: 1px solid #eee;
+        }
+
+        .label {
+            white-space: nowrap;
+        }
+
+        .value {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        #BatteryLevel {
+            color: red;
+        }
+
+        #batteryCharging {
+            color: red;
+        }
+
+        #ChargeInfo {
+            color: orange;
+        }
+
+        #DischargingInfo {
+            color: blue;
+        }
+
+        #StartTime {
+            color: green;
+        }
+
+        #EndTime {
+            color: red;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 400px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .value {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <div class="title">🔋 Battery Status</div>
+
+        <hr>
+
+        <div class="info">
+            <span class="label">🔋 Battery Level</span>
+            <span class="value" id="BatteryLevel">--</span>
+        </div>
+
+        <div class="info">
+            <span class="label">🔌 Charging</span>
+            <span class="value" id="batteryCharging">--</span>
+        </div>
+
+        <div class="info">
+            <span class="label">⏱️ Charging Time</span>
+            <span class="value" id="ChargeInfo">--</span>
+        </div>
+
+        <div class="info">
+            <span class="label">⏳ Discharging Time</span>
+            <span class="value" id="DischargingInfo">--</span>
+        </div>
+
+        <div class="info">
+            <span class="label">🟢 Start Time</span>
+            <span class="value" id="StartTime">--</span>
+        </div>
+
+        <div class="info">
+            <span class="label">🔴 End Time</span>
+            <span class="value" id="EndTime">--</span>
+        </div>
+
+        <div id="errorMessage" class="error"></div>
+
+    </main>
+
+    <script>
+        /*
+         * Battery Status API
+         *
+         * Note:
+         * navigator.getBattery() is not supported by every browser.
+         */
+
+        if (!("getBattery" in navigator)) {
+
+            document.getElementById("errorMessage").textContent =
+                "Battery Status API is not supported by this browser.";
+
+        } else {
+
+            navigator.getBattery()
+                .then((battery) => {
+
+                    const batteryLevel = document.getElementById("BatteryLevel");
+                    const batteryCharging = document.getElementById("batteryCharging");
+                    const chargeInfo = document.getElementById("ChargeInfo");
+                    const dischargingInfo = document.getElementById("DischargingInfo");
+                    const startTime = document.getElementById("StartTime");
+                    const endTime = document.getElementById("EndTime");
+
+                    function formatTime(seconds) {
+
+                        if (!Number.isFinite(seconds) || seconds === Infinity) {
+                            return "Unknown";
+                        }
+
+                        if (seconds <= 0) {
+                            return "0 seconds";
+                        }
+
+                        const hours = Math.floor(seconds / 3600);
+                        const minutes = Math.floor((seconds % 3600) / 60);
+                        const secs = Math.floor(seconds % 60);
+
+                        let result = "";
+
+                        if (hours > 0) {
+                            result += `${hours}h `;
+                        }
+
+                        if (minutes > 0) {
+                            result += `${minutes}m `;
+                        }
+
+                        if (secs > 0 || result === "") {
+                            result += `${secs}s`;
+                        }
+
+                        return result.trim();
+                    }
+
+                    function updateLevelInfo() {
+
+                        const level = Math.round(battery.level * 100);
+
+                        batteryLevel.textContent = `${level}%`;
+                    }
+
+                    function updateChargeInfo() {
+
+                        batteryCharging.textContent =
+                            battery.charging ? "Yes" : "No";
+                    }
+
+                    function updateChargingInfo() {
+
+                        chargeInfo.textContent =
+                            formatTime(battery.chargingTime);
+                    }
+
+                    function updateDischargingInfo() {
+
+                        dischargingInfo.textContent =
+                            formatTime(battery.dischargingTime);
+                    }
+
+                    function updateAllBatteryInfo() {
+
+                        updateLevelInfo();
+                        updateChargeInfo();
+                        updateChargingInfo();
+                        updateDischargingInfo();
+                    }
+
+                    /*
+                     * Charging state changed
+                     */
+                    battery.addEventListener("chargingchange", () => {
+
+                        updateChargeInfo();
+
+                        if (battery.charging) {
+
+                            startTime.textContent =
+                                new Date().toLocaleTimeString();
+
+                            endTime.textContent = "--";
+
+                        } else {
+
+                            // Charging stopped
+                            endTime.textContent =
+                                new Date().toLocaleTimeString();
+                        }
+                    });
+
+                    /*
+                     * Battery level changed
+                     */
+                    battery.addEventListener("levelchange", () => {
+
+                        updateLevelInfo();
+
+                        if (battery.level === 1 && battery.charging) {
+
+                            endTime.textContent =
+                                new Date().toLocaleTimeString();
+                        }
+                    });
+
+                    /*
+                     * Charging time changed
+                     */
+                    battery.addEventListener("chargingtimechange", () => {
+
+                        updateChargingInfo();
+                    });
+
+                    /*
+                     * Discharging time changed
+                     */
+                    battery.addEventListener("dischargingtimechange", () => {
+
+                        updateDischargingInfo();
+                    });
+
+                    /*
+                     * Initial update
+                     */
+                    updateAllBatteryInfo();
+
+                    /*
+                     * If the page loads while the battery
+                     * is already charging, show the current time.
+                     */
+                    if (battery.charging) {
+
+                        startTime.textContent =
+                            new Date().toLocaleTimeString();
+                    }
+
+                    /*
+                     * If battery is already at 100%
+                     */
+                    if (battery.level === 1 && battery.charging) {
+
+                        endTime.textContent =
+                            new Date().toLocaleTimeString();
+                    }
+
+                })
+                .catch((error) => {
+
+                    document.getElementById("errorMessage").textContent =
+                        "Unable to access battery information.";
+
+                    console.error("Battery API error:", error);
+                });
+        }
+    </script>
+
+</body>
+
+</html>
