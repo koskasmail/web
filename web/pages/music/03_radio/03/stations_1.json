@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "name": "Lev Hamedina FM",
+    "freq": "91.0",
+    "url": "https://stream.zeno.fm/f3wvbbqmdg8uv",
+    "description": "Israeli music, hit radio, local news, and talk shows."
+  },
+  {
+    "id": "2",
+    "name": "Eco 99 FM",
+    "freq": "99.0",
+    "url": "https://stream.zeno.fm/034x84954p8uv",
+    "description": "Pop hits, environmental awareness, and top music playlists."
+  },
+  {
+    "id": "3",
+    "name": "Galgalatz",
+    "freq": "91.8",
+    "url": "https://glzwzs.akamaized.net/glglz_mp3",
+    "description": "Popular music, traffic reports, and live radio broadcasts."
+  },
+  {
+    "id": "4",
+    "name": "SomaFM Groove Salad",
+    "freq": "92.5",
+    "url": "https://ice2.somafm.com/groovesalad-128-mp3",
+    "description": "A nicely chilled plate of ambient and downtempo beats."
+  },
+  {
+    "id": "5",
+    "name": "Classic Hits Radio",
+    "freq": "93.0",
+    "url": "https://ice1.somafm.com/secretagent-128-mp3",
+    "description": "Stylish tunes, lounge chill, and classic vintage grooves."
+  },
+  {
+    "id": "6",
+    "name": "Chillout Lounge",
+    "freq": "94.8",
+    "url": "https://ice4.somafm.com/defcon-128-mp3",
+    "description": "Relaxing electronic ambient soundscapes and beats."
+  }
+]

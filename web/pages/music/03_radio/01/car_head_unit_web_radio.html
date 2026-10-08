@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberTuner FM - Cyberpunk Car Head Unit Radio</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Orbitron & Rajdhani for futuristic display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cyanGlow: '#00ffff',
+            cyanDim: '#005566',
+            tealDark: '#03191e',
+            cyberDark: '#080d12',
+            orangeAlert: '#ff5500',
+            redMarker: '#ff2233'
+          },
+          fontFamily: {
+            orbitron: ['Orbitron', 'sans-serif'],
+            rajdhani: ['Rajdhani', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom CRT / Head unit glow styling */
+    body {
+      background-color: #03080c;
+      color: #e0ffff;
+      font-family: 'Rajdhani', sans-serif;
+      user-select: none;
+      overflow-x: hidden;
+    }
+
+    .head-unit-frame {
+      background: linear-gradient(145deg, #121921, #080c10);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.15), inset 0 0 15px rgba(0, 0, 0, 0.8);
+      border: 2px solid #005566;
+    }
+
+    .display-screen {
+      background: radial-gradient(circle at center, #06242c 0%, #030e13 100%);
+      box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.9);
+      position: relative;
+    }
+
+    /* Scanlines effect */
+    .scanlines::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+      background-size: 100% 4px;
+      z-index: 10;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    /* Glowing Text Effects */
+    .glow-text-cyan {
+      text-shadow: 0 0 8px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.4);
+    }
+    .glow-text-orange {
+      text-shadow: 0 0 8px rgba(ff, 85, 0, 0.8), 0 0 15px rgba(255, 85, 0, 0.4);
+    }
+
+    /* Custom Scrollbar for Preset Grid & Modal */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #041217;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #005566;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00ffff;
+    }
+
+    /* Custom Slider */
+    input[type=range] {
+      -webkit-appearance: none;
+      background: transparent;
+    }
+    input[type=range]:focus {
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: #00ffff;
+      box-shadow: 0 0 10px #00ffff;
+      cursor: pointer;
+      margin-top: -6px;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 6px;
+      cursor: pointer;
+      background: #003344;
+      border-radius: 3px;
+    }
+
+    /* Preset Button Styling */
+    .preset-btn {
+      background: linear-gradient(180deg, rgba(0, 50, 65, 0.6) 0%, rgba(0, 20, 30, 0.8) 100%);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      transition: all 0.2s ease;
+    }
+    .preset-btn:hover {
+      background: rgba(0, 100, 120, 0.8);
+      border-color: #00ffff;
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
+    }
+    .preset-btn.active {
+      background: linear-gradient(180deg, rgba(0, 150, 180, 0.4) 0%, rgba(0, 60, 80, 0.9) 100%);
+      border: 1px solid #00ffff;
+      box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.6), 0 0 12px rgba(0, 255, 255, 0.5);
+    }
+
+    /* Frequency Dial Scale Ticks */
+    .tuner-scale {
+      background-image: repeating-linear-gradient(
+        90deg,
+        #0088aa,
+        #0088aa 2px,
+        transparent 2px,
+        transparent 10px
+      );
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-2 sm:p-4">
+
+  <div class="w-full max-w-5xl head-unit-frame rounded-2xl p-3 sm:p-6 text-cyan-100 flex flex-col gap-4 relative shadow-2xl">
+    
+    <!-- Top Branding & Status Header -->
+    <div class="flex justify-between items-center px-2 text-xs font-semibold tracking-wider text-cyan-400 border-b border-cyan-900/60 pb-2">
+      <div class="flex items-center space-x-3">
+        <i class="fa-solid fa-car text-cyan-400 text-lg"></i>
+        <span class="font-orbitron text-sm sm:text-base text-cyan-300 tracking-widest font-bold">CYBER-TUNER <span class="text-xs text-orangeAlert">AUDIO SYSTEM</span></span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span id="clock-display" class="font-orbitron text-cyan-300">12:00 PM</span>
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-cyan-950 text-cyan-400 border border-cyan-800">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-1">108 MHz</span> LIVE
+        </span>
+      </div>
+    </div>
+
+    <!-- MAIN DISPLAY SCREEN -->
+    <div class="display-screen scanlines rounded-xl p-3 sm:p-5 border border-cyan-800/80 flex flex-col justify-between min-h-[360px] relative overflow-hidden">
+      
+      <!-- Audio Visualizer Canvas Background -->
+      <canvas id="visualizer-canvas" class="absolute inset-0 w-full h-full opacity-30 pointer-events-none z-0"></canvas>
+
+      <div class="relative z-10 space-y-4">
+        
+        <!-- 1. Interactive Tuner Scale Bar -->
+        <div class="w-full bg-cyan-950/80 rounded-lg p-2 border border-cyan-800/50 shadow-inner">
+          <!-- Frequency Labels -->
+          <div class="flex justify-between text-[10px] sm:text-xs font-orbitron text-cyan-400 mb-1 px-2">
+            <span>87.50</span>
+            <span>91.50</span>
+            <span>95.70</span>
+            <span>99.90</span>
+            <span>103.90</span>
+            <span>108.00</span>
+          </div>
+
+          <!-- Ruler Tick Mark Container -->
+          <div id="tuner-track" class="relative h-9 bg-black/60 rounded border border-cyan-900/80 cursor-pointer overflow-hidden flex items-center">
+            <div class="w-full h-full tuner-scale opacity-60"></div>
+
+            <!-- Draggable Frequency Marker -->
+            <div id="tuner-marker" class="absolute top-0 bottom-0 w-2.5 bg-redMarker shadow-[0_0_12px_#ff2233] transition-all duration-150 ease-out flex items-center justify-center -translate-x-1/2 pointer-events-none">
+              <div class="w-0.5 h-full bg-white/80"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Main Central Readout -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 py-1 px-2">
+          
+          <!-- Prev / Next Fast Tune Arrows -->
+          <button id="btn-tune-prev" class="hidden md:flex text-cyan-400 hover:text-cyan-200 text-3xl transition active:scale-95 px-2 py-1">
+            <i class="fa-solid fa-angles-left"></i>
+          </button>
+
+          <!-- Middle Readout Block -->
+          <div class="text-center flex-1">
+            <div class="flex justify-center items-center gap-3">
+              <span class="text-xs font-bold text-cyan-500 uppercase tracking-widest bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-900">FM1</span>
+              <span id="display-frequency" class="font-orbitron text-4xl sm:text-6xl font-black text-cyanGlow glow-text-cyan tracking-wider">91.00 <span class="text-2xl sm:text-3xl font-normal text-cyan-400">MHz</span></span>
+            </div>
+
+            <!-- Station Title & Metadata -->
+            <div id="display-station-name" class="font-rajdhani text-lg sm:text-2xl font-bold text-white tracking-wide mt-1 glow-text-cyan truncate max-w-md mx-auto">
+              SELECT A PRESET STATION
+            </div>
+            <div id="display-description" class="text-xs sm:text-sm text-cyan-300/80 font-medium truncate max-w-lg mx-auto">
+              Tune using the slider above or presets below.
+            </div>
+          </div>
+
+          <button id="btn-tune-next" class="hidden md:flex text-cyan-400 hover:text-cyan-200 text-3xl transition active:scale-95 px-2 py-1">
+            <i class="fa-solid fa-angles-right"></i>
+          </button>
+        </div>
+
+        <!-- Mode Indicators (ST, DX, DVD, HD) -->
+        <div class="flex justify-center items-center gap-4 text-xs font-orbitron font-bold">
+          <span class="text-cyan-700">DVD</span>
+          <span id="indicator-st" class="text-orangeAlert glow-text-orange px-1.5 py-0.5 rounded bg-orange-950/40 border border-orange-800/50">ST</span>
+          <span id="indicator-dx" class="text-cyan-400 glow-text-cyan px-1.5 py-0.5 rounded bg-cyan-950/40 border border-cyan-800/50">DX</span>
+          <span class="text-cyan-700">MHz</span>
+          <span id="indicator-audio-status" class="text-emerald-400 font-sans text-[11px] flex items-center gap-1">
+            <i class="fa-solid fa-circle text-[8px] animate-ping"></i> READY
+          </span>
+        </div>
+
+      </div>
+
+      <!-- 3. Station Preset Grid (6 or 12 buttons) -->
+      <div id="preset-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-3 mt-3 relative z-10">
+        <!-- Preset cards will be generated by JS -->
+      </div>
+    </div>
+
+    <!-- LOWER CONTROL BAR -->
+    <div class="bg-gradient-to-r from-cyan-950 via-tealDark to-cyan-950 rounded-xl p-3 border border-cyan-800/60 flex flex-wrap items-center justify-between gap-3 shadow-lg">
+      
+      <!-- Left Controls: Search / Presets Editor / Mode -->
+      <div class="flex items-center space-x-2">
+        <button id="btn-open-editor" title="Open Station List & JSON Editor" class="p-2.5 sm:px-3 sm:py-2 bg-cyan-900/60 hover:bg-cyan-800 text-cyan-300 rounded-lg border border-cyan-700 flex items-center space-x-2 transition active:scale-95">
+          <i class="fa-solid fa-list-ul"></i>
+          <span class="hidden sm:inline text-xs font-bold font-orbitron">STATIONS</span>
+        </button>
+
+        <button id="btn-scan" title="Auto Scan Stations" class="p-2.5 sm:px-3 sm:py-2 bg-cyan-900/60 hover:bg-cyan-800 text-cyan-300 rounded-lg border border-cyan-700 flex items-center space-x-1.5 transition active:scale-95">
+          <i class="fa-solid fa-magnifying-glass text-xs"></i>
+          <span class="hidden sm:inline text-xs font-bold font-orbitron">SCAN</span>
+        </button>
+      </div>
+
+      <!-- Main Playback Controls -->
+      <div class="flex items-center space-x-3 sm:space-x-4 mx-auto sm:mx-0">
+        <button id="btn-prev-preset" class="p-3 text-cyan-300 hover:text-white transition active:scale-90 text-xl">
+          <i class="fa-solid fa-backward-step"></i>
+        </button>
+
+        <button id="btn-play-pause" class="w-12 h-12 rounded-full bg-gradient-to-tr from-cyan-600 to-cyan-400 hover:from-cyan-500 hover:to-cyan-300 text-slate-950 font-bold flex items-center justify-center text-xl shadow-[0_0_15px_#00ffff] transition active:scale-95">
+          <i id="play-icon" class="fa-solid fa-play ml-0.5"></i>
+        </button>
+
+        <button id="btn-stop" class="p-3 text-cyan-300 hover:text-red-400 transition active:scale-90 text-xl">
+          <i class="fa-solid fa-square"></i>
+        </button>
+
+        <button id="btn-next-preset" class="p-3 text-cyan-300 hover:text-white transition active:scale-90 text-xl">
+          <i class="fa-solid fa-forward-step"></i>
+        </button>
+      </div>
+
+      <!-- Right Controls: Volume Slider & Settings -->
+      <div class="flex items-center space-x-3 w-full sm:w-auto justify-end border-t sm:border-t-0 border-cyan-900/60 pt-2 sm:pt-0">
+        <button id="btn-mute" class="text-cyan-400 hover:text-cyan-200 text-lg">
+          <i id="mute-icon" class="fa-solid fa-volume-high"></i>
+        </button>
+        
+        <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="0.8" class="w-24 sm:w-28accent-cyan-400">
+
+        <button id="btn-eq-toggle" title="Toggle Visualizer Style" class="p-2 text-cyan-400 hover:text-cyan-200 text-lg transition">
+          <i class="fa-solid fa-sliders"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STATIONS & JSON EDITOR MODAL -->
+  <div id="editor-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 z-50">
+    <div class="bg-cyan-950 border border-cyan-500/50 rounded-xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+      
+      <!-- Modal Header -->
+      <div class="p-4 bg-cyan-900/80 border-b border-cyan-700 flex justify-between items-center">
+        <h3 class="font-orbitron font-bold text-cyan-200 text-lg flex items-center gap-2">
+          <i class="fa-solid fa-radio text-cyan-400"></i> Station Directory & JSON Config
+        </h3>
+        <button id="btn-close-modal" class="text-cyan-400 hover:text-white text-xl p-1">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Modal Tabs / Body -->
+      <div class="p-4 overflow-y-auto flex-1 space-y-4">
+        
+        <!-- Tab Switches -->
+        <div class="flex border-b border-cyan-800">
+          <button id="tab-list-btn" class="px-4 py-2 border-b-2 border-cyan-400 font-bold text-cyan-200 text-sm">Station List</button>
+          <button id="tab-json-btn" class="px-4 py-2 text-cyan-400 font-medium text-sm hover:text-cyan-200">Raw JSON Config</button>
+        </div>
+
+        <!-- TAB 1: Station List & Quick Add -->
+        <div id="tab-list-content" class="space-y-4">
+          <!-- Add Station Form -->
+          <form id="add-station-form" class="grid grid-cols-1 sm:grid-cols-3 gap-2 bg-black/40 p-3 rounded-lg border border-cyan-900">
+            <input type="text" id="input-name" placeholder="Station Name" required class="bg-cyan-950 border border-cyan-800 rounded px-2.5 py-1.5 text-xs text-cyan-100 focus:border-cyan-400 outline-none">
+            <input type="number" step="0.1" min="87.5" max="108.0" id="input-freq" placeholder="Freq (e.g. 91.5)" required class="bg-cyan-950 border border-cyan-800 rounded px-2.5 py-1.5 text-xs text-cyan-100 focus:border-cyan-400 outline-none">
+            <input type="url" id="input-url" placeholder="Stream Audio URL" required class="bg-cyan-950 border border-cyan-800 rounded px-2.5 py-1.5 text-xs text-cyan-100 focus:border-cyan-400 outline-none">
+            <input type="text" id="input-desc" placeholder="Description / Genre" class="sm:col-span-2 bg-cyan-950 border border-cyan-800 rounded px-2.5 py-1.5 text-xs text-cyan-100 focus:border-cyan-400 outline-none">
+            <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold text-xs rounded py-1.5 transition">
+              + Add Station
+            </button>
+          </form>
+
+          <!-- Interactive Station Table -->
+          <div class="overflow-x-auto rounded border border-cyan-900">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-cyan-900/60 text-cyan-300 font-orbitron">
+                <tr>
+                  <th class="p-2">#</th>
+                  <th class="p-2">Freq</th>
+                  <th class="p-2">Name</th>
+                  <th class="p-2">Genre / Desc</th>
+                  <th class="p-2 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="station-table-body" class="divide-y divide-cyan-950 bg-black/30">
+                <!-- Rows added dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 2: RAW JSON EDITOR -->
+        <div id="tab-json-content" class="hidden space-y-3">
+          <p class="text-xs text-cyan-300">You can paste or modify custom JSON radio configuration below:</p>
+          <textarea id="json-editor-area" rows="10" class="w-full bg-black/80 font-mono text-xs text-cyan-300 border border-cyan-800 rounded p-3 focus:border-cyan-400 outline-none"></textarea>
+          <div class="flex justify-between items-center">
+            <button id="btn-reset-default" class="text-xs text-orangeAlert hover:underline">Reset Default Stations</button>
+            <button id="btn-apply-json" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-4 py-1.5 rounded text-xs">Apply JSON Changes</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-3 bg-cyan-900/40 border-t border-cyan-800 flex justify-end">
+        <button id="btn-modal-done" class="bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold px-5 py-1.5 rounded text-xs">
+          Close & Save
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Audio Element -->
+  <audio id="audio-player" crossorigin="anonymous" preload="none"></audio>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    
+    // Default Station List JSON
+    const DEFAULT_STATIONS = [
+      {
+        id: 1,
+        name: "Lofi Cyber FM",
+        freq: 89.10,
+        url: "https://stream.zeno.fm/f3wvbbqmdg8uv",
+        description: "24/7 Chill Lofi Synth & Cyberbeats",
+        genre: "Lofi / Chill"
+      },
+      {
+        id: 2,
+        name: "Lev HaMedina 91FM",
+        freq: 91.00,
+        url: "https://fm91.live-stream.net/91fm_aac",
+        description: "Pop & Top 40 Hits Live Stream",
+        genre: "Pop / Hits"
+      },
+      {
+        id: 3,
+        name: "SomaFM Groove Salad",
+        freq: 93.50,
+        url: "https://ice1.somafm.com/groovesalad-128-mp3",
+        description: "A nicely chilled plate of ambient / downtempo beats",
+        genre: "Ambient"
+      },
+      {
+        id: 4,
+        name: "Classic Jazz Lounge",
+        freq: 96.20,
+        url: "https://stream.zeno.fm/0r0xa792kwzuv",
+        description: "Smooth Night Jazz & Blues Live",
+        genre: "Jazz"
+      },
+      {
+        id: 5,
+        name: "Synthwave Transmogrifier",
+        freq: 101.40,
+        url: "https://ice1.somafm.com/defcon-128-mp3",
+        description: "Music for Hacking, Cyberpunk Synthwave",
+        genre: "Electro"
+      },
+      {
+        id: 6,
+        name: "Global News World",
+        freq: 105.80,
+        url: "https://stream.zeno.fm/a83xbfy8348uv",
+        description: "24/7 World News Broadcast & Reports",
+        genre: "News / Talk"
+      }
+    ];
+
+    // Main App State
+    let stations = [];
+    let currentStationIndex = 0;
+    let isPlaying = false;
+    let minFreq = 87.50;
+    let maxFreq = 108.00;
+    let visualizerMode = 0; // 0: Bars, 1: Waveform, 2: Pulse Ring
+
+    // Web Audio API context for visualizer
+    let audioCtx = null;
+    let analyser = null;
+    let sourceNode = null;
+
+    // DOM Element References
+    const audio = document.getElementById('audio-player');
+    const displayFreq = document.getElementById('display-frequency');
+    const displayStationName = document.getElementById('display-station-name');
+    const displayDescription = document.getElementById('display-description');
+    const presetGrid = document.getElementById('preset-grid');
+    const tunerTrack = document.getElementById('tuner-track');
+    const tunerMarker = document.getElementById('tuner-marker');
+    
+    // Playback Buttons
+    const btnPlayPause = document.getElementById('btn-play-pause');
+    const playIcon = document.getElementById('play-icon');
+    const btnStop = document.getElementById('btn-stop');
+    const btnPrevPreset = document.getElementById('btn-prev-preset');
+    const btnNextPreset = document.getElementById('btn-next-preset');
+    const btnTunePrev = document.getElementById('btn-tune-prev');
+    const btnTuneNext = document.getElementById('btn-tune-next');
+    
+    // Volume & Mute
+    const volumeSlider = document.getElementById('volume-slider');
+    const btnMute = document.getElementById('btn-mute');
+    const muteIcon = document.getElementById('mute-icon');
+
+    // Canvas
+    const canvas = document.getElementById('visualizer-canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Modal & Editor
+    const editorModal = document.getElementById('editor-modal');
+    const btnOpenEditor = document.getElementById('btn-open-editor');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+    const btnModalDone = document.getElementById('btn-modal-done');
+    const stationTableBody = document.getElementById('station-table-body');
+    const addStationForm = document.getElementById('add-station-form');
+    const tabListBtn = document.getElementById('tab-list-btn');
+    const tabJsonBtn = document.getElementById('tab-json-btn');
+    const tabListContent = document.getElementById('tab-list-content');
+    const tabJsonContent = document.getElementById('tab-json-content');
+    const jsonEditorArea = document.getElementById('json-editor-area');
+    const btnApplyJson = document.getElementById('btn-apply-json');
+    const btnResetDefault = document.getElementById('btn-reset-default');
+    const statusIndicator = document.getElementById('indicator-audio-status');
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadStationsFromStorage();
+      renderPresets();
+      updateClock();
+      setInterval(updateClock, 1000);
+      setupCanvas();
+
+      // Select initial station without playing automatically
+      if (stations.length > 0) {
+        selectStation(0, false);
+      }
+
+      setupEventListeners();
+    });
+
+    // Clock display helper
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock-display').innerText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    // Load stations from LocalStorage or default
+    function loadStationsFromStorage() {
+      const stored = localStorage.getItem('cybertuner_stations');
+      if (stored) {
+        try {
+          stations = JSON.parse(stored);
+        } catch (e) {
+          console.error("Failed to parse stored stations", e);
+          stations = [...DEFAULT_STATIONS];
+        }
+      } else {
+        stations = [...DEFAULT_STATIONS];
+      }
+    }
+
+    function saveStationsToStorage() {
+      localStorage.setItem('cybertuner_stations', JSON.stringify(stations));
+    }
+
+    function renderPresets() {
+      presetGrid.innerHTML = '';
+
+      stations.forEach((st, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `preset-btn p-2 sm:p-3 rounded-lg flex flex-col justify-between text-left transition relative overflow-hidden ${
+          idx === currentStationIndex ? 'active' : ''
+        }`;
+        
+        btn.innerHTML = `
+          <div class="flex justify-between items-center text-[10px] sm:text-xs text-cyan-400 font-orbitron">
+            <span class="font-bold text-orangeAlert">#0${idx + 1}</span>
+            <span>${st.freq.toFixed(2)} MHz</span>
+          </div>
+          <div class="font-bold text-xs sm:text-sm text-white truncate mt-1">${st.name}</div>
+          <div class="text-[10px] text-cyan-300/70 truncate">${st.genre || 'Live Radio'}</div>
+        `;
+
+        btn.addEventListener('click', () => {
+          selectStation(idx, true);
+        });
+
+        presetGrid.appendChild(btn);
+      });
+    }
+
+    // Tune to a station by index
+    function selectStation(index, autoPlay = true) {
+      if (index < 0 || index >= stations.length) return;
+      
+      currentStationIndex = index;
+      const st = stations[index];
+
+      // Update Screen
+      displayFreq.innerHTML = `${st.freq.toFixed(2)} <span class="text-2xl sm:text-3xl font-normal text-cyan-400">MHz</span>`;
+      displayStationName.innerText = st.name;
+      displayDescription.innerText = st.description || 'Digital Audio Broadcasting';
+
+      // Update Tuner Bar Slider Position
+      updateTunerMarker(st.freq);
+
+      // Update Active Button styling
+      renderPresets();
+
+      // Set Audio Stream Source
+      audio.src = st.url;
+
+      if (autoPlay) {
+        playAudio();
+      }
+    }
+
+    function initWebAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 64;
+
+        try {
+          sourceNode = audioCtx.createMediaElementSource(audio);
+          sourceNode.connect(analyser);
+          analyser.connect(audioCtx.destination);
+        } catch (e) {
+          console.warn("Web Audio API CORS restricted for visualizer on this stream URL");
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playAudio() {
+      initWebAudio();
+      statusIndicator.innerHTML = `<i class="fa-solid fa-spinner animate-spin text-cyan-400"></i> TUNING...`;
+      
+      audio.play().then(() => {
+        isPlaying = true;
+        playIcon.className = "fa-solid fa-pause";
+        statusIndicator.innerHTML = `<i class="fa-solid fa-circle text-[8px] text-emerald-400 animate-pulse"></i> BROADCASTING`;
+      }).catch(err => {
+        console.error("Audio playback error:", err);
+        isPlaying = false;
+        playIcon.className = "fa-solid fa-play";
+        statusIndicator.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-orangeAlert"></i> OFFLINE / ERR`;
+      });
+    }
+
+    function pauseAudio() {
+      audio.pause();
+      isPlaying = false;
+      playIcon.className = "fa-solid fa-play";
+      statusIndicator.innerHTML = `<i class="fa-solid fa-circle text-[8px] text-amber-400"></i> PAUSED`;
+    }
+
+    function stopAudio() {
+      audio.pause();
+      audio.currentTime = 0;
+      isPlaying = false;
+      playIcon.className = "fa-solid fa-play";
+      statusIndicator.innerHTML = `<i class="fa-solid fa-circle text-[8px] text-slate-500"></i> STOPPED`;
+    }
+
+    function setupCanvas() {
+      const resizeCanvas = () => {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+      };
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      requestAnimationFrame(drawVisualizer);
+    }
+
+    function drawVisualizer() {
+      requestAnimationFrame(drawVisualizer);
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const bufferLength = analyser ? analyser.frequencyBinCount : 32;
+      const dataArray = new Uint8Array(bufferLength);
+
+      if (analyser && isPlaying) {
+        analyser.getByteFrequencyData(dataArray);
+      } else {
+        // Subtle ambient random animation when paused
+        for (let i = 0; i < bufferLength; i++) {
+          dataArray[i] = isPlaying ? Math.random() * 20 : 2;
+        }
+      }
+
+      const width = canvas.width;
+      const height = canvas.height;
+
+      if (visualizerMode === 0) {
+        // Classic Digital Equalizer Bars
+        const barWidth = (width / bufferLength) * 1.5;
+        let x = 0;
+
+        for (let i = 0; i < bufferLength; i++) {
+          const barHeight = (dataArray[i] / 255) * height * 0.8;
+
+          const gradient = ctx.createLinearGradient(0, height, 0, 0);
+          gradient.addColorStop(0, 'rgba(0, 255, 255, 0.1)');
+          gradient.addColorStop(0.7, 'rgba(0, 255, 255, 0.6)');
+          gradient.addColorStop(1, 'rgba(255, 85, 0, 0.9)');
+
+          ctx.fillStyle = gradient;
+          ctx.fillRect(x, height - barHeight, barWidth - 3, barHeight);
+
+          x += barWidth;
+        }
+      } else if (visualizerMode === 1) {
+        // Oscilloscope Waveform Line
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#00ffff';
+
+        const sliceWidth = width / bufferLength;
+        let x = 0;
+
+        for (let i = 0; i < bufferLength; i++) {
+          const v = dataArray[i] / 128.0;
+          const y = (v * height) / 2;
+
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+
+          x += sliceWidth;
+        }
+
+        ctx.lineTo(canvas.width, canvas.height / 2);
+        ctx.stroke();
+      }
+    }
+
+    function updateTunerMarker(freq) {
+      const percentage = Math.min(Math.max((freq - minFreq) / (maxFreq - minFreq), 0), 1);
+      tunerMarker.style.left = `${percentage * 100}%`;
+    }
+
+    // Click/Drag to tune frequency on scale
+    tunerTrack.addEventListener('click', (e) => {
+      const rect = tunerTrack.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const percentage = Math.min(Math.max(clickX / rect.width, 0), 1);
+      const tunedFreq = minFreq + percentage * (maxFreq - minFreq);
+
+      // Find closest station or update manual display frequency
+      let closestIdx = 0;
+      let minDiff = Infinity;
+
+      stations.forEach((st, idx) => {
+        const diff = Math.abs(st.freq - tunedFreq);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closestIdx = idx;
+        }
+      });
+
+      selectStation(closestIdx, true);
+    });
+
+    function setupEventListeners() {
+      // Play / Pause Toggle
+      btnPlayPause.addEventListener('click', () => {
+        if (isPlaying) {
+          pauseAudio();
+        } else {
+          playAudio();
+        }
+      });
+
+      // Stop Button
+      btnStop.addEventListener('click', stopAudio);
+
+      // Next / Prev Preset Buttons
+      btnPrevPreset.addEventListener('click', () => {
+        const prevIdx = (currentStationIndex - 1 + stations.length) % stations.length;
+        selectStation(prevIdx, isPlaying);
+      });
+
+      btnNextPreset.addEventListener('click', () => {
+        const nextIdx = (currentStationIndex + 1) % stations.length;
+        selectStation(nextIdx, isPlaying);
+      });
+
+      btnTunePrev.addEventListener('click', () => {
+        const prevIdx = (currentStationIndex - 1 + stations.length) % stations.length;
+        selectStation(prevIdx, isPlaying);
+      });
+
+      btnTuneNext.addEventListener('click', () => {
+        const nextIdx = (currentStationIndex + 1) % stations.length;
+        selectStation(nextIdx, isPlaying);
+      });
+
+      // Volume Slider
+      volumeSlider.addEventListener('input', (e) => {
+        audio.volume = e.target.value;
+        if (audio.volume === 0) {
+          muteIcon.className = "fa-solid fa-volume-xmark text-red-400";
+        } else {
+          muteIcon.className = "fa-solid fa-volume-high";
+        }
+      });
+
+      // Mute Toggle
+      btnMute.addEventListener('click', () => {
+        audio.muted = !audio.muted;
+        if (audio.muted) {
+          muteIcon.className = "fa-solid fa-volume-xmark text-red-400";
+        } else {
+          muteIcon.className = "fa-solid fa-volume-high";
+        }
+      });
+
+      // Visualizer Mode Toggle
+      document.getElementById('btn-eq-toggle').addEventListener('click', () => {
+        visualizerMode = (visualizerMode + 1) % 2;
+      });
+
+      // Scan Button (Cycles through stations briefly)
+      document.getElementById('btn-scan').addEventListener('click', () => {
+        let count = 0;
+        const scanInterval = setInterval(() => {
+          selectStation(count % stations.length, true);
+          count++;
+          if (count >= stations.length) clearInterval(scanInterval);
+        }, 2500);
+      });
+
+      // Modal Open / Close
+      btnOpenEditor.addEventListener('click', () => {
+        populateStationTable();
+        jsonEditorArea.value = JSON.stringify(stations, null, 2);
+        editorModal.classList.remove('hidden');
+      });
+
+      btnCloseModal.addEventListener('click', () => editorModal.classList.add('hidden'));
+      btnModalDone.addEventListener('click', () => editorModal.classList.add('hidden'));
+
+      // Tab Switching in Modal
+      tabListBtn.addEventListener('click', () => {
+        tabListBtn.className = "px-4 py-2 border-b-2 border-cyan-400 font-bold text-cyan-200 text-sm";
+        tabJsonBtn.className = "px-4 py-2 text-cyan-400 font-medium text-sm hover:text-cyan-200";
+        tabListContent.classList.remove('hidden');
+        tabJsonContent.classList.add('hidden');
+      });
+
+      tabJsonBtn.addEventListener('click', () => {
+        tabJsonBtn.className = "px-4 py-2 border-b-2 border-cyan-400 font-bold text-cyan-200 text-sm";
+        tabListBtn.className = "px-4 py-2 text-cyan-400 font-medium text-sm hover:text-cyan-200";
+        tabJsonContent.classList.remove('hidden');
+        tabListContent.classList.add('hidden');
+      });
+
+      // Add New Station Form Submission
+      addStationForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newStation = {
+          id: Date.now(),
+          name: document.getElementById('input-name').value.trim(),
+          freq: parseFloat(document.getElementById('input-freq').value),
+          url: document.getElementById('input-url').value.trim(),
+          description: document.getElementById('input-desc').value.trim() || 'Custom Stream',
+          genre: 'User Stream'
+        };
+
+        stations.push(newStation);
+        // Sort by frequency
+        stations.sort((a, b) => a.freq - b.freq);
+
+        saveStationsToStorage();
+        renderPresets();
+        populateStationTable();
+        addStationForm.reset();
+      });
+
+      // Apply Raw JSON Changes
+      btnApplyJson.addEventListener('click', () => {
+        try {
+          const parsed = JSON.parse(jsonEditorArea.value);
+          if (Array.isArray(parsed)) {
+            stations = parsed;
+            saveStationsToStorage();
+            renderPresets();
+            populateStationTable();
+            alert("Station JSON configuration updated successfully!");
+          } else {
+            alert("JSON must be an array of station objects.");
+          }
+        } catch (err) {
+          alert("Invalid JSON format: " + err.message);
+        }
+      });
+
+      // Reset to default
+      btnResetDefault.addEventListener('click', () => {
+        if (confirm("Reset to default station list?")) {
+          stations = [...DEFAULT_STATIONS];
+          saveStationsToStorage();
+          renderPresets();
+          populateStationTable();
+          jsonEditorArea.value = JSON.stringify(stations, null, 2);
+        }
+      });
+    }
+
+    function populateStationTable() {
+      stationTableBody.innerHTML = '';
+      stations.forEach((st, idx) => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-cyan-900/30 text-cyan-100";
+        tr.innerHTML = `
+          <td class="p-2 font-mono font-bold text-orangeAlert">#${idx + 1}</td>
+          <td class="p-2 font-mono text-cyan-300">${st.freq.toFixed(2)} MHz</td>
+          <td class="p-2 font-bold">${st.name}</td>
+          <td class="p-2 text-cyan-300/80">${st.description || '-'}</td>
+          <td class="p-2 text-right space-x-2">
+            <button onclick="playDirect(${idx})" class="text-emerald-400 hover:text-emerald-200 text-xs px-2 py-0.5 border border-emerald-800 rounded bg-emerald-950/60">Play</button>
+            <button onclick="removeStation(${idx})" class="text-red-400 hover:text-red-200 text-xs px-2 py-0.5 border border-red-900 rounded bg-red-950/60">Delete</button>
+          </td>
+        `;
+        stationTableBody.appendChild(tr);
+      });
+    }
+
+    window.playDirect = function(index) {
+      selectStation(index, true);
+      editorModal.classList.add('hidden');
+    };
+
+    window.removeStation = function(index) {
+      if (stations.length <= 1) {
+        alert("You must keep at least one station preset.");
+        return;
+      }
+      stations.splice(index, 1);
+      saveStationsToStorage();
+      renderPresets();
+      populateStationTable();
+      jsonEditorArea.value = JSON.stringify(stations, null, 2);
+    };
+  </script>
+</body>
+</html>

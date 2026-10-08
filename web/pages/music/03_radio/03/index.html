@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Car Radio - FM Head Unit</title>
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Inter:wght@300;400;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <div class="radio-unit">
+    <!-- Top Display Header -->
+    <header class="unit-header">
+      <div class="header-status">
+        <span class="status-badge"><i class="fa-solid fa-satellite-dish"></i> STEREO</span>
+        <span class="status-badge" id="stereo-st">ST</span>
+        <span class="status-badge" id="stereo-dx">DX</span>
+      </div>
+      <div class="band-tag" id="current-band">FM1</div>
+    </header>
+
+    <!-- Tuner Scale Bar -->
+    <div class="tuner-bar-container">
+      <div class="freq-markers">
+        <span>87.50</span>
+        <span>91.00</span>
+        <span>95.70</span>
+        <span>99.00</span>
+        <span>103.90</span>
+        <span>108.00</span>
+      </div>
+      <div class="tuner-track-wrapper">
+        <div class="tuner-ruler"></div>
+        <input type="range" id="freq-slider" min="87.5" max="108.0" step="0.1" value="91.0" />
+        <div class="tuner-needle" id="tuner-needle"></div>
+      </div>
+    </div>
+
+    <!-- Main LCD Digital Screen -->
+    <main class="lcd-screen">
+      <button class="nav-arrow nav-prev" id="btn-prev-freq" title="Tune Down">
+        <i class="fa-solid fa-angles-left"></i>
+      </button>
+
+      <div class="station-info-box">
+        <div class="main-frequency" id="display-frequency">
+          91.00 <span class="unit">MHz</span>
+        </div>
+        <div class="station-title" id="display-name">Lev Hamedina FM</div>
+        <div class="station-desc" id="display-desc">Loading station information...</div>
+      </div>
+
+      <button class="nav-arrow nav-next" id="btn-next-freq" title="Tune Up">
+        <i class="fa-solid fa-angles-right"></i>
+      </button>
+    </main>
+
+    <!-- Preset Grid (Buttons 1 - 6) -->
+    <div class="presets-grid" id="presets-grid">
+      <!-- Generated via JavaScript -->
+    </div>
+
+    <!-- Audio Visualizer Canvas -->
+    <div class="visualizer-container">
+      <canvas id="audio-visualizer"></canvas>
+    </div>
+
+    <!-- Bottom Controls & Navigation -->
+    <footer class="control-deck">
+      <button class="deck-btn" id="btn-seek" title="Auto Seek">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span>SEEK</span>
+      </button>
+      <button class="deck-btn" id="btn-play" title="Play/Pause">
+        <i class="fa-solid fa-play" id="play-icon"></i>
+        <span id="play-text">PLAY</span>
+      </button>
+      <button class="deck-btn active" id="btn-band" title="Switch Band">
+        <i class="fa-solid fa-radio"></i>
+        <span>BAND</span>
+      </button>
+      <div class="volume-control-box">
+        <i class="fa-solid fa-volume-high"></i>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.8" />
+      </div>
+      <button class="deck-btn" id="btn-settings" title="Edit Stations JSON">
+        <i class="fa-solid fa-sliders"></i>
+        <span>JSON</span>
+      </button>
+    </footer>
+  </div>
+
+  <!-- Hidden Audio Player -->
+  <audio id="audio-player"></audio>
+  <!-- Modal for JSON Editing -->
+  <div class="modal-overlay" id="json-modal">
+    <div class="modal-body">
+      <h3><i class="fa-solid fa-code"></i> Edit Stations Data (JSON)</h3>
+      <p>Edit the JSON list of radio stations below and click Save.</p>
+      <textarea id="json-editor"></textarea>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="btn-modal-cancel">Cancel</button>
+        <button class="btn-primary" id="btn-modal-save">Save & Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
