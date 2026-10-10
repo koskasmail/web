@@ -10,8 +10,15 @@
     "id": "2",
     "name": "Galgalatz",
     "freq": "91.8",
-    "url": "https://glzwzs.akamaized.net/glglz_mp3",
+    "url": "https://glzwizzlv.bynetcdn.com/glglz_mp3",
     "description": "Popular music, traffic reports, and live radio broadcasts."
+  },
+  {
+    "id": "3",
+    "name": "Galei_Israel",
+    "freq": "94.0",
+    "url": "https://cdn.cybercdn.live/Galei_Israel/Live/icecast.audio",
+    "description": "news."
   },
   {
     "id": "3",
