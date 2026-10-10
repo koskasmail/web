@@ -10,8 +10,15 @@
     "id": "2",
     "name": "Galgalatz",
     "freq": "91.8",
-    "url": "https://glzwzs.akamaized.net/glglz_mp3",
+    "url": "https://glzwizzlv.bynetcdn.com/glglz_mp3",
     "description": "Popular music, traffic reports, and live radio broadcasts."
+  },
+  {
+    "id": "3",
+    "name": "Galei_Israel",
+    "freq": "94.0",
+    "url": "https://cdn.cybercdn.live/Galei_Israel/Live/icecast.audio",
+    "description": "news."
   },
   {
     "id": "3",
@@ -40,12 +47,5 @@
     "freq": "99.0",
     "url": "https://stream.zeno.fm/034x84954p8uv",
     "description": "Pop hits, environmental awareness, and top music playlists."
-  },
-  {
-    "id": "7",
-    "name": "Dublin's Q102 80's",
-    "freq": "105.01",
-    "url": "https://wg.cdn.tibus.net/Q10280s",
-    "description": " Dublin's Q102 80's"
   }
 ]
