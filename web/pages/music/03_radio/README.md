@@ -1,11 +1,11 @@
 # web
 
-#### Playlists
-* [xxx](https://github.com/koskasmail/web/blob/main/web/pages/links.md)
+#### radio - online
+* [car_radio_v2](https://koskasmail.github.io/web/web/pages/music/03_radio/02/)
 
 
-#### favorit
-* xxx
+#### json_list
+* https://koskasmail.github.io/web/web/pages/music/03_radio/station/json/01.01_israel.json
 * 
 * 
 
