@@ -3,7 +3,8 @@
 # links 
 
 ## browser
-* [Battery Status](https://koskasmail.github.io/web/web/pages/browser/battery_status/battery.html)
+* [Battery Status_v1](https://koskasmail.github.io/web/web/pages/browser/battery_status/battery.html)
+* [Battery Status_v2](https://koskasmail.github.io/web/web/pages/browser/battery_status_offline/)
 
 ### browser - window size
 * [window_size](https://koskasmail.github.io/web/web/pages/browser/window_size/window_size/)
